@@ -445,22 +445,24 @@
 
         @media (min-width: 769px) {
             ::view-transition-old(root) {
-                animation: fade-out 0.15s ease-out;
+                animation: page-turn-old 0.45s ease-in-out;
+                transform-origin: left center;
             }
 
             ::view-transition-new(root) {
-                animation: fade-in 0.2s ease-in;
+                animation: page-turn-new 0.45s ease-in-out;
+                transform-origin: left center;
             }
         }
 
-        @keyframes fade-out {
-            from { opacity: 1; }
-            to { opacity: 0; }
+        @keyframes page-turn-old {
+            0% { transform: perspective(1200px) rotateY(0deg); opacity: 1; }
+            100% { transform: perspective(1200px) rotateY(-180deg); opacity: 0; }
         }
 
-        @keyframes fade-in {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        @keyframes page-turn-new {
+            0% { transform: perspective(1200px) rotateY(180deg); opacity: 0; }
+            100% { transform: perspective(1200px) rotateY(0deg); opacity: 1; }
         }
     </style>
 </head>
