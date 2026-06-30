@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Articles — Hassan Mohamed</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <input type="checkbox" id="menu-toggle" class="menu-toggle">
+    <header>
+        <a href="about.html" class="masthead-script">Hassan Mohamed</a>
+        <label for="menu-toggle" class="menu-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+        <nav>
+            <a href="about.html">About</a>
+            <a href="projects.html">Projects</a>
+            <a href="articles.html" class="active">Articles</a>
+        </nav>
+    </header>
+
+    <div class="divider">
+        <svg viewBox="0 0 1200 4" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 2 C150 1, 300 3, 500 2 S800 1, 1000 2 S1150 3, 1200 2" stroke="#A37356" stroke-width="0.8" fill="none" opacity="0.5"/>
+        </svg>
+    </div>
+
+    <div class="container">
+        <div class="page-header">
+            <span class="label">Writing</span>
+            <h1>Articles</h1>
+        </div>
+
+        <div class="articles-list" id="articles-list"></div>
+        <div class="article-view" id="article-view">
+            <span class="back" onclick="showList()">&larr; Back to articles</span>
+            <div class="article-body" id="article-content"></div>
+        </div>
+    </div>
+
+    <div class="divider" style="margin-top:0">
+        <svg viewBox="0 0 1200 4" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 2 C150 1, 300 3, 500 2 S800 1, 1000 2 S1150 3, 1200 2" stroke="#A37356" stroke-width="0.8" fill="none" opacity="0.5"/>
+        </svg>
+    </div>
+
+    <footer>&copy; 2026 Hassan Mohamed</footer>
+
+    <script>
+        const articles = [];
+        function renderList() {
+            const el = document.getElementById('articles-list');
+            if (!articles.length) { el.innerHTML = '<p class="empty">No articles published yet.</p>'; return; }
+            el.innerHTML = articles.map((a, i) =>
+                `<div class="article-row" onclick="loadArticle(${i})"><div class="date">${a.date}</div><div><h3>${a.title}</h3><p>${a.summary}</p></div></div>`
+            ).join('');
+        }
+        async function loadArticle(i) {
+            const a = articles[i];
+            try { const res = await fetch(a.file); if (!res.ok) throw new Error(); const md = await res.text(); document.getElementById('article-content').innerHTML = marked.parse(md); }
+            catch { document.getElementById('article-content').innerHTML = '<p class="empty">Could not load this article.</p>'; }
+            document.getElementById('articles-list').style.display = 'none';
+            document.getElementById('article-view').style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+        function showList() {
+            document.getElementById('articles-list').style.display = 'flex';
+            document.getElementById('article-view').style.display = 'none';
+        }
+        renderList();
+    </script>
+</body>
+</html>
