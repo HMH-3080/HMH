@@ -5,16 +5,308 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Articles — Hassan Mohamed</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .article-card {
+            background: linear-gradient(145deg, #e8d5c0, #d4b89f, #c49a7c);
+            border-radius: 8px;
+            padding: 2rem;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: inset 2px 2px 4px rgba(255,255,255,0.4), inset -2px -2px 6px rgba(0,0,0,0.2), 0 8px 20px rgba(0,0,0,0.08);
+            border: 1px solid rgba(122, 79, 56, 0.15);
+        }
+
+        .article-card:hover {
+            transform: translateY(-4px);
+            box-shadow: inset 2px 2px 4px rgba(255,255,255,0.4), inset -2px -2px 6px rgba(0,0,0,0.2), 0 16px 32px rgba(0,0,0,0.12);
+        }
+
+        .article-card::before,
+        .article-card::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #5a3a28, #3a2318);
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .article-card::before { top: 12px; left: 12px; }
+        .article-card::after { top: 12px; right: 12px; }
+
+        .article-card .screw-bl,
+        .article-card .screw-br {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #5a3a28, #3a2318);
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .article-card .screw-bl { bottom: 12px; left: 12px; }
+        .article-card .screw-br { bottom: 12px; right: 12px; }
+
+        .article-card .article-date {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #5a3a28;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .article-card h3 {
+            font-family: var(--serif);
+            font-size: 1.35rem;
+            color: #2b1d14;
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+        }
+
+        .article-card .article-excerpt {
+            font-size: 0.9rem;
+            color: #4a3528;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .article-card .article-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .article-card .article-tag {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.25rem 0.6rem;
+            background: rgba(43, 29, 20, 0.1);
+            border-radius: 3px;
+            color: #5a3a28;
+            font-weight: 500;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 3rem;
+        }
+
+        .pagination button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 40px;
+            height: 40px;
+            padding: 0 0.75rem;
+            border: 1px solid rgba(163, 115, 86, 0.25);
+            background: linear-gradient(145deg, #f0e8de, #e8d5c0);
+            color: var(--copper-dark);
+            border-radius: 6px;
+            font-family: var(--sans);
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: inset 1px 1px 2px rgba(255,255,255,0.5), 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .pagination button:hover:not(:disabled) {
+            background: linear-gradient(145deg, #e8d5c0, #d4b89f);
+            border-color: var(--copper);
+        }
+
+        .pagination button.active {
+            background: var(--copper);
+            color: #fff;
+            border-color: var(--copper-dark);
+            box-shadow: 0 2px 8px rgba(163, 115, 86, 0.3);
+        }
+
+        .pagination button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .article-view {
+            display: none;
+            max-width: 740px;
+            margin: 0 auto;
+        }
+
+        .article-view.active {
+            display: block;
+        }
+
+        .article-view .back {
+            display: inline-block;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--copper);
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: 2.5rem;
+            cursor: pointer;
+        }
+
+        .article-view .back:hover { color: var(--copper-dark); }
+
+        .article-view .article-header {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(163, 115, 86, 0.2);
+        }
+
+        .article-view .article-header h1 {
+            font-family: var(--serif);
+            font-size: 2.8rem;
+            line-height: 1.15;
+            margin-bottom: 1rem;
+            color: var(--ink);
+        }
+
+        .article-view .article-meta {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.8rem;
+            color: var(--ink-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .article-body {
+            font-family: var(--serif);
+            font-size: 1.15rem;
+            line-height: 1.85;
+            color: var(--ink-light);
+        }
+
+        .article-body h2 {
+            font-family: var(--serif);
+            font-size: 1.7rem;
+            margin: 3rem 0 1.25rem;
+            color: var(--ink);
+            padding-bottom: 0.6rem;
+            border-bottom: 1px solid rgba(163, 115, 86, 0.15);
+        }
+
+        .article-body h3 {
+            font-family: var(--serif);
+            font-size: 1.3rem;
+            margin: 2.25rem 0 1rem;
+            color: var(--ink);
+        }
+
+        .article-body p { margin-bottom: 1.5rem; }
+        .article-body strong { color: var(--ink); font-weight: 600; }
+        .article-body em { font-style: italic; color: var(--copper-dark); }
+
+        .article-body code {
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 0.82em;
+            background: rgba(163, 115, 86, 0.1);
+            padding: 0.2em 0.45em;
+            border-radius: 4px;
+            color: var(--copper-dark);
+            border: 1px solid rgba(163, 115, 86, 0.12);
+        }
+
+        .article-body pre {
+            background: #0d1117;
+            color: #e6edf3;
+            border-radius: 10px;
+            margin: 2rem 0;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border: 1px solid rgba(163, 115, 86, 0.1);
+        }
+
+        .article-body pre .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.6rem 1rem;
+            background: rgba(163, 115, 86, 0.08);
+            border-bottom: 1px solid rgba(163, 115, 86, 0.1);
+            font-family: var(--sans);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #8b949e;
+        }
+
+        .article-body pre .code-header .lang-badge {
+            background: rgba(163, 115, 86, 0.15);
+            color: #BA8B6E;
+            padding: 0.2em 0.6em;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        .article-body pre code {
+            display: block;
+            padding: 1.25rem 1.5rem;
+            overflow-x: auto;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            background: none;
+            border: none;
+            color: inherit;
+        }
+
+        .article-body pre code::-webkit-scrollbar { height: 6px; }
+        .article-body pre code::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); }
+        .article-body pre code::-webkit-scrollbar-thumb { background: rgba(163, 115, 86, 0.3); border-radius: 3px; }
+
+        .article-body ul, .article-body ol { margin: 1.25rem 0 1.5rem 0; padding-left: 0; }
+        .article-body ul { list-style: none; }
+        .article-body ul li { position: relative; padding-left: 1.5rem; margin-bottom: 0.6rem; }
+        .article-body ul li::before { content: ''; position: absolute; left: 0; top: 0.65em; width: 6px; height: 6px; background: var(--copper); border-radius: 50%; }
+
+        .article-body ol { counter-reset: list-counter; list-style: none; }
+        .article-body ol li { counter-increment: list-counter; position: relative; padding-left: 2rem; margin-bottom: 0.6rem; }
+        .article-body ol li::before { content: counter(list-counter); position: absolute; left: 0; top: 0; width: 1.5rem; height: 1.5rem; background: rgba(163, 115, 86, 0.1); color: var(--copper-dark); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 600; font-family: var(--sans); }
+
+        .article-body blockquote { border-left: 3px solid var(--copper); padding: 1rem 1.5rem; margin: 2rem 0; background: rgba(163, 115, 86, 0.04); border-radius: 0 8px 8px 0; font-style: italic; color: var(--ink-muted); }
+        .article-body blockquote p { margin-bottom: 0; }
+        .article-body hr { border: none; height: 1px; background: linear-gradient(90deg, transparent, rgba(163, 115, 86, 0.3), transparent); margin: 3rem 0; }
+        .article-body table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.95rem; }
+        .article-body th { text-align: left; padding: 0.75rem 1rem; background: rgba(163, 115, 86, 0.08); border-bottom: 2px solid rgba(163, 115, 86, 0.2); font-weight: 600; color: var(--ink); font-family: var(--sans); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; }
+        .article-body td { padding: 0.75rem 1rem; border-bottom: 1px solid rgba(0,0,0,0.06); }
+        .article-body tr:hover td { background: rgba(163, 115, 86, 0.03); }
+
+        .loading-msg { text-align: center; padding: 4rem 0; color: var(--ink-muted); font-size: 0.9rem; }
+
+        @media (max-width: 768px) {
+            .articles-grid { grid-template-columns: 1fr; }
+            .article-view .article-header h1 { font-size: 2rem; }
+            .article-body { font-size: 1.05rem; }
+        }
+    </style>
 </head>
 <body>
     <input type="checkbox" id="menu-toggle" class="menu-toggle">
     <header>
         <a href="about.html" class="masthead-script">Hassan Mohamed</a>
         <label for="menu-toggle" class="menu-btn">
-            <span></span>
-            <span></span>
-            <span></span>
+            <span></span><span></span><span></span>
         </label>
         <nav>
             <a href="about.html">About</a>
@@ -24,9 +316,7 @@
     </header>
 
     <div class="divider">
-        <svg viewBox="0 0 1200 4" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 2 C150 1, 300 3, 500 2 S800 1, 1000 2 S1150 3, 1200 2" stroke="#A37356" stroke-width="0.8" fill="none" opacity="0.5"/>
-        </svg>
+        <svg viewBox="0 0 1200 4" preserveAspectRatio="none"><path d="M0 2 C150 1, 300 3, 500 2 S800 1, 1000 2 S1150 3, 1200 2" stroke="#A37356" stroke-width="0.8" fill="none" opacity="0.5"/></svg>
     </div>
 
     <div class="container">
@@ -34,44 +324,185 @@
             <span class="label">Writing</span>
             <h1>Articles</h1>
         </div>
-
-        <div class="articles-list" id="articles-list"></div>
+        <div class="articles-grid" id="articles-grid">
+            <div class="loading-msg">Loading articles...</div>
+        </div>
+        <div class="pagination" id="pagination"></div>
         <div class="article-view" id="article-view">
-            <span class="back" onclick="showList()">&larr; Back to articles</span>
+            <span class="back" id="back-btn">&larr; Back to articles</span>
+            <div class="article-header" id="article-header"></div>
             <div class="article-body" id="article-content"></div>
         </div>
     </div>
 
     <div class="divider" style="margin-top:0">
-        <svg viewBox="0 0 1200 4" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 2 C150 1, 300 3, 500 2 S800 1, 1000 2 S1150 3, 1200 2" stroke="#A37356" stroke-width="0.8" fill="none" opacity="0.5"/>
-        </svg>
+        <svg viewBox="0 0 1200 4" preserveAspectRatio="none"><path d="M0 2 C150 1, 300 3, 500 2 S800 1, 1000 2 S1150 3, 1200 2" stroke="#A37356" stroke-width="0.8" fill="none" opacity="0.5"/></svg>
     </div>
 
     <footer>&copy; 2026 Hassan Mohamed</footer>
 
     <script>
-        const articles = [];
-        function renderList() {
-            const el = document.getElementById('articles-list');
-            if (!articles.length) { el.innerHTML = '<p class="empty">No articles published yet.</p>'; return; }
-            el.innerHTML = articles.map((a, i) =>
-                `<div class="article-row" onclick="loadArticle(${i})"><div class="date">${a.date}</div><div><h3>${a.title}</h3><p>${a.summary}</p></div></div>`
-            ).join('');
+    (function() {
+        var grid = document.getElementById("articles-grid");
+        var view = document.getElementById("article-view");
+        var headerEl = document.getElementById("article-header");
+        var contentEl = document.getElementById("article-content");
+        var paginationEl = document.getElementById("pagination");
+        var backBtn = document.getElementById("back-btn");
+
+        var PER_PAGE = 10;
+        var currentPage = 1;
+        var articles = [];
+        var totalPages = 0;
+
+        function formatDate(d) {
+            return new Date(d).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
         }
-        async function loadArticle(i) {
-            const a = articles[i];
-            try { const res = await fetch(a.file); if (!res.ok) throw new Error(); const md = await res.text(); document.getElementById('article-content').innerHTML = marked.parse(md); }
-            catch { document.getElementById('article-content').innerHTML = '<p class="empty">Could not load this article.</p>'; }
-            document.getElementById('articles-list').style.display = 'none';
-            document.getElementById('article-view').style.display = 'block';
-            window.scrollTo(0, 0);
+
+        function extractTitle(md) {
+            var match = md.match(/^#\s+(.+)/m);
+            return match ? match[1].trim() : "Untitled";
         }
-        function showList() {
-            document.getElementById('articles-list').style.display = 'flex';
-            document.getElementById('article-view').style.display = 'none';
+
+        function getExcerpt(md) {
+            var lines = md.split("\n");
+            for (var i = 0; i < lines.length; i++) {
+                var l = lines[i].trim();
+                if (l && l.charAt(0) !== "#" && l.substring(0, 3) !== "```" && l.charAt(0) !== "|" && l.charAt(0) !== "-" && l.length > 15) {
+                    return l.substring(0, 130);
+                }
+            }
+            return "";
         }
-        renderList();
+
+        function highlightCodeblocks(container) {
+            var pres = container.querySelectorAll("pre code");
+            for (var i = 0; i < pres.length; i++) {
+                var code = pres[i];
+                var lang = "";
+                var m = code.className.match(/language-(\w+)/);
+                if (m) lang = m[1];
+
+                var header = document.createElement("div");
+                header.className = "code-header";
+                var badge = document.createElement("span");
+                badge.className = "lang-badge";
+                badge.textContent = lang || "Code";
+                header.innerHTML = "<span>Code</span>";
+                header.appendChild(badge);
+                code.parentNode.insertBefore(header, code);
+
+                if (window.hljs) hljs.highlightElement(code);
+            }
+        }
+
+        function renderGrid() {
+            var start = (currentPage - 1) * PER_PAGE;
+            var pageArticles = articles.slice(start, start + PER_PAGE);
+            var html = "";
+
+            for (var i = 0; i < pageArticles.length; i++) {
+                var a = pageArticles[i];
+                var idx = start + i;
+                html += '<div class="article-card" data-idx="' + idx + '">';
+                html += '<span class="screw-bl"></span><span class="screw-br"></span>';
+                html += '<div class="article-date">' + formatDate(a.date) + '</div>';
+                html += '<h3>' + a.title + '</h3>';
+                html += '<p class="article-excerpt">' + getExcerpt(a.content) + '...</p>';
+                html += '<div class="article-tags">';
+                for (var t = 0; t < a.tags.length; t++) {
+                    html += '<span class="article-tag">' + a.tags[t] + '</span>';
+                }
+                html += '</div></div>';
+            }
+
+            grid.innerHTML = html;
+
+            var cards = grid.querySelectorAll(".article-card");
+            for (var c = 0; c < cards.length; c++) {
+                cards[c].addEventListener("click", function() {
+                    openArticle(parseInt(this.getAttribute("data-idx")));
+                });
+            }
+
+            renderPagination();
+        }
+
+        function renderPagination() {
+            if (totalPages <= 1) { paginationEl.innerHTML = ""; return; }
+            var html = '<button data-page="' + (currentPage - 1) + '"' + (currentPage === 1 ? ' disabled' : '') + '>&larr; Prev</button>';
+            for (var p = 1; p <= totalPages; p++) {
+                html += '<button data-page="' + p + '"' + (p === currentPage ? ' class="active"' : '') + '>' + p + '</button>';
+            }
+            html += '<button data-page="' + (currentPage + 1) + '"' + (currentPage === totalPages ? ' disabled' : '') + '>Next &rarr;</button>';
+            paginationEl.innerHTML = html;
+
+            var btns = paginationEl.querySelectorAll("button");
+            for (var b = 0; b < btns.length; b++) {
+                btns[b].addEventListener("click", function() {
+                    var pg = parseInt(this.getAttribute("data-page"));
+                    if (!isNaN(pg) && pg >= 1 && pg <= totalPages) {
+                        currentPage = pg;
+                        renderGrid();
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                    }
+                });
+            }
+        }
+
+        function openArticle(i) {
+            var a = articles[i];
+            headerEl.innerHTML = '<h1>' + a.title + '</h1><div class="article-meta"><span>' + formatDate(a.date) + '</span><span>' + a.tags.join(" / ") + '</span></div>';
+            contentEl.innerHTML = marked.parse(a.content);
+            highlightCodeblocks(contentEl);
+            grid.style.display = "none";
+            paginationEl.style.display = "none";
+            view.classList.add("active");
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+
+        function showGrid() {
+            view.classList.remove("active");
+            grid.style.display = "";
+            paginationEl.style.display = "";
+        }
+
+        backBtn.addEventListener("click", showGrid);
+
+        async function loadArticles() {
+            try {
+                var res = await fetch("articles/manifest.json");
+                var manifest = await res.json();
+
+                var loaded = [];
+                for (var i = 0; i < manifest.length; i++) {
+                    var item = manifest[i];
+                    try {
+                        var mdRes = await fetch("articles/" + item.file);
+                        var md = await mdRes.text();
+                        loaded.push({
+                            title: extractTitle(md),
+                            date: item.date,
+                            tags: item.tags || [],
+                            content: md
+                        });
+                    } catch (e) {
+                        console.warn("Failed to load:", item.file);
+                    }
+                }
+
+                articles = loaded.sort(function(a, b) {
+                    return new Date(b.date) - new Date(a.date);
+                });
+                totalPages = Math.ceil(articles.length / PER_PAGE);
+                renderGrid();
+            } catch (e) {
+                grid.innerHTML = '<div class="loading-msg">Failed to load articles. Use a local server or deploy to GitHub Pages.</div>';
+            }
+        }
+
+        loadArticles();
+    })();
     </script>
 </body>
 </html>

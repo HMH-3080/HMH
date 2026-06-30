@@ -1,0 +1,12 @@
+[
+  {
+    "file": "building-reliable-backends.md",
+    "date": "2026-06-15",
+    "tags": ["backend", "architecture"]
+  },
+  {
+    "file": "kotlin-multiplatform-production.md",
+    "date": "2026-06-28",
+    "tags": ["kotlin", "kmp", "mobile"]
+  }
+]
