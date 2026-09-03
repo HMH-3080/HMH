@@ -3,702 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About — Hassan Mohamed</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-
-    <style>
-        :root {
-            --bg-canvas: #F7F5F0;
-            --text-ink: #1A1A1A;
-            --copper-light: #C49A7C;
-            --copper-mid: #A37356;
-            --copper-dark: #7A4F38;
-            --copper-shadow: rgba(122, 79, 56, 0.4);
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            background-color: var(--bg-canvas);
-            color: var(--text-ink);
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-            overflow-x: hidden;
-        }
-
-        h1, h2, h3 {
-            font-family: 'Playfair Display', serif;
-            color: var(--text-ink);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 4rem;
-        }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 2rem 4rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .masthead-script {
-            font-family: 'Alex Brush', cursive;
-            font-size: 2.5rem;
-            color: var(--text-ink);
-            text-decoration: none;
-            letter-spacing: 1px;
-        }
-
-        nav {
-            display: flex;
-            gap: 2.5rem;
-        }
-
-        nav a {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-decoration: none;
-            color: #555;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        nav a:hover, nav a.active {
-            color: var(--text-ink);
-        }
-
-        nav a.active {
-            position: relative;
-        }
-
-        nav a.active::after {
-            content: '';
-            position: absolute;
-            bottom: -6px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: var(--copper-mid);
-            border-radius: 2px;
-        }
-
-        .menu-toggle {
-            display: none;
-        }
-
-        .menu-btn {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            padding: 5px;
-            z-index: 100;
-        }
-
-        .menu-btn span {
-            width: 24px;
-            height: 2px;
-            background: var(--text-ink);
-            transition: all 0.3s ease;
-            border-radius: 2px;
-        }
-
-        .menu-toggle:checked ~ header .menu-btn span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-
-        .menu-toggle:checked ~ header .menu-btn span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .menu-toggle:checked ~ header .menu-btn span:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -5px);
-        }
-
-        .divider {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 4rem;
-            display: flex;
-            justify-content: center;
-        }
-        
-        .divider svg {
-            width: 100%;
-            height: 15px;
-        }
-
-        .hero {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 5rem 0;
-            position: relative;
-            gap: 4rem;
-        }
-
-        .hero-left {
-            flex: 1;
-            max-width: 500px;
-            z-index: 2;
-        }
-
-        .hero-left .label {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: var(--copper-dark);
-            font-weight: 600;
-            display: block;
-            margin-bottom: 1rem;
-        }
-
-        .hero-left h1 {
-            font-size: 4.5rem;
-            line-height: 1.05;
-            margin-bottom: 0.5rem;
-            letter-spacing: -1px;
-        }
-
-        .hero-left .role {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            font-size: 1.5rem;
-            color: var(--copper-mid);
-            margin-bottom: 2rem;
-        }
-
-        .hero-left .bio {
-            font-size: 1rem;
-            color: #444;
-            line-height: 1.8;
-            max-width: 400px;
-        }
-
-        .hero-right {
-            flex: 1;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 420px;
-        }
-
-        .portrait-wrapper {
-            position: relative;
-            width: 280px;
-            height: 280px;
-            z-index: 2;
-        }
-
-        .portrait {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-            box-shadow: 
-                0 0 0 4px rgba(163, 115, 86, 0.3),
-                0 0 0 8px rgba(163, 115, 86, 0.1),
-                0 25px 50px -12px rgba(0,0,0,0.2);
-            border: 3px solid var(--copper-mid);
-            filter: sepia(5%) contrast(102%);
-        }
-
-        .hero-schematic {
-            position: absolute;
-            width: 420px;
-            height: 420px;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 1;
-            opacity: 0.9;
-            pointer-events: none;
-        }
-
-        .tech-section {
-            margin: 5rem 0;
-        }
-
-        .tech-section h2 {
-            font-size: 2rem;
-            margin-bottom: 3rem;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            padding-bottom: 1rem;
-        }
-
-        .tech-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 4rem;
-        }
-
-        .tech-col h3 {
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-family: 'Inter', sans-serif;
-            color: var(--copper-dark);
-            margin-bottom: 2rem;
-        }
-
-        .tech-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-        }
-
-        .copper-plate {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 0.75rem 1.25rem;
-            background: linear-gradient(145deg, #BA8B6E, #A37356);
-            border-radius: 6px;
-            font-weight: 500;
-            font-size: 0.95rem;
-            color: #2b1d14;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            position: relative;
-            transition: transform 0.3s ease;
-        }
-
-        .copper-plate:hover {
-            transform: translateY(-2px);
-        }
-
-        .tech-list img {
-            width: 20px;
-            height: 20px;
-            filter: invert(24%) sepia(21%) saturate(1210%) hue-rotate(345deg) brightness(91%) contrast(89%);
-        }
-
-        .copper-badge {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            padding: 1.5rem;
-            background: linear-gradient(145deg, #BA8B6E, #A37356, #8C6246);
-            border-radius: 8px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-            position: relative;
-            width: 140px;
-            aspect-ratio: 1;
-            margin: 0.5rem 0;
-            background-image: 
-                radial-gradient(circle at 12px 12px, #3a2318 2px, transparent 2.5px),
-                radial-gradient(circle at calc(100% - 12px) 12px, #3a2318 2px, transparent 2.5px),
-                radial-gradient(circle at 12px calc(100% - 12px), #3a2318 2px, transparent 2.5px),
-                radial-gradient(circle at calc(100% - 12px) calc(100% - 12px), #3a2318 2px, transparent 2.5px),
-                linear-gradient(145deg, #BA8B6E, #A37356, #8C6246);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .copper-badge:hover {
-            transform: translateY(-4px);
-            box-shadow: 
-                inset 2px 2px 4px rgba(255,255,255,0.4),
-                inset -2px -2px 6px rgba(0,0,0,0.4),
-                0 15px 25px var(--copper-shadow);
-        }
-
-        .copper-badge img {
-            width: 40px;
-            height: 40px;
-            filter: drop-shadow(0 2px 2px rgba(0,0,0,0.5)) invert(10%) sepia(20%) saturate(200%) hue-rotate(345deg) brightness(30%) contrast(120%);
-        }
-
-        .copper-badge .badge-label {
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: #2b1d14;
-            letter-spacing: 0.5px;
-            text-shadow: 1px 1px 0 rgba(255,255,255,0.2);
-        }
-
-        .contact-section {
-            margin: 4rem 0 2rem 0;
-        }
-
-        .contact-section h2 {
-            font-size: 2rem;
-            margin-bottom: 3rem;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            padding-bottom: 1rem;
-        }
-
-        .contact-links {
-            display: flex;
-            gap: 3rem;
-        }
-
-        .contact-link {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            text-decoration: none;
-            color: var(--text-ink);
-            font-size: 0.95rem;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .contact-link:hover {
-            color: var(--copper-mid);
-        }
-
-        .contact-link svg {
-            width: 20px;
-            height: 20px;
-            fill: currentColor;
-            opacity: 0.7;
-        }
-
-
-        footer {
-            text-align: center;
-            padding: 2rem 0;
-            font-size: 0.85rem;
-            color: #777;
-            font-family: 'Inter', sans-serif;
-        }
-
-        @media (max-width: 992px) {
-            .container { padding: 0 2rem; }
-            header { padding: 1.5rem 2rem; }
-            .divider { padding: 0 2rem; }
-            .menu-btn { display: flex; }
-            nav {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 70%;
-                max-width: 280px;
-                height: 100vh;
-                background: var(--bg-canvas);
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                gap: 2.5rem;
-                transition: right 0.3s ease;
-                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-                z-index: 99;
-            }
-            nav a {
-                font-size: 1.1rem;
-                letter-spacing: 3px;
-            }
-            .menu-toggle:checked ~ header nav {
-                right: 0;
-            }
-            .hero { flex-direction: column; text-align: center; margin: 3rem 0; gap: 2rem; }
-            .hero-left { max-width: 100%; }
-            .hero-left h1 { font-size: 3rem; }
-            .hero-left .bio { max-width: 100%; margin: 0 auto; }
-            .hero-right { min-height: 360px; }
-            .portrait-wrapper { width: 240px; height: 240px; }
-            .hero-schematic { width: 360px; height: 360px; }
-            .tech-grid { grid-template-columns: 1fr; gap: 3rem; }
-            .tech-col { align-items: center; display: flex; flex-direction: column; }
-            .tech-list { align-items: center; width: 100%; max-width: 300px; }
-            .copper-plate { width: 100%; justify-content: center; }
-            .contact-links { justify-content: center; }
-        }
-
-        @media (max-width: 480px) {
-            .container { padding: 0 1.25rem; }
-            header { padding: 1rem 1.25rem; }
-            .masthead-script { font-size: 1.8rem; }
-            .divider { padding: 0 1.25rem; }
-            nav { width: 80%; }
-            .hero { margin: 2rem 0; }
-            .hero-left h1 { font-size: 2.2rem; }
-            .hero-left .role { font-size: 1.1rem; }
-            .portrait-wrapper { width: 200px; height: 200px; }
-            .hero-schematic { width: 300px; height: 300px; }
-            .hero-right { min-height: 300px; }
-            .copper-badge { width: 110px; padding: 1rem; }
-            .contact-links { flex-direction: column; gap: 1.5rem; align-items: center; }
-        }
-
-        @view-transition {
-            navigation: auto;
-        }
-
-        @media (min-width: 769px) {
-            ::view-transition-old(root) {
-                animation: page-turn-old 0.45s ease-in-out;
-                transform-origin: left center;
-            }
-
-            ::view-transition-new(root) {
-                animation: page-turn-new 0.45s ease-in-out;
-                transform-origin: left center;
-            }
-        }
-
-        @keyframes page-turn-old {
-            0% { transform: perspective(1200px) rotateY(0deg); opacity: 1; }
-            100% { transform: perspective(1200px) rotateY(-180deg); opacity: 0; }
-        }
-
-        @keyframes page-turn-new {
-            0% { transform: perspective(1200px) rotateY(180deg); opacity: 0; }
-            100% { transform: perspective(1200px) rotateY(0deg); opacity: 1; }
-        }
-    </style>
+    <meta name="description" content="Hassan Mohamed — Systems Builder. Business platforms, ERP, SaaS, and open-source tooling.">
+    <title>Hassan Mohamed — Systems Builder</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="sysbar">
+        <div class="sysbar-inner">
+            <span>SYS.HMH — PORTFOLIO / v2.1</span>
+            <span><span class="dot"></span>STATUS: SHIPPING + MAINTAINING <span class="hide-m">— EGYFY BETA LIVE</span></span>
+        </div>
+    </div>
+
     <input type="checkbox" id="menu-toggle" class="menu-toggle">
     <header>
-        <a href="about.html" class="masthead-script">Hassan Mohamed</a>
-        <label for="menu-toggle" class="menu-btn">
-            <span></span>
-            <span></span>
-            <span></span>
-        </label>
-        <nav>
-            <a href="about.html" class="active">About</a>
-            <a href="projects.html">Projects</a>
-            <a href="articles.html">Articles</a>
-        </nav>
+        <div class="header-inner">
+            <a href="about.html" class="brand"><span class="brand-mark">HM</span><span class="brand-name">Hassan Mohamed <span>/ sys.builder</span></span></a>
+            <label for="menu-toggle" class="menu-btn" aria-label="Menu"><span></span><span></span><span></span></label>
+            <nav>
+                <a href="about.html" class="active">About</a>
+                <a href="projects.html">Projects</a>
+                <a href="articles.html">Articles</a>
+            </nav>
+        </div>
     </header>
-
-    <div class="divider">
-        <svg viewBox="0 0 1200 4" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 2 C150 1, 300 3, 500 2 S800 1, 1000 2 S1150 3, 1200 2" stroke="#A37356" stroke-width="0.8" fill="none" opacity="0.5"/>
-        </svg>
-    </div>
 
     <div class="container">
         <section class="hero">
-            <div class="hero-left">
-                <span class="label">Profile</span>
+            <div>
+                <span class="label">01 / Profile — ~/about</span>
                 <h1>Hassan<br>Mohamed</h1>
-                <p class="role">Systems Builder</p>
+                <p class="role">systems_builder --full-stack</p>
                 <p class="bio">I build reliable systems from the ground up. Backend, frontend, databases — I enjoy working across the full stack to ship things that actually work.</p>
+                <dl class="hero-meta">
+                    <dt>Focus</dt><dd>Business platforms · ERP · SaaS</dd>
+                    <dt>Operation</dt><dd>Offline-first · Cloud sync · Maintained infra</dd>
+                    <dt>Base</dt><dd>Egypt — remote-capable</dd>
+                </dl>
+                <div class="hero-actions">
+                    <a class="btn btn-primary" href="projects.html">View projects →</a>
+                    <a class="btn btn-ghost" href="https://github.com/HMH-3080" target="_blank" rel="noopener">GitHub ↗</a>
+                </div>
             </div>
-            <div class="hero-right">
-                <svg class="hero-schematic" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <radialGradient id="wc" cx="50%" cy="50%" r="50%">
-                            <stop offset="0%" stop-color="#C49A7C" stop-opacity="0.18"/>
-                            <stop offset="60%" stop-color="#A37356" stop-opacity="0.06"/>
-                            <stop offset="100%" stop-color="#A37356" stop-opacity="0"/>
-                        </radialGradient>
-                        <filter id="g">
-                            <feGaussianBlur stdDeviation="1" result="b"/>
-                            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-                        </filter>
-                        <filter id="gs">
-                            <feGaussianBlur stdDeviation="2" result="b"/>
-                            <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-                        </filter>
-                    </defs>
-
-                    <ellipse cx="200" cy="200" rx="190" ry="190" fill="url(#wc)"/>
-
-                    <g stroke="#7A4F38" stroke-width="1.2" opacity="0.6" fill="none">
-                        <path d="M200 110 L200 65"/>
-                        <path d="M200 290 L200 335"/>
-                        <path d="M110 200 L65 200"/>
-                        <path d="M290 200 L335 200"/>
-                        <path d="M136 136 L104 104"/>
-                        <path d="M264 136 L296 104"/>
-                        <path d="M136 264 L104 296"/>
-                        <path d="M264 264 L296 296"/>
-                        <path d="M120 175 L85 155"/>
-                        <path d="M280 175 L315 155"/>
-                        <path d="M120 225 L85 245"/>
-                        <path d="M280 225 L315 245"/>
-                        <path d="M175 120 L155 85"/>
-                        <path d="M225 120 L245 85"/>
-                        <path d="M175 280 L155 315"/>
-                        <path d="M225 280 L245 315"/>
-                    </g>
-
-                    <g fill="none" stroke="#7A4F38" stroke-width="1" opacity="0.65">
-                        <circle cx="200" cy="65" r="3.5"/>
-                        <circle cx="200" cy="335" r="3.5"/>
-                        <circle cx="65" cy="200" r="3.5"/>
-                        <circle cx="335" cy="200" r="3.5"/>
-                        <circle cx="104" cy="104" r="3.5"/>
-                        <circle cx="296" cy="104" r="3.5"/>
-                        <circle cx="104" cy="296" r="3.5"/>
-                        <circle cx="296" cy="296" r="3.5"/>
-                        <circle cx="85" cy="155" r="3"/>
-                        <circle cx="315" cy="155" r="3"/>
-                        <circle cx="85" cy="245" r="3"/>
-                        <circle cx="315" cy="245" r="3"/>
-                        <circle cx="155" cy="85" r="3"/>
-                        <circle cx="245" cy="85" r="3"/>
-                        <circle cx="155" cy="315" r="3"/>
-                        <circle cx="245" cy="315" r="3"/>
-                    </g>
-                    <g fill="#7A4F38" opacity="0.45">
-                        <circle cx="200" cy="65" r="1.2"/>
-                        <circle cx="200" cy="335" r="1.2"/>
-                        <circle cx="65" cy="200" r="1.2"/>
-                        <circle cx="335" cy="200" r="1.2"/>
-                        <circle cx="104" cy="104" r="1.2"/>
-                        <circle cx="296" cy="104" r="1.2"/>
-                        <circle cx="104" cy="296" r="1.2"/>
-                        <circle cx="296" cy="296" r="1.2"/>
-                        <circle cx="85" cy="155" r="1"/>
-                        <circle cx="315" cy="155" r="1"/>
-                        <circle cx="85" cy="245" r="1"/>
-                        <circle cx="315" cy="245" r="1"/>
-                        <circle cx="155" cy="85" r="1"/>
-                        <circle cx="245" cy="85" r="1"/>
-                        <circle cx="155" cy="315" r="1"/>
-                        <circle cx="245" cy="315" r="1"/>
-                    </g>
-
-                    <circle cx="200" cy="200" r="140" fill="none" stroke="#A37356" stroke-width="1.5" opacity="0.15"/>
-                    <circle cx="200" cy="200" r="140" fill="none" stroke="#A37356" stroke-width="2" opacity="0" filter="url(#g)">
-                        <animate attributeName="opacity" values="0;0.7;0" dur="0.5s" repeatCount="indefinite"/>
-                        <animate attributeName="r" values="140;148;140" dur="0.5s" repeatCount="indefinite"/>
-                    </circle>
-                    <circle cx="200" cy="200" r="160" fill="none" stroke="#C49A7C" stroke-width="0.8" opacity="0" filter="url(#g)">
-                        <animate attributeName="opacity" values="0;0.35;0" dur="0.5s" repeatCount="indefinite" begin="0.15s"/>
-                        <animate attributeName="r" values="160;168;160" dur="0.5s" repeatCount="indefinite" begin="0.15s"/>
-                    </circle>
-
-                    <g filter="url(#gs)">
-                        <rect x="196" y="70" width="8" height="16" rx="4" fill="#C49A7C">
-                            <animate attributeName="y" values="70;110;70" dur="0.9s" repeatCount="indefinite"/>
-                            <animate attributeName="opacity" values="1;0.3;0" dur="0.9s" repeatCount="indefinite"/>
-                        </rect>
-                        <rect x="196" y="284" width="8" height="16" rx="4" fill="#C49A7C">
-                            <animate attributeName="y" values="284;324;284" dur="0.9s" repeatCount="indefinite" begin="0.2s"/>
-                            <animate attributeName="opacity" values="1;0.3;0" dur="0.9s" repeatCount="indefinite" begin="0.2s"/>
-                        </rect>
-                        <rect x="70" y="196" width="16" height="8" rx="4" fill="#C49A7C">
-                            <animate attributeName="x" values="70;110;70" dur="0.9s" repeatCount="indefinite" begin="0.1s"/>
-                            <animate attributeName="opacity" values="1;0.3;0" dur="0.9s" repeatCount="indefinite" begin="0.1s"/>
-                        </rect>
-                        <rect x="284" y="196" width="16" height="8" rx="4" fill="#C49A7C">
-                            <animate attributeName="x" values="284;324;284" dur="0.9s" repeatCount="indefinite" begin="0.3s"/>
-                            <animate attributeName="opacity" values="1;0.3;0" dur="0.9s" repeatCount="indefinite" begin="0.3s"/>
-                        </rect>
-                        <rect x="108" y="108" width="14" height="8" rx="3" fill="#C49A7C" opacity="0.8" transform="rotate(-45 115 112)">
-                            <animate attributeName="opacity" values="0.8;0.2;0.8" dur="1.1s" repeatCount="indefinite" begin="0.15s"/>
-                        </rect>
-                        <rect x="278" y="108" width="14" height="8" rx="3" fill="#C49A7C" opacity="0.8" transform="rotate(45 285 112)">
-                            <animate attributeName="opacity" values="0.8;0.2;0.8" dur="1.1s" repeatCount="indefinite" begin="0.25s"/>
-                        </rect>
-                        <rect x="108" y="284" width="14" height="8" rx="3" fill="#C49A7C" opacity="0.8" transform="rotate(45 115 288)">
-                            <animate attributeName="opacity" values="0.8;0.2;0.8" dur="1.1s" repeatCount="indefinite" begin="0.35s"/>
-                        </rect>
-                        <rect x="278" y="284" width="14" height="8" rx="3" fill="#C49A7C" opacity="0.8" transform="rotate(-45 285 288)">
-                            <animate attributeName="opacity" values="0.8;0.2;0.8" dur="1.1s" repeatCount="indefinite" begin="0.45s"/>
-                        </rect>
-                    </g>
-
-                    <circle cx="200" cy="200" r="125" fill="none" stroke="#C49A7C" stroke-width="0.8" opacity="0.2">
-                        <animate attributeName="opacity" values="0.2;0.5;0.2" dur="2.5s" repeatCount="indefinite"/>
-                    </circle>
-                </svg>
-                <div class="portrait-wrapper">
+            <div class="spec" aria-label="Build manifest">
+                <div class="spec-bar"><span>build-manifest</span><span class="lang">sys / 10 shipped</span></div>
+                <div class="spec-body"><span class="c"># factual manifest — no filler</span><br><span class="k">name:</span> <span class="v">hassan.mohamed</span><br><span class="k">role:</span> <span class="v">systems builder</span><br><span class="k">systems_shipped:</span> <span class="s">10</span> <span class="c"># 4 enterprise · 3 saas/product · 3 oss</span><br><span class="k">oss_repos:</span> <span class="s">3</span> <span class="c"># kpm · id-checker · pomodoro</span><br><span class="k">saas_tenants_live:</span> <span class="s">3</span> <span class="c"># twins · abdo-store · tm</span><br><span class="k">core:</span> <span class="v">[kotlin, java, typescript, elixir]</span><br><span class="k">runtime:</span> <span class="v">[ktor, spring-boot, phoenix, express]</span><br><span class="k">data:</span> <span class="v">[postgres, sqlite, turso, mongo]</span><br><span class="k">maintains:</span> <span class="v">[el-tawfikia infra, gal infra]</span></div>
+                <div class="portrait-row">
                     <img src="logo.png" alt="Hassan Mohamed" class="portrait">
+                    <div class="who"><strong>Operator + builder.</strong><br>Designs, ships, then keeps the servers running.</div>
                 </div>
             </div>
         </section>
 
-        <div class="divider">
-            <svg viewBox="0 0 1200 4" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0 2 C150 1, 300 3, 500 2 S800 1, 1000 2 S1150 3, 1200 2" stroke="#A37356" stroke-width="0.8" fill="none" opacity="0.5"/>
-            </svg>
-        </div>
-
-        <section class="tech-section">
-            <h2>Technology & Tools</h2>
+        <div class="sec-head"><span class="sec-index">02 / STACK</span><span class="sec-title">Technology &amp; tools</span><span class="sec-note">production-used only</span></div>
+        <section>
             <div class="tech-grid">
                 <div class="tech-col">
                     <h3>Languages</h3>
-                    <ul class="tech-list">
-                        <li class="copper-plate"><img src="https://cdn.simpleicons.org/kotlin"> Kotlin</li>
-                        <li class="copper-badge"><img src="https://cdn.simpleicons.org/openjdk"><span class="badge-label">Java</span></li>
-                        <li class="copper-plate"><img src="https://cdn.simpleicons.org/typescript"> TypeScript</li>
-                        <li class="copper-badge"><img src="https://cdn.simpleicons.org/javascript"><span class="badge-label">JavaScript</span></li>
-                        <li class="copper-plate"><img src="https://cdn.simpleicons.org/elixir"> Elixir</li>
-                    </ul>
+                    <div class="tech-list">
+                        <span class="chip"><img src="https://cdn.simpleicons.org/kotlin" alt="" loading="lazy">Kotlin</span>
+                        <span class="chip"><img src="https://cdn.simpleicons.org/openjdk" alt="" loading="lazy">Java</span>
+                        <span class="chip"><img src="https://cdn.simpleicons.org/typescript" alt="" loading="lazy">TypeScript</span>
+                        <span class="chip"><img src="https://cdn.simpleicons.org/javascript" alt="" loading="lazy">JavaScript</span>
+                        <span class="chip"><img src="https://cdn.simpleicons.org/elixir" alt="" loading="lazy">Elixir</span>
+                    </div>
                 </div>
                 <div class="tech-col">
-                    <h3>Frameworks & Tools</h3>
-                    <ul class="tech-list">
-                        <li class="copper-plate"><img src="https://cdn.simpleicons.org/kotlin"> KMP</li>
-                        <li class="copper-plate"><img src="https://cdn.simpleicons.org/ktor"> Ktor</li>
-                        <li class="copper-badge"><img src="https://cdn.simpleicons.org/springboot"><span class="badge-label">Spring Boot</span></li>
-                        <li class="copper-plate"><img src="https://cdn.simpleicons.org/eclipsevertdotx"> Vert.x</li>
-                        <li class="copper-plate"><img src="https://cdn.simpleicons.org/express"> Express.js</li>
-                        <li class="copper-badge"><img src="https://cdn.simpleicons.org/phoenixframework"><span class="badge-label">Phoenix</span></li>
-                        <li class="copper-plate"><img src="https://cdn.simpleicons.org/htmx"> HTMX</li>
-                        <li class="copper-plate">λ http4k</li>
-                    </ul>
+                    <h3>Frameworks &amp; tools</h3>
+                    <div class="tech-list">
+                        <span class="chip">KMP</span>
+                        <span class="chip"><img src="https://cdn.simpleicons.org/ktor" alt="" loading="lazy">Ktor</span>
+                        <span class="chip"><img src="https://cdn.simpleicons.org/springboot" alt="" loading="lazy">Spring Boot</span>
+                        <span class="chip"><img src="https://cdn.simpleicons.org/eclipsevertdotx" alt="" loading="lazy">Vert.x</span>
+                        <span class="chip"><img src="https://cdn.simpleicons.org/express" alt="" loading="lazy">Express.js</span>
+                        <span class="chip"><img src="https://cdn.simpleicons.org/phoenixframework" alt="" loading="lazy">Phoenix</span>
+                        <span class="chip"><img src="https://cdn.simpleicons.org/htmx" alt="" loading="lazy">HTMX</span>
+                        <span class="chip">λ http4k</span>
+                    </div>
                 </div>
                 <div class="tech-col">
                     <h3>Databases</h3>
-                    <ul class="tech-list">
-                        <li class="copper-plate"><img src="https://cdn.simpleicons.org/postgresql"> PostgreSQL</li>
-                        <li class="copper-plate"><img src="https://cdn.simpleicons.org/mysql"> MySQL</li>
-                        <li class="copper-plate"><img src="https://cdn.simpleicons.org/mongodb"> MongoDB</li>
-                        <li class="copper-plate"><img src="https://cdn.simpleicons.org/sqlite"> SQLite</li>
-                        <li class="copper-badge"><img src="https://cdn.simpleicons.org/turso"><span class="badge-label">Turso</span></li>
-                    </ul>
+                    <div class="tech-list">
+                        <span class="chip"><img src="https://cdn.simpleicons.org/postgresql" alt="" loading="lazy">PostgreSQL</span>
+                        <span class="chip"><img src="https://cdn.simpleicons.org/mysql" alt="" loading="lazy">MySQL</span>
+                        <span class="chip"><img src="https://cdn.simpleicons.org/mongodb" alt="" loading="lazy">MongoDB</span>
+                        <span class="chip"><img src="https://cdn.simpleicons.org/sqlite" alt="" loading="lazy">SQLite</span>
+                        <span class="chip"><img src="https://cdn.simpleicons.org/turso" alt="" loading="lazy">Turso</span>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <div class="divider">
-            <svg viewBox="0 0 1200 4" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0 2 C150 1, 300 3, 500 2 S800 1, 1000 2 S1150 3, 1200 2" stroke="#A37356" stroke-width="0.8" fill="none" opacity="0.5"/>
-            </svg>
-        </div>
+        <div class="sec-head"><span class="sec-index">03 / SELECTED</span><span class="sec-title">Selected work</span><span class="sec-note"><a href="projects.html" style="color:inherit">full index →</a></span></div>
+        <section>
+            <div class="index-table">
+                <a class="index-row" href="projects.html#egyfy"><span class="yr">2025—</span><span class="nm">Egyfy<small>Multi-tenant SaaS e-commerce · 3 live tenants</small></span><span class="status status-beta">Beta</span><span class="arr">→</span></a>
+                <a class="index-row" href="projects.html#elfath"><span class="yr">2024</span><span class="nm">El Fath Pharmacies<small>Offline-first multi-branch POS + loyalty</small></span><span class="status status-live">Live</span><span class="arr">→</span></a>
+                <a class="index-row" href="projects.html#rocket2"><span class="yr">2026</span><span class="nm">Rocket System 2<small>Distributed ERP · offline-first + mobile</small></span><span class="status status-live">Live</span><span class="arr">→</span></a>
+            </div>
+        </section>
 
-        <section class="contact-section">
-            <h2>Contact</h2>
+        <div class="sec-head"><span class="sec-index">04 / CONTACT</span><span class="sec-title">Contact</span><span class="sec-note">direct channels</span></div>
+        <section>
             <div class="contact-links">
                 <a href="https://github.com/HMH-3080" target="_blank" rel="noopener" class="contact-link">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                    GitHub
+                    GitHub <span class="ext">↗ HMH-3080</span>
                 </a>
                 <a href="https://www.linkedin.com/in/hasan-mohamed-81a187289/" target="_blank" rel="noopener" class="contact-link">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                    LinkedIn
+                    LinkedIn <span class="ext">↗ hasan-mohamed</span>
                 </a>
                 <a href="mailto:hasanmo3080vr@gmail.com" class="contact-link">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z"/><path d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z"/></svg>
-                    Email
+                    Email <span class="ext">↗ hasanmo3080vr</span>
                 </a>
             </div>
         </section>
     </div>
 
-    <div class="divider" style="margin-top:0">
-        <svg viewBox="0 0 1200 4" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 2 C150 1, 300 3, 500 2 S800 1, 1000 2 S1150 3, 1200 2" stroke="#A37356" stroke-width="0.8" fill="none" opacity="0.5"/>
-        </svg>
-    </div>
-
-    <footer>&copy; 2026 Hassan Mohamed</footer>
+    <footer>
+        <div class="footer-inner">
+            <span>© 2026 HASSAN MOHAMED</span>
+            <span>FLAT · MONO · NO FRAMEWORKS</span>
+        </div>
+    </footer>
 </body>
 </html>
