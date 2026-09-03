@@ -6,6 +6,9 @@
     <meta name="description" content="Hassan Mohamed — Systems Builder. Business platforms, ERP, SaaS, and open-source tooling.">
     <title>Hassan Mohamed — Systems Builder</title>
     <link rel="stylesheet" href="style.css">
+    <script>
+    (function(){try{var t=localStorage.getItem('hmh-theme');if(!t){t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.dataset.theme=t;}catch(e){}})();
+    </script>
 </head>
 <body>
     <div class="sysbar">
@@ -24,6 +27,7 @@
                 <a href="about.html" class="active">About</a>
                 <a href="projects.html">Projects</a>
                 <a href="articles.html">Articles</a>
+                <button class="theme-btn" id="theme-btn" type="button">MODE: LIGHT</button>
             </nav>
         </div>
     </header>
@@ -128,5 +132,19 @@
             <span>FLAT · MONO · NO FRAMEWORKS</span>
         </div>
     </footer>
+
+    <script>
+    (function() {
+        var btn = document.getElementById("theme-btn");
+        function label() { btn.textContent = document.documentElement.dataset.theme === "dark" ? "MODE: DARK" : "MODE: LIGHT"; }
+        btn.addEventListener("click", function() {
+            var next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+            document.documentElement.dataset.theme = next;
+            try { localStorage.setItem("hmh-theme", next); } catch (e) {}
+            label();
+        });
+        label();
+    })();
+    </script>
 </body>
 </html>

@@ -6,6 +6,9 @@
     <meta name="description" content="Technical writing on backends, Kotlin Multiplatform, and SQLite by Hassan Mohamed.">
     <title>Articles — Hassan Mohamed</title>
     <link rel="stylesheet" href="style.css">
+    <script>
+    (function(){try{var t=localStorage.getItem('hmh-theme');if(!t){t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.dataset.theme=t;}catch(e){}})();
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -27,6 +30,7 @@
                 <a href="about.html">About</a>
                 <a href="projects.html">Projects</a>
                 <a href="articles.html" class="active">Articles</a>
+                <button class="theme-btn" id="theme-btn" type="button">MODE: LIGHT</button>
             </nav>
         </div>
     </header>
@@ -199,6 +203,20 @@
             }
         }
         loadArticles();
+    })();
+    </script>
+
+    <script>
+    (function() {
+        var btn = document.getElementById("theme-btn");
+        function label() { btn.textContent = document.documentElement.dataset.theme === "dark" ? "MODE: DARK" : "MODE: LIGHT"; }
+        btn.addEventListener("click", function() {
+            var next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+            document.documentElement.dataset.theme = next;
+            try { localStorage.setItem("hmh-theme", next); } catch (e) {}
+            label();
+        });
+        label();
     })();
     </script>
 </body>

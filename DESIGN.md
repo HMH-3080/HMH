@@ -112,6 +112,8 @@ HMH Systems is an engineering dossier, not a marketing site. Monochrome surfaces
 - **Hairline (#E4E4E7):** All dividers, table rules, card borders.
 - **CodeBg (#09090B) / CodeText (#E4E4E7):** Code blocks and spec panels only.
 
+Dark mode mirrors the same tokens with inverted luminance — no new hues: canvas `#09090B`, surface `#101013`, ink `#F4F4F5`, hairline `#26262B`, signal lightened to `#FB923C` for contrast. Primary buttons and the brand mark invert (paper fill, ink text). Activated via `data-theme="dark"` on `<html>`, persisted in `localStorage`, defaulting to `prefers-color-scheme`.
+
 ## Typography
 
 Inter for prose and UI, JetBrains Mono for specs only — section indices (`01 / PROFILE`), paths (`~/projects`), table headers, tech chips, status labels, buttons in uppercase-mono where the action is technical. Never serif display, never script. H1 tight tracking `-0.03em`, weight 650. Body 0.95rem/1.7.
