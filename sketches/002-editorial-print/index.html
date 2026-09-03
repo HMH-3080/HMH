@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Systems Review — Hassan Mohamed</title>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --paper: #FDFCF8; --ink: #1C1A16; --muted: #6B655B; --rule: #DDD8CC; --accent: #8C3B12; }
+  body { background: var(--paper); color: var(--ink); font-family: 'Newsreader', Georgia, serif; font-size: 18px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  .progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--accent); width: 0; z-index: 50; }
+  .folio { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); display: flex; justify-content: space-between; gap: 12px; max-width: 1080px; margin: 0 auto; padding: 14px 28px; border-bottom: 1px solid var(--rule); flex-wrap: wrap; }
+  .masthead { text-align: center; max-width: 1080px; margin: 0 auto; padding: 40px 28px 0; }
+  .masthead .vol { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); }
+  .masthead h1 { font-size: clamp(2.6rem, 7vw, 4.6rem); font-weight: 500; letter-spacing: -0.02em; line-height: 1.02; margin: 14px 0 8px; }
+  .masthead .deck { font-style: italic; color: var(--muted); font-size: 1.15rem; }
+  .byline { display: flex; justify-content: center; gap: 18px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); padding: 18px 0 22px; border-bottom: 3px double var(--ink); max-width: 1080px; margin: 0 auto; padding-left: 28px; padding-right: 28px; flex-wrap: wrap; }
+  main { max-width: 1080px; margin: 0 auto; padding: 0 28px 80px; display: grid; grid-template-columns: 1fr 220px; gap: 56px; }
+  article { min-width: 0; }
+  .dropcap::first-letter { font-size: 3.4em; float: left; line-height: .85; padding: 4px 10px 0 0; font-weight: 600; }
+  article p { margin-bottom: 1.2em; max-width: 62ch; }
+  h2.sec { font-size: 1.6rem; font-weight: 600; letter-spacing: -0.01em; margin: 2.2em 0 .4em; padding-top: .6em; border-top: 1px solid var(--ink); display: flex; align-items: baseline; gap: 12px; }
+  h2.sec .n { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 500; }
+  .pull { font-size: 1.5rem; font-style: italic; line-height: 1.4; border-left: 3px solid var(--accent); padding-left: 20px; margin: 1.8em 0; color: var(--ink); }
+  .cols { column-count: 2; column-gap: 36px; }
+  .cols p { break-inside: avoid; }
+  .toc { list-style: none; }
+  .toc li { display: flex; align-items: baseline; gap: 10px; padding: 10px 0; border-bottom: 1px dotted var(--rule); }
+  .toc .pg { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); }
+  .toc a { color: inherit; text-decoration: none; font-weight: 500; }
+  .toc a:hover { color: var(--accent); }
+  .toc .dots { flex: 1; border-bottom: 1px dotted var(--rule); transform: translateY(-4px); }
+  .toc .yr { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted); }
+  aside.marginalia { border-left: 1px solid var(--rule); padding-left: 20px; align-self: start; position: sticky; top: 24px; display: flex; flex-direction: column; gap: 18px; }
+  .note { font-size: .85rem; line-height: 1.55; color: var(--muted); }
+  .note .tag { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 4px; }
+  .stackline { font-family: 'JetBrains Mono', monospace; font-size: 12.5px; line-height: 2; color: var(--muted); }
+  .stackline b { color: var(--ink); font-weight: 500; }
+  .colophon { max-width: 1080px; margin: 0 auto; padding: 22px 28px 60px; border-top: 3px double var(--ink); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .colophon a { color: var(--accent); }
+  nav.jump { display: flex; gap: 8px; flex-wrap: wrap; max-width: 1080px; margin: 0 auto; padding: 18px 28px 0; }
+  nav.jump a { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); text-decoration: none; border: 1px solid var(--rule); padding: 8px 12px; min-height: 40px; display: inline-flex; align-items: center; }
+  nav.jump a:hover { border-color: var(--ink); color: var(--ink); }
+  @media (max-width: 860px) { main { grid-template-columns: 1fr; } aside.marginalia { border-left: none; padding-left: 0; border-top: 1px solid var(--rule); padding-top: 18px; position: static; } .cols { column-count: 1; } }
+</style>
+</head>
+<body>
+<div class="progress" id="prog"></div>
+<div class="folio"><span>Est. 2022 — Cairo, EG</span><span>The Systems Review · Portfolio in print</span><span>Vol. II — 2026</span></div>
+<header class="masthead">
+  <div class="vol">Profile · Nº 01</div>
+  <h1>I build reliable systems from the ground up.</h1>
+  <p class="deck">Backend, frontend, databases — the full stack, in service of things that actually work.</p>
+</header>
+<div class="byline"><span>Words — Hassan Mohamed</span><span>Practice — Systems builder</span><span>8 min read</span></div>
+<nav class="jump"><a href="#profile">§ Profile</a><a href="#stack">§ Stack</a><a href="#index">§ Index of works</a><a href="#contact">§ Correspondence</a></nav>
+<main>
+  <article>
+    <h2 class="sec" id="profile"><span class="n">§1</span> Profile</h2>
+    <p class="dropcap">I enjoy working across the full stack to ship things that actually work. My practice centers on business platforms — inventory, ERP, e-commerce — designed for reliability first: offline-first architectures, cloud synchronization, and infrastructure I continue to maintain long after launch.</p>
+    <div class="pull">“Design it, ship it, then keep the servers running.”</div>
+    <div class="cols">
+      <p>Four enterprise systems anchor the practice: an auto-parts management platform on a secure internal network, a cloud enterprise suite for industrial supply, a contracting and CRM platform, and an offline-first pharmacy network with loyalty and POS.</p>
+      <p>Alongside client work, three products ship under my own hand — two generations of a retail ERP called Rocket, and Egyfy, a multi-tenant SaaS for branded storefronts, currently in beta with three live tenants — plus three open-source tools for JVM developers and beyond.</p>
+    </div>
+    <h2 class="sec" id="stack"><span class="n">§2</span> Instruments</h2>
+    <p class="stackline"><b>Languages</b> — Kotlin · Java · TypeScript · JavaScript · Elixir<br><b>Frameworks</b> — KMP · Ktor · Spring Boot · Vert.x · Express · Phoenix · HTMX · http4k<br><b>Databases</b> — PostgreSQL · MySQL · MongoDB · SQLite · Turso</p>
+    <h2 class="sec" id="index"><span class="n">§3</span> Index of works</h2>
+    <ol class="toc">
+      <li><span class="pg">01</span><a href="#contact">El Tawfikia Auto Parts Markets</a><span class="dots"></span><span class="yr">2022</span></li>
+      <li><span class="pg">02</span><a href="#contact">GAL Factory Supplies — galimport.shop</a><span class="dots"></span><span class="yr">2023</span></li>
+      <li><span class="pg">03</span><a href="#contact">Pioneer General Supplies &amp; Contracting</a><span class="dots"></span><span class="yr">2026</span></li>
+      <li><span class="pg">04</span><a href="#contact">El Fath Pharmacies — offline-first POS</a><span class="dots"></span><span class="yr">2024</span></li>
+      <li><span class="pg">05</span><a href="#contact">Rocket System 1 &amp; 2 — retail ERP</a><span class="dots"></span><span class="yr">2025–26</span></li>
+      <li><span class="pg">06</span><a href="#contact">Egyfy — SaaS storefronts, in beta</a><span class="dots"></span><span class="yr">2025—</span></li>
+      <li><span class="pg">07</span><a href="https://github.com/HMH-3080/kpm" target="_blank" rel="noopener">KPM — Kotlin Package Manager †</a><span class="dots"></span><span class="yr">OSS</span></li>
+      <li><span class="pg">08</span><a href="https://github.com/HMH-3080/egyptian-national-id-checker" target="_blank" rel="noopener">Egyptian National ID Checker †</a><span class="dots"></span><span class="yr">OSS</span></li>
+      <li><span class="pg">09</span><a href="https://github.com/HMH-3080/Pomodoro_Timer" target="_blank" rel="noopener">Pomodoro Timer, in Rust †</a><span class="dots"></span><span class="yr">OSS</span></li>
+    </ol>
+    <p style="font-size:.85rem;color:var(--muted)">† Open source. Full dossiers live in the <i>Projects</i> volume of this portfolio.</p>
+    <h2 class="sec" id="contact"><span class="n">§4</span> Correspondence</h2>
+    <p>Letters welcome at <b>hasanmo3080vr@gmail.com</b>. Telegrams via <b>GitHub — HMH-3080</b> and <b>LinkedIn</b>. Replies within a working day.</p>
+  </article>
+  <aside class="marginalia">
+    <div class="note"><span class="tag">Marginalia — i</span>Ten systems shipped: four enterprise, three products, three open-source. Nothing listed here is a mockup.</div>
+    <div class="note"><span class="tag">Marginalia — ii</span>Offline-first is a through-line: pharmacies, warehouses, and ERPs that survive outages, then sync.</div>
+    <div class="note"><span class="tag">Marginalia — iii</span>Set in Newsreader with mono folio details. One rust accent, used sparingly.</div>
+  </aside>
+</main>
+<footer class="colophon"><span>© 2026 Hassan Mohamed</span><span>Set in Newsreader · <a href="https://github.com/HMH-3080" target="_blank" rel="noopener">GitHub</a></span><span>Finis coronat opus</span></footer>
+<script>
+(function(){
+  var p = document.getElementById('prog');
+  function upd(){ var h = document.documentElement; var m = h.scrollHeight - h.clientHeight; p.style.width = (m > 0 ? (h.scrollTop / m) * 100 : 0) + '%'; }
+  addEventListener('scroll', upd, {passive: true}); upd();
+})();
+</script>
+</body>
+</html>

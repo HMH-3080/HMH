@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HASSAN MOHAMED — SYSTEMS THAT SHIP</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --paper: #FFFFFF; --ink: #0A0A0A; --muted: #6E6E6E; --rule: #0A0A0A; --hair: #E3E3E3; --red: #E03E00; }
+  body { background: var(--paper); color: var(--ink); font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+  .topbar { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-bottom: 3px solid var(--rule); font-size: 13px; font-weight: 700; letter-spacing: .06em; }
+  .topbar nav { display: flex; gap: 4px; }
+  .topbar nav a { color: var(--ink); text-decoration: none; font-size: 12px; padding: 10px 14px; min-height: 44px; display: inline-flex; align-items: center; letter-spacing: .1em; }
+  .topbar nav a:hover, .topbar nav a.on { background: var(--ink); color: #fff; }
+  .hero { padding: 56px 0 0; }
+  .hero .kicker { font-size: 13px; font-weight: 800; letter-spacing: .28em; }
+  .hero .kicker i { font-style: normal; color: var(--red); }
+  .hero h1 { font-size: clamp(3.4rem, 10.5vw, 9rem); font-weight: 900; letter-spacing: -0.045em; line-height: .92; margin: 18px 0 26px; text-transform: uppercase; }
+  .hero h1 .stroke { color: transparent; -webkit-text-stroke: 2px var(--ink); }
+  .metagrid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 3px solid var(--rule); border-bottom: 3px solid var(--rule); }
+  .metagrid div { padding: 16px 20px 18px 0; }
+  .metagrid div + div { border-left: 1px solid var(--hair); padding-left: 20px; }
+  .metagrid .l { font-size: 11px; font-weight: 800; letter-spacing: .22em; color: var(--muted); display: block; margin-bottom: 6px; }
+  .metagrid .v { font-weight: 700; font-size: 15px; letter-spacing: -0.01em; }
+  section.block { padding: 64px 0 8px; }
+  .sechead { display: flex; align-items: baseline; gap: 20px; border-bottom: 3px solid var(--rule); padding-bottom: 12px; margin-bottom: 0; }
+  .sechead .num { font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 900; letter-spacing: -0.04em; line-height: 1; }
+  .sechead .t { font-size: 13px; font-weight: 800; letter-spacing: .28em; }
+  .sechead .r { margin-left: auto; font-size: 12px; color: var(--muted); font-weight: 500; }
+  .filters { display: flex; gap: 8px; padding: 20px 0; flex-wrap: wrap; }
+  .filters button { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: .08em; background: none; border: 2px solid var(--ink); padding: 10px 16px; min-height: 44px; cursor: pointer; }
+  .filters button.on, .filters button:hover { background: var(--ink); color: #fff; }
+  .rows a { display: grid; grid-template-columns: 90px 1fr auto auto; gap: 20px; align-items: center; padding: 22px 16px; border-bottom: 2px solid var(--ink); text-decoration: none; color: inherit; transition: background .08s, color .08s; }
+  .rows a:first-child { border-top: 2px solid var(--ink); }
+  .rows a:hover { background: var(--ink); color: #fff; }
+  .rows a:hover .sub, .rows a:hover .yr { color: #B5B5B5; }
+  .rows .idx { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 14px; }
+  .rows .nm { font-size: clamp(1.2rem, 2.6vw, 1.9rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; }
+  .rows .sub { display: block; font-size: 13px; font-weight: 500; color: var(--muted); letter-spacing: 0; margin-top: 4px; }
+  .rows .yr { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted); }
+  .rows .tag { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: .1em; border: 2px solid currentColor; padding: 4px 8px; white-space: nowrap; }
+  .stackbig { font-size: clamp(1.1rem, 2.4vw, 1.7rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.9; padding: 28px 0; border-bottom: 3px solid var(--rule); }
+  .stackbig span { color: var(--muted); font-weight: 500; }
+  .contactgrid { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 3px solid var(--rule); }
+  .contactgrid a { padding: 26px 10px; font-weight: 800; font-size: 1.05rem; letter-spacing: -0.01em; color: inherit; text-decoration: none; display: flex; flex-direction: column; gap: 6px; }
+  .contactgrid a + a { border-left: 1px solid var(--hair); padding-left: 26px; }
+  .contactgrid a small { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 400; color: var(--muted); letter-spacing: .06em; }
+  .contactgrid a:hover { background: var(--ink); color: #fff; }
+  .contactgrid a:hover small { color: #B5B5B5; }
+  footer .giant { font-size: clamp(3rem, 11vw, 10rem); font-weight: 900; letter-spacing: -0.045em; line-height: .95; padding: 48px 0 8px; text-transform: uppercase; }
+  footer .giant em { font-style: normal; color: var(--red); }
+  .fine { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; padding: 16px 0 40px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .1em; color: var(--muted); }
+  @media (max-width: 760px) { .metagrid { grid-template-columns: 1fr 1fr; } .metagrid div:nth-child(3) { border-left: none; padding-left: 0; } .rows a { grid-template-columns: 1fr auto; } .rows .idx, .rows .yr { display: none; } .contactgrid { grid-template-columns: 1fr; } .contactgrid a + a { border-left: none; border-top: 1px solid var(--hair); padding-left: 10px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><span>HM—SYS / PORTFOLIO</span><nav class="mono"><a href="#" class="on">ABOUT</a><a href="#">PROJECTS</a><a href="#">ARTICLES</a></nav></div>
+  <header class="hero">
+    <div class="kicker mono">HASSAN MOHAMED <i>●</i> SYSTEMS BUILDER</div>
+    <h1>Systems<br><span class="stroke">that ship</span><br>&amp; stay up.</h1>
+    <div class="metagrid">
+      <div><span class="l">BASE</span><span class="v">Cairo, EG — remote</span></div>
+      <div><span class="l">FOCUS</span><span class="v">ERP · SaaS · Business platforms</span></div>
+      <div><span class="l">SHIPPED</span><span class="v">10 systems · 3 live tenants</span></div>
+      <div><span class="l mono" id="clock">CAIRO --:--:--</span><span class="v">Currently maintaining client infra</span></div>
+    </div>
+  </header>
+
+  <section class="block">
+    <div class="sechead"><span class="num">01</span><span class="t">SELECTED WORK</span><span class="r mono">filter ↓ · 10 dossiers</span></div>
+    <div class="filters" id="filters">
+      <button data-f="all" class="on">ALL/10</button><button data-f="ent">ENTERPRISE</button><button data-f="pro">PRODUCTS</button><button data-f="oss">OPEN SOURCE</button>
+    </div>
+    <div class="rows" id="rows">
+      <a href="#" data-c="pro"><span class="idx">/07</span><span class="nm">EGYFY<span class="sub">Multi-tenant SaaS storefronts — twins · abdo-store · tm live</span></span><span class="yr">2025—</span><span class="tag">BETA</span></a>
+      <a href="#" data-c="ent"><span class="idx">/04</span><span class="nm">EL FATH PHARMA<span class="sub">Offline-first multi-branch POS + loyalty</span></span><span class="yr">2024</span><span class="tag">LIVE</span></a>
+      <a href="#" data-c="pro"><span class="idx">/06</span><span class="nm">ROCKET SYSTEM 2<span class="sub">Distributed ERP + mobile companion</span></span><span class="yr">2026</span><span class="tag">LIVE</span></a>
+      <a href="#" data-c="ent"><span class="idx">/01</span><span class="nm">EL TAWFIKIA<span class="sub">Auto-parts platform on secure internal net</span></span><span class="yr">2022</span><span class="tag">ENT</span></a>
+      <a href="#" data-c="ent"><span class="idx">/02</span><span class="nm">GAL SUPPLIES<span class="sub">Cloud enterprise suite — galimport.shop</span></span><span class="yr">2023</span><span class="tag">ENT</span></a>
+      <a href="#" data-c="ent"><span class="idx">/03</span><span class="nm">PIONEER<span class="sub">Contracting, CRM, supplier control</span></span><span class="yr">2026</span><span class="tag">ENT</span></a>
+      <a href="#" data-c="pro"><span class="idx">/05</span><span class="nm">ROCKET SYSTEM 1<span class="sub">Lightweight retail sales + inventory</span></span><span class="yr">2025</span><span class="tag">PRO</span></a>
+      <a href="https://github.com/HMH-3080/kpm" target="_blank" rel="noopener" data-c="oss"><span class="idx">/08</span><span class="nm">KPM<span class="sub">Kotlin package manager for the JVM</span></span><span class="yr">OSS</span><span class="tag">↗</span></a>
+      <a href="https://github.com/HMH-3080/egyptian-national-id-checker" target="_blank" rel="noopener" data-c="oss"><span class="idx">/09</span><span class="nm">EG-ID CHECKER<span class="sub">Validation + demographic extraction lib</span></span><span class="yr">OSS</span><span class="tag">↗</span></a>
+      <a href="https://github.com/HMH-3080/Pomodoro_Timer" target="_blank" rel="noopener" data-c="oss"><span class="idx">/10</span><span class="nm">POMODORO RS<span class="sub">Native Windows timer — Rust + egui</span></span><span class="yr">OSS</span><span class="tag">↗</span></a>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="sechead"><span class="num">02</span><span class="t">STACK</span><span class="r mono">production-used only</span></div>
+    <p class="stackbig">KOTLIN <span>/</span> JAVA <span>/</span> TYPESCRIPT <span>/</span> ELIXIR <span>/</span> KMP <span>/</span> KTOR <span>/</span> SPRING BOOT <span>/</span> PHOENIX <span>/</span> POSTGRESQL <span>/</span> TURSO <span>/</span> SQLITE</p>
+  </section>
+
+  <section class="block">
+    <div class="sechead"><span class="num">03</span><span class="t">CONTACT</span><span class="r mono">direct channels</span></div>
+    <div class="contactgrid">
+      <a href="https://github.com/HMH-3080" target="_blank" rel="noopener">GITHUB ↗<small>HMH-3080</small></a>
+      <a href="https://www.linkedin.com/in/hasan-mohamed-81a187289/" target="_blank" rel="noopener">LINKEDIN ↗<small>HASAN-MOHAMED</small></a>
+      <a href="mailto:hasanmo3080vr@gmail.com">EMAIL ↗<small>HASANMO3080VR@GMAIL</small></a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="giant">Hassan<em>.</em><br>Mohamed</div>
+    <div class="fine"><span>© 2026 — BUILT FLAT, NO FRAMEWORKS</span><span>SET IN INTER · ONE RED ACCENT</span></div>
+  </footer>
+</div>
+<script>
+(function(){
+  var btns = document.querySelectorAll('#filters button');
+  btns.forEach(function(b){ b.addEventListener('click', function(){
+    btns.forEach(function(x){ x.classList.remove('on'); }); b.classList.add('on');
+    var f = b.dataset.f;
+    document.querySelectorAll('#rows a').forEach(function(r){ r.style.display = (f === 'all' || r.dataset.c === f) ? '' : 'none'; });
+  }); });
+  var clock = document.getElementById('clock');
+  function tick(){ try { clock.textContent = 'CAIRO ' + new Intl.DateTimeFormat('en-GB',{timeZone:'Africa/Cairo',hour:'2-digit',minute:'2-digit',second:'2-digit'}).format(new Date()); } catch(e){ clock.textContent = 'CAIRO —'; } }
+  tick(); setInterval(tick, 1000);
+})();
+</script>
+</body>
+</html>

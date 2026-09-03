@@ -136,6 +136,9 @@ Cards 6px, chips 4px, status pills 4px (rectangular-technical, not bubbly), butt
 - `chip-tech`: flat `#F4F4F5` fill, mono 0.7rem, hairline border. No icons required; icon optional at 14px monochrome.
 - `status-live` / `status-beta`: 4px rect, white mono text on green/orange. Small, inline with title.
 - `card-flat`: white, 1px hairline, 6px radius. Hover: border darkens + 1px lift shadow. No inset screws, no metallic texture.
+- Command palette (`⌘K` / Ctrl+K): the site's signature interaction. Flat surface panel, grouped results, keyboard-first (arrows + enter + esc). Federated per-page index (`window.HMH_INDEX`) plus global actions (theme toggle, copy email, navigation).
+- Status panel: maintained-systems list with pulsing dots, dotted leaders, mono state labels (`LIVE` / `BETA`). States must be truthful — `MAINTAINED` where uptime can't be proven.
+- Changelog: reverse-chronological ship log, mono dates, tag pills (`Article` / `Shipped` / `Beta`). Only real, dated events.
 - Index rows: full-width table rows with tabular numbers, hover `#FAFAFA`, active left 2px signal bar only on the row.
 - Code: dark panel with mono header bar (filename + lang badge), GitHub-dark-ish highlighting.
 

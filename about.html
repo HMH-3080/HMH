@@ -11,13 +11,6 @@
     </script>
 </head>
 <body>
-    <div class="sysbar">
-        <div class="sysbar-inner">
-            <span>SYS.HMH — PORTFOLIO / v2.1</span>
-            <span><span class="dot"></span>STATUS: SHIPPING + MAINTAINING <span class="hide-m">— EGYFY BETA LIVE</span></span>
-        </div>
-    </div>
-
     <input type="checkbox" id="menu-toggle" class="menu-toggle">
     <header>
         <div class="header-inner">
@@ -27,6 +20,7 @@
                 <a href="about.html" class="active">About</a>
                 <a href="projects.html">Projects</a>
                 <a href="articles.html">Articles</a>
+                <button class="cmdbtn" id="cmdk-btn" type="button" title="Command menu (Ctrl/⌘ K)">⌘K</button>
                 <button class="theme-btn" id="theme-btn" type="button">MODE: LIGHT</button>
             </nav>
         </div>
@@ -49,17 +43,39 @@
                     <a class="btn btn-ghost" href="https://github.com/HMH-3080" target="_blank" rel="noopener">GitHub ↗</a>
                 </div>
             </div>
-            <div class="spec" aria-label="Build manifest">
-                <div class="spec-bar"><span>build-manifest</span><span class="lang">sys / 10 shipped</span></div>
-                <div class="spec-body"><span class="c"># factual manifest — no filler</span><br><span class="k">name:</span> <span class="v">hassan.mohamed</span><br><span class="k">role:</span> <span class="v">systems builder</span><br><span class="k">systems_shipped:</span> <span class="s">10</span> <span class="c"># 4 enterprise · 3 saas/product · 3 oss</span><br><span class="k">oss_repos:</span> <span class="s">3</span> <span class="c"># kpm · id-checker · pomodoro</span><br><span class="k">saas_tenants_live:</span> <span class="s">3</span> <span class="c"># twins · abdo-store · tm</span><br><span class="k">core:</span> <span class="v">[kotlin, java, typescript, elixir]</span><br><span class="k">runtime:</span> <span class="v">[ktor, spring-boot, phoenix, express]</span><br><span class="k">data:</span> <span class="v">[postgres, sqlite, turso, mongo]</span><br><span class="k">maintains:</span> <span class="v">[el-tawfikia infra, gal infra]</span></div>
-                <div class="portrait-row">
-                    <img src="logo.png" alt="Hassan Mohamed" class="portrait">
-                    <div class="who"><strong>Operator + builder.</strong><br>Designs, ships, then keeps the servers running.</div>
-                </div>
+            <div class="status-panel" aria-label="Maintained systems">
+                <div class="status-head"><span>SYSTEMS — MAINTAINED</span><span class="ok">● ALL MONITORED</span></div>
+                <a class="srow" href="projects.html#egyfy"><span class="pulse"></span><span class="nm">Egyfy<small>Multi-tenant SaaS · 3 live tenants</small></span><span class="leader"></span><span class="st">BETA</span></a>
+                <a class="srow" href="projects.html#elfath"><span class="pulse"></span><span class="nm">El Fath Pharmacies<small>Offline-first POS · multi-branch</small></span><span class="leader"></span><span class="st">LIVE</span></a>
+                <a class="srow" href="projects.html#gal"><span class="pulse"></span><span class="nm">GAL Factory Supplies<small>Cloud platform · galimport.shop</small></span><span class="leader"></span><span class="st">LIVE</span></a>
+                <a class="srow" href="projects.html#tawfikia"><span class="pulse"></span><span class="nm">El Tawfikia<small>Internal-network ops · since 2022</small></span><span class="leader"></span><span class="st">LIVE</span></a>
+                <a class="srow" href="projects.html#rocket2"><span class="pulse"></span><span class="nm">Rocket System 2<small>Distributed ERP + mobile</small></span><span class="leader"></span><span class="st">LIVE</span></a>
+                <div class="status-foot"><img src="logo.png" alt=""><span>operator on call — infra maintained since 2022</span><span style="margin-left:auto">11 SYS · 4 OSS</span></div>
             </div>
         </section>
 
-        <div class="sec-head"><span class="sec-index">02 / STACK</span><span class="sec-title">Technology &amp; tools</span><span class="sec-note">production-used only</span></div>
+        <div class="sec-head"><span class="sec-index">02 / CHANGELOG</span><span class="sec-title">Ship log</span><span class="sec-note">newest first</span></div>
+        <section>
+            <div class="log-row"><span class="d">2026-09-03</span><span class="tag">Article</span><span class="t"><a href="articles.html?f=backpressure-fast-producer-slow-consumer.md">Backpressure: when the chef outruns the waiter</a></span></div>
+            <div class="log-row"><span class="d">2026-09-02</span><span class="tag">Article</span><span class="t"><a href="articles.html?f=beam-memory-model-isolation.md">The BEAM memory model: isolation instead of sharing</a></span></div>
+            <div class="log-row"><span class="d">2026-09-01</span><span class="tag">Article</span><span class="t"><a href="articles.html?f=beam-distributed-systems.md">Why the BEAM is different for distributed systems</a></span></div>
+            <div class="log-row"><span class="d">2026-08-31</span><span class="tag">Article</span><span class="t"><a href="articles.html?f=why-the-beam-vm-is-special.md">Why the BEAM VM is special</a></span></div>
+            <div class="log-row"><span class="d">2026-08-30</span><span class="tag">Article</span><span class="t"><a href="articles.html?f=websockets-are-not-faster-http.md">WebSockets are not just faster HTTP</a></span></div>
+            <div class="log-row"><span class="d">2026-08-29</span><span class="tag">Article</span><span class="t"><a href="articles.html?f=elixir-processes-are-not-threads.md">Elixir processes are not threads</a></span></div>
+            <div class="log-row"><span class="d">2026-07-02</span><span class="tag">Article</span><span class="t"><a href="articles.html">SQLite concurrent writes &amp; MVCC with Turso</a></span></div>
+            <div class="log-row"><span class="d">2026-06-28</span><span class="tag">Article</span><span class="t"><a href="articles.html">Kotlin Multiplatform in production</a></span></div>
+            <div class="log-row"><span class="d">2026-06-15</span><span class="tag">Article</span><span class="t"><a href="articles.html">Building reliable backend systems</a></span></div>
+            <div class="log-row"><span class="d">2026</span><span class="tag">OSS</span><span class="t"><a href="projects.html#altair">Altair</a> — batteries-included web framework for Crystal</span></div>
+            <div class="log-row"><span class="d">2026</span><span class="tag tag-ship">Shipped</span><span class="t"><a href="projects.html#rocket2">Rocket System 2</a> — distributed ERP + mobile companion</span></div>
+            <div class="log-row"><span class="d">2026</span><span class="tag tag-ship">Shipped</span><span class="t"><a href="projects.html#pioneer">Pioneer</a> — contracting, CRM &amp; supplier control</span></div>
+            <div class="log-row"><span class="d">2025</span><span class="tag tag-beta">Beta</span><span class="t"><a href="projects.html#egyfy">Egyfy</a> — SaaS storefronts, 3 live tenants</span></div>
+            <div class="log-row"><span class="d">2025</span><span class="tag tag-ship">Shipped</span><span class="t"><a href="projects.html#rocket1">Rocket System 1</a> — lightweight retail ERP</span></div>
+            <div class="log-row"><span class="d">2024</span><span class="tag tag-ship">Shipped</span><span class="t"><a href="projects.html#elfath">El Fath Pharmacies</a> — offline-first POS + loyalty</span></div>
+            <div class="log-row"><span class="d">2023</span><span class="tag tag-ship">Shipped</span><span class="t"><a href="projects.html#gal">GAL Factory Supplies</a> — cloud platform, <a href="https://galimport.shop" target="_blank" rel="noopener">galimport.shop</a></span></div>
+            <div class="log-row"><span class="d">2022</span><span class="tag tag-ship">Shipped</span><span class="t"><a href="projects.html#tawfikia">El Tawfikia</a> — internal-network business platform</span></div>
+        </section>
+
+        <div class="sec-head"><span class="sec-index">03 / STACK</span><span class="sec-title">Technology &amp; tools</span><span class="sec-note">production-used only</span></div>
         <section>
             <div class="tech-grid">
                 <div class="tech-col">
@@ -70,6 +86,7 @@
                         <span class="chip"><img src="https://cdn.simpleicons.org/typescript" alt="" loading="lazy">TypeScript</span>
                         <span class="chip"><img src="https://cdn.simpleicons.org/javascript" alt="" loading="lazy">JavaScript</span>
                         <span class="chip"><img src="https://cdn.simpleicons.org/elixir" alt="" loading="lazy">Elixir</span>
+                        <span class="chip"><img src="https://cdn.simpleicons.org/crystal" alt="" loading="lazy">Crystal</span>
                     </div>
                 </div>
                 <div class="tech-col">
@@ -90,6 +107,7 @@
                     <div class="tech-list">
                         <span class="chip"><img src="https://cdn.simpleicons.org/postgresql" alt="" loading="lazy">PostgreSQL</span>
                         <span class="chip"><img src="https://cdn.simpleicons.org/mysql" alt="" loading="lazy">MySQL</span>
+                        <span class="chip"><img src="https://cdn.simpleicons.org/mariadb" alt="" loading="lazy">MariaDB</span>
                         <span class="chip"><img src="https://cdn.simpleicons.org/mongodb" alt="" loading="lazy">MongoDB</span>
                         <span class="chip"><img src="https://cdn.simpleicons.org/sqlite" alt="" loading="lazy">SQLite</span>
                         <span class="chip"><img src="https://cdn.simpleicons.org/turso" alt="" loading="lazy">Turso</span>
@@ -98,16 +116,16 @@
             </div>
         </section>
 
-        <div class="sec-head"><span class="sec-index">03 / SELECTED</span><span class="sec-title">Selected work</span><span class="sec-note"><a href="projects.html" style="color:inherit">full index →</a></span></div>
+        <div class="sec-head"><span class="sec-index">04 / SELECTED</span><span class="sec-title">Selected work</span><span class="sec-note"><a href="projects.html" style="color:inherit">full index →</a></span></div>
         <section>
             <div class="index-table">
+                <a class="index-row" href="projects.html#altair"><span class="yr">OSS</span><span class="nm">Altair<small>Batteries-included web framework for Crystal</small></span><span class="status status-oss">OSS</span><span class="arr">→</span></a>
                 <a class="index-row" href="projects.html#egyfy"><span class="yr">2025—</span><span class="nm">Egyfy<small>Multi-tenant SaaS e-commerce · 3 live tenants</small></span><span class="status status-beta">Beta</span><span class="arr">→</span></a>
-                <a class="index-row" href="projects.html#elfath"><span class="yr">2024</span><span class="nm">El Fath Pharmacies<small>Offline-first multi-branch POS + loyalty</small></span><span class="status status-live">Live</span><span class="arr">→</span></a>
-                <a class="index-row" href="projects.html#rocket2"><span class="yr">2026</span><span class="nm">Rocket System 2<small>Distributed ERP · offline-first + mobile</small></span><span class="status status-live">Live</span><span class="arr">→</span></a>
+                <a class="index-row" href="projects.html#pioneer"><span class="yr">2026</span><span class="nm">Pioneer General Supplies &amp; Contracting<small>CRM · suppliers · workflow control</small></span><span class="cat">Enterprise</span><span class="arr">→</span></a>
             </div>
         </section>
 
-        <div class="sec-head"><span class="sec-index">04 / CONTACT</span><span class="sec-title">Contact</span><span class="sec-note">direct channels</span></div>
+        <div class="sec-head"><span class="sec-index">05 / CONTACT</span><span class="sec-title">Contact</span><span class="sec-note">direct channels</span></div>
         <section>
             <div class="contact-links">
                 <a href="https://github.com/HMH-3080" target="_blank" rel="noopener" class="contact-link">
@@ -129,7 +147,6 @@
     <footer>
         <div class="footer-inner">
             <span>© 2026 HASSAN MOHAMED</span>
-            <span>FLAT · MONO · NO FRAMEWORKS</span>
         </div>
     </footer>
 
@@ -146,5 +163,38 @@
         label();
     })();
     </script>
+
+    <div class="palette-backdrop" id="pal-bg" hidden>
+        <div class="palette" role="dialog" aria-modal="true" aria-label="Command menu">
+            <div class="pal-input-row"><span class="pal-prompt">›</span><input id="pal-input" placeholder="Type a command or search…" autocomplete="off" spellcheck="false" aria-label="Command menu"></div>
+            <div class="pal-list" id="pal-list" role="listbox"></div>
+            <div class="pal-foot"><span><kbd>↑↓</kbd> navigate</span><span><kbd>↵</kbd> run</span><span><kbd>esc</kbd> close</span></div>
+        </div>
+    </div>
+    <script>
+    window.HMH_INDEX = [
+        { group: "Projects", title: "Egyfy — SaaS storefronts", hint: "beta", run: function() { window.location.href = "projects.html#egyfy"; } },
+        { group: "Projects", title: "El Fath Pharmacies — offline-first POS", hint: "2024", run: function() { window.location.href = "projects.html#elfath"; } },
+        { group: "Projects", title: "Rocket System 2 — distributed ERP", hint: "2026", run: function() { window.location.href = "projects.html#rocket2"; } },
+        { group: "Projects", title: "El Tawfikia Auto Parts Markets", hint: "2022", run: function() { window.location.href = "projects.html#tawfikia"; } },
+        { group: "Projects", title: "GAL Factory Supplies", hint: "2023", run: function() { window.location.href = "projects.html#gal"; } },
+        { group: "Projects", title: "Pioneer General Supplies", hint: "2026", run: function() { window.location.href = "projects.html#pioneer"; } },
+        { group: "Projects", title: "Rocket System 1 — retail ERP", hint: "2025", run: function() { window.location.href = "projects.html#rocket1"; } },
+        { group: "Projects", title: "KPM — Kotlin Package Manager", hint: "oss", run: function() { window.location.href = "projects.html#kpm"; } },
+        { group: "Projects", title: "Egyptian National ID Checker", hint: "oss", run: function() { window.location.href = "projects.html#idchecker"; } },
+        { group: "Projects", title: "Pomodoro Timer — Rust", hint: "oss", run: function() { window.location.href = "projects.html#pomodoro"; } },
+        { group: "Projects", title: "Altair — Crystal web framework", hint: "oss", run: function() { window.location.href = "projects.html#altair"; } },
+        { group: "Articles", title: "Backpressure: when the chef outruns the waiter", hint: "2026-09-03", run: function() { window.location.href = "articles.html?f=backpressure-fast-producer-slow-consumer.md"; } },
+        { group: "Articles", title: "The BEAM memory model: isolation instead of sharing", hint: "2026-09-02", run: function() { window.location.href = "articles.html?f=beam-memory-model-isolation.md"; } },
+        { group: "Articles", title: "Why the BEAM is different for distributed systems", hint: "2026-09-01", run: function() { window.location.href = "articles.html?f=beam-distributed-systems.md"; } },
+        { group: "Articles", title: "Why the BEAM VM is special", hint: "2026-08-31", run: function() { window.location.href = "articles.html?f=why-the-beam-vm-is-special.md"; } },
+        { group: "Articles", title: "WebSockets are not just faster HTTP", hint: "2026-08-30", run: function() { window.location.href = "articles.html?f=websockets-are-not-faster-http.md"; } },
+        { group: "Articles", title: "Elixir processes are not threads", hint: "2026-08-29", run: function() { window.location.href = "articles.html?f=elixir-processes-are-not-threads.md"; } },
+        { group: "Articles", title: "SQLite concurrent writes & MVCC with Turso", hint: "2026-07-02", run: function() { window.location.href = "articles.html?f=sqlite-concurrent-writes-mvcc-turso.md"; } },
+        { group: "Articles", title: "Kotlin Multiplatform in production", hint: "2026-06-28", run: function() { window.location.href = "articles.html?f=kotlin-multiplatform-production.md"; } },
+        { group: "Articles", title: "Building reliable backend systems", hint: "2026-06-15", run: function() { window.location.href = "articles.html?f=building-reliable-backends.md"; } }
+    ];
+    </script>
+    <script src="palette.js"></script>
 </body>
 </html>

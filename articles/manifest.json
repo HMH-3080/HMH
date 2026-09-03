@@ -13,5 +13,35 @@
     "file": "sqlite-concurrent-writes-mvcc-turso.md",
     "date": "2026-07-02",
     "tags": ["sqlite", "mvcc", "turso", "databases", "backend"]
+  },
+  {
+    "file": "elixir-processes-are-not-threads.md",
+    "date": "2026-08-29",
+    "tags": ["elixir", "concurrency", "beam", "backend"]
+  },
+  {
+    "file": "websockets-are-not-faster-http.md",
+    "date": "2026-08-30",
+    "tags": ["websockets", "realtime", "elixir", "phoenix", "architecture"]
+  },
+  {
+    "file": "why-the-beam-vm-is-special.md",
+    "date": "2026-08-31",
+    "tags": ["elixir", "erlang", "beam", "actor-model", "concurrency", "fault-tolerance"]
+  },
+  {
+    "file": "beam-distributed-systems.md",
+    "date": "2026-09-01",
+    "tags": ["elixir", "erlang", "beam", "distributed-systems", "otp", "fault-tolerance"]
+  },
+  {
+    "file": "beam-memory-model-isolation.md",
+    "date": "2026-09-02",
+    "tags": ["elixir", "erlang", "beam", "memory", "ets", "concurrency"]
+  },
+  {
+    "file": "backpressure-fast-producer-slow-consumer.md",
+    "date": "2026-09-03",
+    "tags": ["backpressure", "elixir", "broadway", "genstage", "streaming", "resilience"]
   }
 ]

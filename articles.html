@@ -14,13 +14,6 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
-    <div class="sysbar">
-        <div class="sysbar-inner">
-            <span>SYS.HMH — PORTFOLIO / v2.1</span>
-            <span><span class="dot"></span>WRITING: BACKENDS · KMP · SQLITE</span>
-        </div>
-    </div>
-
     <input type="checkbox" id="menu-toggle" class="menu-toggle">
     <header>
         <div class="header-inner">
@@ -30,6 +23,7 @@
                 <a href="about.html">About</a>
                 <a href="projects.html">Projects</a>
                 <a href="articles.html" class="active">Articles</a>
+                <button class="cmdbtn" id="cmdk-btn" type="button" title="Command menu (Ctrl/⌘ K)">⌘K</button>
                 <button class="theme-btn" id="theme-btn" type="button">MODE: LIGHT</button>
             </nav>
         </div>
@@ -192,12 +186,26 @@
                     try {
                         var mdRes = await fetch("articles/" + item.file);
                         var md = await mdRes.text();
-                        loaded.push({ title: extractTitle(md), date: item.date, tags: item.tags || [], content: md, mins: readMins(md) });
+                        loaded.push({ title: extractTitle(md), date: item.date, tags: item.tags || [], content: md, mins: readMins(md), file: item.file });
                     } catch (e) { console.warn("Failed to load:", item.file); }
                 }
                 articles = loaded.sort(function(a, b) { return new Date(b.date) - new Date(a.date); });
                 totalPages = Math.ceil(articles.length / PER_PAGE);
                 renderGrid();
+                try {
+                    var params = new URLSearchParams(window.location.search);
+                    var deepFile = params.get("f");
+                    var deepIdx = -1;
+                    if (deepFile) {
+                        for (var k = 0; k < articles.length; k++) {
+                            if (articles[k].file === deepFile) { deepIdx = k; break; }
+                        }
+                    } else {
+                        var deep = parseInt(params.get("a"), 10);
+                        if (!isNaN(deep) && deep >= 0 && deep < articles.length) deepIdx = deep;
+                    }
+                    if (deepIdx >= 0) openArticle(deepIdx);
+                } catch (e) {}
             } catch (e) {
                 grid.innerHTML = '<div class="loading-msg" style="padding:1.5rem">Failed to load articles. Use a local server or deploy to GitHub Pages.</div>';
             }
@@ -219,5 +227,27 @@
         label();
     })();
     </script>
+
+    <div class="palette-backdrop" id="pal-bg" hidden>
+        <div class="palette" role="dialog" aria-modal="true" aria-label="Command menu">
+            <div class="pal-input-row"><span class="pal-prompt">›</span><input id="pal-input" placeholder="Type a command or search…" autocomplete="off" spellcheck="false" aria-label="Command menu"></div>
+            <div class="pal-list" id="pal-list" role="listbox"></div>
+            <div class="pal-foot"><span><kbd>↑↓</kbd> navigate</span><span><kbd>↵</kbd> run</span><span><kbd>esc</kbd> close</span></div>
+        </div>
+    </div>
+    <script>
+    window.HMH_INDEX = [
+        { group: "Articles", title: "Backpressure: when the chef outruns the waiter", hint: "2026-09-03", run: function() { window.location.href = "articles.html?f=backpressure-fast-producer-slow-consumer.md"; } },
+        { group: "Articles", title: "The BEAM memory model: isolation instead of sharing", hint: "2026-09-02", run: function() { window.location.href = "articles.html?f=beam-memory-model-isolation.md"; } },
+        { group: "Articles", title: "Why the BEAM is different for distributed systems", hint: "2026-09-01", run: function() { window.location.href = "articles.html?f=beam-distributed-systems.md"; } },
+        { group: "Articles", title: "Why the BEAM VM is special", hint: "2026-08-31", run: function() { window.location.href = "articles.html?f=why-the-beam-vm-is-special.md"; } },
+        { group: "Articles", title: "WebSockets are not just faster HTTP", hint: "2026-08-30", run: function() { window.location.href = "articles.html?f=websockets-are-not-faster-http.md"; } },
+        { group: "Articles", title: "Elixir processes are not threads", hint: "2026-08-29", run: function() { window.location.href = "articles.html?f=elixir-processes-are-not-threads.md"; } },
+        { group: "Articles", title: "SQLite concurrent writes & MVCC with Turso", hint: "2026-07-02", run: function() { window.location.href = "articles.html?f=sqlite-concurrent-writes-mvcc-turso.md"; } },
+        { group: "Articles", title: "Kotlin Multiplatform in production", hint: "2026-06-28", run: function() { window.location.href = "articles.html?f=kotlin-multiplatform-production.md"; } },
+        { group: "Articles", title: "Building reliable backend systems", hint: "2026-06-15", run: function() { window.location.href = "articles.html?f=building-reliable-backends.md"; } }
+    ];
+    </script>
+    <script src="palette.js"></script>
 </body>
 </html>

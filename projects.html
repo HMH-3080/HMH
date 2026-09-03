@@ -11,13 +11,6 @@
     </script>
 </head>
 <body>
-    <div class="sysbar">
-        <div class="sysbar-inner">
-            <span>SYS.HMH — PORTFOLIO / v2.1</span>
-            <span><span class="dot"></span>INDEX: 10 SYSTEMS</span>
-        </div>
-    </div>
-
     <input type="checkbox" id="menu-toggle" class="menu-toggle">
     <header>
         <div class="header-inner">
@@ -27,6 +20,7 @@
                 <a href="about.html">About</a>
                 <a href="projects.html" class="active">Projects</a>
                 <a href="articles.html">Articles</a>
+                <button class="cmdbtn" id="cmdk-btn" type="button" title="Command menu (Ctrl/⌘ K)">⌘K</button>
                 <button class="theme-btn" id="theme-btn" type="button">MODE: LIGHT</button>
             </nav>
         </div>
@@ -36,15 +30,15 @@
         <div class="page-header">
             <span class="label">Selected work</span>
             <h1>Projects</h1>
-            <div class="path">~/projects — 10 systems · filter, then read the dossier</div>
+            <div class="path">~/projects — 11 systems · filter, then read the dossier</div>
         </div>
         <p class="page-intro">Business platforms, enterprise systems, SaaS products, and open-source tools I have designed, built, and maintained — spanning inventory management, ERP, e-commerce, and developer tooling.</p>
 
         <div class="filters" role="tablist" aria-label="Filter projects">
-            <button class="filter-btn on" data-f="all">All / 10</button>
+            <button class="filter-btn on" data-f="all">All / 11</button>
             <button class="filter-btn" data-f="enterprise">Enterprise / 4</button>
             <button class="filter-btn" data-f="product">Products &amp; SaaS / 3</button>
-            <button class="filter-btn" data-f="oss">Open source / 3</button>
+            <button class="filter-btn" data-f="oss">Open source / 4</button>
         </div>
 
         <div class="index-table" id="index">
@@ -57,6 +51,7 @@
             <a class="index-row" data-cat="product" href="#egyfy"><span class="yr">2025—</span><span class="nm">Egyfy<small>Multi-tenant SaaS e-commerce · 3 live tenants</small></span><span class="status status-beta">Beta</span><span class="arr">→</span></a>
             <a class="index-row" data-cat="oss" href="#kpm"><span class="yr">OSS</span><span class="nm">KPM — Kotlin Package Manager<small>JVM dependency workflow · Maven-backed</small></span><span class="status status-oss">OSS</span><span class="arr">→</span></a>
             <a class="index-row" data-cat="oss" href="#idchecker"><span class="yr">OSS</span><span class="nm">Egyptian National ID Checker<small>Validation + demographic extraction lib</small></span><span class="status status-oss">OSS</span><span class="arr">→</span></a>
+            <a class="index-row" data-cat="oss" href="#altair"><span class="yr">OSS</span><span class="nm">Altair<small>Batteries-included web framework for Crystal</small></span><span class="status status-oss">OSS</span><span class="arr">→</span></a>
             <a class="index-row" data-cat="oss" href="#pomodoro"><span class="yr">OSS</span><span class="nm">Pomodoro Timer<small>Native Rust/egui Windows app</small></span><span class="status status-oss">OSS</span><span class="arr">→</span></a>
         </div>
 
@@ -306,7 +301,7 @@
             <div class="project-tech"><span>SaaS</span><span>Multi-Tenant</span><span>E-Commerce</span><span>Cloud</span><span>Scalable</span></div>
         </div>
 
-        <div class="section-divider">Open source — 03 dossiers</div>
+        <div class="section-divider">Open source — 04 dossiers</div>
 
         <div class="project-block" id="kpm" data-cat="oss">
             <span class="project-id">PRJ-08 / OSS</span>
@@ -337,6 +332,7 @@
             </div>
             <div class="project-tech"><span>Kotlin</span><span>JVM</span><span>CLI</span><span>Maven</span><span>Package Manager</span></div>
             <a href="https://github.com/HMH-3080/kpm" target="_blank" rel="noopener" class="project-link">↗ GitHub — HMH-3080/kpm</a>
+            <div class="cmdline"><code>gh repo clone HMH-3080/kpm</code><button class="copybtn" type="button" data-copy="gh repo clone HMH-3080/kpm">COPY</button></div>
         </div>
 
         <div class="project-block" id="idchecker" data-cat="oss">
@@ -365,6 +361,7 @@
             </div>
             <div class="project-tech"><span>Library</span><span>Validation</span><span>API Design</span></div>
             <a href="https://github.com/HMH-3080/egyptian-national-id-checker" target="_blank" rel="noopener" class="project-link">↗ GitHub — egyptian-national-id-checker</a>
+            <div class="cmdline"><code>gh repo clone HMH-3080/egyptian-national-id-checker</code><button class="copybtn" type="button" data-copy="gh repo clone HMH-3080/egyptian-national-id-checker">COPY</button></div>
         </div>
 
         <div class="project-block" id="pomodoro" data-cat="oss">
@@ -397,6 +394,42 @@
             </div>
             <div class="project-tech"><span>Rust</span><span>egui</span><span>Native Desktop</span><span>Windows</span><span>Systems Programming</span></div>
             <a href="https://github.com/HMH-3080/Pomodoro_Timer" target="_blank" rel="noopener" class="project-link">↗ GitHub — Pomodoro_Timer</a>
+            <div class="cmdline"><code>gh repo clone HMH-3080/Pomodoro_Timer</code><button class="copybtn" type="button" data-copy="gh repo clone HMH-3080/Pomodoro_Timer">COPY</button></div>
+        </div>
+
+        <div class="project-block" id="altair" data-cat="oss">
+            <span class="project-id">PRJ-11 / OSS</span>
+            <div class="project-header">
+                <h2>Altair — Web Framework for Crystal</h2>
+                <div class="project-badges"><span class="status status-oss">Open source</span></div>
+            </div>
+            <p class="project-summary">Batteries-included web framework for the Crystal language, built under the Arab-Open-Source organization (MIT licensed). Convention over configuration with native performance and single-binary deployment. Early development — phases 0–7 complete with a ~992-spec suite.</p>
+            <div class="project-cols">
+                <div><div class="project-section-title">Capabilities</div>
+                    <ul class="project-features">
+                        <li>Compile-time routing DSL with typed action references</li>
+                        <li>Per-request controllers with typed params</li>
+                        <li>Typed compile-time ECR views, layouts &amp; partials</li>
+                        <li>ORM with SQLite3 + PostgreSQL adapters</li>
+                        <li>Migrations, validations, associations, callbacks</li>
+                        <li>CLI — new, generate, server, routes, db commands</li>
+                        <li>Sessions, CSRF, JWT auth &amp; background jobs</li>
+                    </ul>
+                </div>
+                <div><div class="project-section-title">Engineering</div>
+                    <ul class="project-features">
+                        <li>Framework architecture from the ground up</li>
+                        <li>Compiler-leveraged correctness (errors at build time)</li>
+                        <li>Dual-backend ORM design with contract tests</li>
+                        <li>~992-spec suite across the stack</li>
+                        <li>Public k6 benchmarks vs Express &amp; Fiber</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="project-tech"><span>Crystal</span><span>MVC Framework</span><span>ORM</span><span>CLI</span><span>SQLite</span><span>PostgreSQL</span></div>
+            <a href="https://github.com/Arab-Open-Source/Altair" target="_blank" rel="noopener" class="project-link">↗ GitHub — Arab-Open-Source/Altair</a>
+            <div class="cmdline"><code>gh repo clone Arab-Open-Source/Altair</code><button class="copybtn" type="button" data-copy="gh repo clone Arab-Open-Source/Altair">COPY</button></div>
+            <a href="https://arab-open-source.github.io/Altair/" target="_blank" rel="noopener" class="project-link">↗ Documentation site</a>
         </div>
     </div>
 
@@ -444,5 +477,29 @@
         label();
     })();
     </script>
+
+    <div class="palette-backdrop" id="pal-bg" hidden>
+        <div class="palette" role="dialog" aria-modal="true" aria-label="Command menu">
+            <div class="pal-input-row"><span class="pal-prompt">›</span><input id="pal-input" placeholder="Type a command or search…" autocomplete="off" spellcheck="false" aria-label="Command menu"></div>
+            <div class="pal-list" id="pal-list" role="listbox"></div>
+            <div class="pal-foot"><span><kbd>↑↓</kbd> navigate</span><span><kbd>↵</kbd> run</span><span><kbd>esc</kbd> close</span></div>
+        </div>
+    </div>
+    <script>
+    window.HMH_INDEX = [
+        { group: "On this page", title: "El Tawfikia Auto Parts Markets", hint: "PRJ-01", run: function() { window.location.href = "#tawfikia"; } },
+        { group: "On this page", title: "GAL Factory Supplies", hint: "PRJ-02", run: function() { window.location.href = "#gal"; } },
+        { group: "On this page", title: "Pioneer General Supplies", hint: "PRJ-03", run: function() { window.location.href = "#pioneer"; } },
+        { group: "On this page", title: "El Fath Pharmacies", hint: "PRJ-04", run: function() { window.location.href = "#elfath"; } },
+        { group: "On this page", title: "Rocket System 1", hint: "PRJ-05", run: function() { window.location.href = "#rocket1"; } },
+        { group: "On this page", title: "Rocket System 2", hint: "PRJ-06", run: function() { window.location.href = "#rocket2"; } },
+        { group: "On this page", title: "Egyfy — SaaS", hint: "PRJ-07 · beta", run: function() { window.location.href = "#egyfy"; } },
+        { group: "On this page", title: "KPM — Kotlin Package Manager", hint: "PRJ-08 · oss", run: function() { window.location.href = "#kpm"; } },
+        { group: "On this page", title: "Egyptian National ID Checker", hint: "PRJ-09 · oss", run: function() { window.location.href = "#idchecker"; } },
+        { group: "On this page", title: "Pomodoro Timer — Rust", hint: "PRJ-10 · oss", run: function() { window.location.href = "#pomodoro"; } },
+        { group: "On this page", title: "Altair — Crystal web framework", hint: "PRJ-11 · oss", run: function() { window.location.href = "#altair"; } }
+    ];
+    </script>
+    <script src="palette.js"></script>
 </body>
 </html>

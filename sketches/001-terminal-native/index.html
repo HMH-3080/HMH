@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>hmh@portfolio: ~</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --bg: #0B0B0C; --panel: #131315; --fg: #D6D3CD; --dim: #8A8781; --faint: #4C4A46; --amber: #E8A33D; --line: #232326; }
+  body { background: var(--bg); color: var(--fg); font-family: 'JetBrains Mono', monospace; font-size: 14px; line-height: 1.7; min-height: 100vh; display: flex; justify-content: center; padding: 24px 16px 64px; }
+  .term { width: 100%; max-width: 820px; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; height: fit-content; }
+  .tabbar { display: flex; align-items: center; gap: 8px; padding: 10px 14px; border-bottom: 1px solid var(--line); color: var(--dim); font-size: 12px; }
+  .tabbar .dots { display: flex; gap: 6px; }
+  .tabbar .dots i { width: 11px; height: 11px; border-radius: 50%; background: #2E2E33; border: 1px solid #3A3A40; font-style: normal; }
+  .tabbar .title { margin-left: 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .screen { padding: 20px 20px 28px; min-height: 60vh; }
+  .boot { color: var(--dim); white-space: pre-wrap; }
+  .boot .ok { color: var(--amber); }
+  .ascii { color: var(--faint); line-height: 1.3; margin: 14px 0 4px; font-size: 12px; white-space: pre; overflow-x: auto; }
+  .out { white-space: pre-wrap; word-break: break-word; margin: 2px 0 10px; }
+  .out .k { color: var(--dim); } .out .h { color: var(--amber); font-weight: 700; }
+  .out a { color: var(--amber); }
+  .row { display: flex; align-items: center; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+  .prompt { color: var(--amber); font-weight: 700; white-space: nowrap; }
+  #cmd { background: none; border: none; outline: none; color: var(--fg); font: inherit; flex: 1; min-width: 120px; caret-color: var(--amber); }
+  .chips { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--line); }
+  .chips button { font: inherit; font-size: 12px; background: none; color: var(--dim); border: 1px solid var(--line); border-radius: 6px; padding: 8px 12px; min-height: 40px; cursor: pointer; }
+  .chips button:hover { color: var(--amber); border-color: var(--amber); }
+  .caret::after { content: '▊'; color: var(--amber); animation: blink 1s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .caret::after { animation: none; } }
+  .hint { color: var(--faint); font-size: 12px; margin-top: 10px; }
+</style>
+</head>
+<body>
+<div class="term">
+  <div class="tabbar"><span class="dots"><i></i><i></i><i></i></span><span class="title">visitor@hmh: ~/portfolio — sh</span></div>
+  <div class="screen">
+    <div class="boot" id="boot"></div>
+    <div class="ascii"> _   _ __  __ _   _
+| | | |  \/  | | | |
+| |_| | |\/| | |_| |
+|  _  | |  | |  _  |
+|_| |_|_|  |_|_| |_|  v2.1</div>
+    <div id="log"></div>
+    <div class="row"><span class="prompt">visitor@hmh:~$</span><input id="cmd" autocomplete="off" spellcheck="false" aria-label="terminal command"></div>
+    <div class="chips" id="chips"></div>
+    <div class="hint">tip: type <b>help</b> · outputs are real data from this portfolio</div>
+  </div>
+</div>
+<script>
+(function(){
+  var log = document.getElementById('log'), boot = document.getElementById('boot'),
+      input = document.getElementById('cmd'), chips = document.getElementById('chips');
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var CMDS = {
+    help: '<span class="h">COMMANDS</span>\n  about      who is hassan\n  stack      production-used technology\n  projects   10 shipped systems\n  articles   engineering notes\n  contact    direct channels\n  whoami     visitor\n  clear      clear screen',
+    about: '<span class="h">HASSAN MOHAMED</span> — systems_builder --full-stack\nI build reliable systems from the ground up. Backend,\nfrontend, databases — full stack, things that actually work.\n<span class="k">focus :</span> business platforms · ERP · SaaS\n<span class="k">ops   :</span> offline-first · cloud sync · maintained infra\n<span class="k">base  :</span> Egypt — remote-capable',
+    stack: '<span class="h">STACK</span> <span class="k">(production-used only)</span>\n<span class="k">lang  :</span> kotlin · java · typescript · javascript · elixir\n<span class="k">frame :</span> kmp · ktor · spring-boot · vert.x · express · phoenix · htmx · http4k\n<span class="k">data  :</span> postgresql · mysql · mongodb · sqlite · turso',
+    projects: '<span class="h">PROJECTS</span> <span class="k">10 systems</span>\n<span class="k">[enterprise]</span> el-tawfikia(2022) · gal-supplies(2023) · pioneer(2026) · el-fath-pharma(2024)\n<span class="k">[product]  </span> rocket-sys-1(2025) · rocket-sys-2(2026) · egyfy[beta](2025—)\n<span class="k">[oss]      </span> kpm · eg-national-id-checker · pomodoro-rs\nrun <span class="h">contact</span> for links, or open projects.html in this repo.',
+    articles: '<span class="h">ARTICLES</span>\n  2026-07-02  sqlite concurrent writes &amp; mvcc with turso\n  2026-06-28  kotlin multiplatform in production\n  2026-06-15  building reliable backend systems',
+    contact: '<span class="h">CONTACT</span>\n  github   <a href="https://github.com/HMH-3080" target="_blank" rel="noopener">github.com/HMH-3080</a>\n  linkedin <a href="https://www.linkedin.com/in/hasan-mohamed-81a187289/" target="_blank" rel="noopener">/in/hasan-mohamed</a>\n  email    hasanmo3080vr@gmail.com',
+    whoami: 'visitor — welcomed. run `help` to look around.'
+  };
+  function print(html){ var d = document.createElement('div'); d.className = 'out'; d.innerHTML = html; log.appendChild(d); d.scrollIntoView({block:'nearest'}); }
+  function run(raw){
+    var c = raw.trim().toLowerCase();
+    print('<span class="prompt">visitor@hmh:~$</span> ' + c.replace(/</g,'&lt;'));
+    if(!c) return;
+    if(c === 'clear'){ log.innerHTML = ''; return; }
+    print(CMDS[c] || ('sh: command not found: ' + c.replace(/</g,'&lt;') + ' — try `help`'));
+  }
+  ['help','about','stack','projects','articles','contact'].forEach(function(c){
+    var b = document.createElement('button'); b.textContent = '$ ' + c;
+    b.addEventListener('click', function(){ run(c); input.focus(); }); chips.appendChild(b);
+  });
+  input.addEventListener('keydown', function(e){ if(e.key === 'Enter'){ run(input.value); input.value=''; } });
+  var lines = ['[ ok ] mounted ~/portfolio', '[ ok ] 10 systems indexed · 3 articles · 0 filler'];
+  if(reduced){ boot.innerHTML = lines.map(function(l){return '<span class="ok">'+l.slice(0,6)+'</span>'+l.slice(6);}).join('\n'); print(CMDS.help); }
+  else{
+    var i = 0;
+    (function tick(){
+      if(i < lines.length){ var l = lines[i++]; boot.innerHTML += '<span class="ok">'+l.slice(0,6)+'</span>'+l.slice(6)+'\n'; setTimeout(tick, 260); }
+      else print(CMDS.help);
+    })();
+  }
+  document.querySelector('.screen').addEventListener('click', function(e){ if(e.target.tagName !== 'BUTTON' && e.target.tagName !== 'A') input.focus(); });
+  input.focus();
+})();
+</script>
+</body>
+</html>
