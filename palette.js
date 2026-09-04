@@ -28,6 +28,8 @@
   /* ── palette ── */
   var EMAIL = "hasanmo3080vr@gmail.com";
   var GITHUB = "https://github.com/HMH-3080";
+  var X_PROFILE = "https://x.com/mohamed_ha31364";
+  var WHATSAPP = "https://wa.me/201104391245";
 
   function go(url) { return function() { window.location.href = url; }; }
   function open(url) { return function() { window.open(url, "_blank", "noopener"); }; }
@@ -51,6 +53,8 @@
     { group: "Actions", title: "Toggle color theme", hint: "theme", run: theme },
     { group: "Actions", title: "Copy email address", hint: EMAIL, run: copy(EMAIL) },
     { group: "Actions", title: "Open GitHub profile", hint: "HMH-3080", run: open(GITHUB) },
+    { group: "Actions", title: "Open X profile", hint: "@mohamed_ha31364", run: open(X_PROFILE) },
+    { group: "Actions", title: "Chat on WhatsApp", hint: "0110 439 1245", run: open(WHATSAPP) },
     { group: "Go to", title: "About — profile & status", hint: "g a", run: go("about.html") },
     { group: "Go to", title: "Projects — 11 systems", hint: "g p", run: go("projects.html") },
     { group: "Go to", title: "Articles — engineering notes", hint: "g r", run: go("articles.html") }

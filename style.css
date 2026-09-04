@@ -543,14 +543,23 @@ kbd {
 .srow { display: flex; align-items: center; padding: 0.7rem 1.1rem; border-bottom: 1px solid var(--hairline); font-size: 0.85rem; text-decoration: none; }
 .srow:last-of-type { border-bottom: none; }
 a.srow:hover { background: var(--bg); }
-.srow .pulse { width: 8px; height: 8px; border-radius: 50%; background: var(--success); flex-shrink: 0; animation: pulse 2.2s ease-out infinite; }
-@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(21, 128, 58, 0.35); } 70% { box-shadow: 0 0 0 7px rgba(21, 128, 58, 0); } 100% { box-shadow: 0 0 0 0 rgba(21, 128, 58, 0); } }
 .srow .nm { font-weight: 600; }
 .srow .nm small { display: block; font-weight: 400; color: var(--muted); font-size: 0.74rem; }
 .srow .leader { flex: 1; border-bottom: 1px dotted var(--hairline-strong); margin: 0 0.7rem; min-width: 1rem; transform: translateY(-3px); }
 .srow .st { font-family: var(--mono); font-size: 0.62rem; font-weight: 600; letter-spacing: 0.08em; color: var(--success); white-space: nowrap; }
 .status-foot { display: flex; align-items: center; gap: 0.7rem; padding: 0.8rem 1.1rem; border-top: 1px solid var(--hairline); background: var(--bg); font-family: var(--mono); font-size: 0.68rem; color: var(--muted); }
 .status-foot img { width: 28px; height: 28px; border-radius: var(--r-sm); filter: grayscale(1); border: 1px solid var(--hairline-strong); }
+/* ── Operator on-call strip (DESIGN.md: mono specs, dotted leader, 1 signal max) ── */
+.oncall-meta { display: flex; flex-direction: column; gap: 0.1rem; line-height: 1.4; min-width: 0; }
+.oncall-meta strong { font-size: 0.66rem; font-weight: 600; letter-spacing: 0.08em; color: var(--ink); white-space: nowrap; }
+.oncall-meta small { font-size: 0.7rem; letter-spacing: 0.02em; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.oncall .leader { flex: 1; border-bottom: 1px dotted var(--hairline-strong); margin: 0 0.2rem; min-width: 1rem; transform: translateY(-3px); }
+.oncall-stat { font-size: 0.66rem; font-weight: 600; letter-spacing: 0.08em; color: var(--faint); white-space: nowrap; font-variant-numeric: tabular-nums; }
+@media (max-width: 640px) {
+  .oncall { flex-wrap: wrap; }
+  .oncall .leader { display: none; }
+  .oncall-stat { margin-left: auto; }
+}
 
 /* Changelog */
 .log-row { display: grid; grid-template-columns: 110px 96px 1fr; gap: 1rem; align-items: baseline; padding: 0.75rem 0; border-bottom: 1px solid var(--hairline); }
