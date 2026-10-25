@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="Hassan Mohamed">
+<meta name="description" content="Master CV — Hassan Mohamed, Systems Builder. Backend, business platforms, ERP, SaaS, desktop software and open source. Single-column, ATS-friendly, prints to A4 vector PDF.">
+<title>Hassan Mohamed — CV (Systems Builder)</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ── Master résumé document ──
+     Single column · standard section headings · semantic h1–h3 · real hyperlinks.
+     Prints to A4 vector PDF via window.print() or build-cv.sh (headless Chromium). */
+  :root {
+    --paper: #FFFFFF;
+    --ink: #1A1713;
+    --body: #44403A;
+    --faint: #7C766C;
+    --rule: #E4DFD6;
+    --rule-soft: #EEEAE2;
+    --sig: #B8440A;                        /* International Orange, darkened for print */
+    --lead: #D3CEC4;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: #000; font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+  h1, h2, h3 { font-weight: inherit; }
+
+  /* ── toolbar (screen only) ── */
+  .toolbar {
+    max-width: 210mm; margin: 22px auto 0; padding: 0 4mm;
+    display: flex; gap: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .tb-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+  .tbtn {
+    font-family: 'JetBrains Mono', monospace; font-size: .72rem; font-weight: 600; letter-spacing: .08em;
+    padding: 11px 15px; min-height: 44px; border-radius: 8px; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
+    transition: transform .15s, border-color .15s, box-shadow .15s;
+  }
+  .tbtn:active { transform: translateY(1px); }
+  .tbtn.solid { background: #F2EFE9; color: #000; border: 1px solid #F2EFE9; }
+  .tbtn.solid:hover { background: #FFF; transform: translateY(-2px); box-shadow: 0 10px 30px rgba(242,239,233,.12); }
+  .tbtn.ghost { background: rgba(11,10,9,.5); color: #F2EFE9; border: 1px solid rgba(242,239,233,.13); }
+  .tbtn.ghost:hover { border-color: #A8A49B; transform: translateY(-2px); }
+  .tb-note { font-size: .68rem; letter-spacing: .04em; color: #A8A49B; text-align: right; }
+
+  /* ── the A4 sheet ── */
+  .sheet {
+    width: 210mm; max-width: calc(100% - 20px); margin: 18px auto 56px;
+    background: var(--paper); color: var(--ink);
+    padding: 16mm 17mm 14mm;
+    border-radius: 6px; box-shadow: 0 30px 80px rgba(0,0,0,.7);
+    font-size: 9.6pt; line-height: 1.5;
+  }
+
+  /* header */
+  .cv-head { border-bottom: 1.1pt solid var(--ink); padding-bottom: 9pt; display: flex; justify-content: space-between; align-items: flex-end; gap: 14pt; }
+  .cv-name { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 22.5pt; letter-spacing: -.015em; line-height: 1; }
+  .cv-role { margin-top: 4.5pt; font-size: 9.4pt; color: var(--body); }
+  .cv-role b { color: var(--sig); font-weight: 600; }
+  .cv-contact { display: grid; gap: 2pt; text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 7.4pt; line-height: 1.5; color: var(--body); white-space: nowrap; }
+  .cv-contact b { color: var(--faint); font-weight: 600; }
+  .cv-contact a { text-decoration: none; }
+
+  /* standard sections */
+  .sec { margin-top: 12.5pt; }
+  .sec-head {
+    font-family: 'Inter', sans-serif; font-size: 9pt; font-weight: 700; letter-spacing: .13em; text-transform: uppercase;
+    color: var(--ink); border-bottom: .8pt solid var(--ink); padding-bottom: 3pt; margin-bottom: 6.5pt;
+    display: flex; align-items: baseline; gap: 6pt;
+    break-after: avoid;
+  }
+  .sec-head::before { content: ''; width: 5.5pt; height: 5.5pt; background: var(--sig); transform: translateY(-.5pt); }
+  .sec-head .note { margin-left: auto; font-size: 7pt; font-weight: 500; letter-spacing: .06em; color: var(--faint); }
+
+  .cv-sum { color: var(--body); break-inside: avoid; }
+  .cv-sum b { color: var(--ink); font-weight: 600; }
+
+  /* project group subheadings */
+  .grp {
+    display: flex; align-items: baseline; gap: 6pt;
+    font-family: 'Inter', sans-serif; font-weight: 700; font-size: 9.3pt; letter-spacing: .01em; color: var(--ink);
+    margin: 8pt 0 3.5pt;
+    break-after: avoid;
+  }
+  .grp .gn { margin-left: auto; font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 6.8pt; letter-spacing: .09em; text-transform: uppercase; color: var(--faint); white-space: nowrap; }
+
+  /* role block: employer line, then bullets */
+  .role { margin-bottom: 7.5pt; break-inside: avoid; }
+  .rhead { display: flex; align-items: baseline; margin-bottom: 1.5pt; break-after: avoid; }
+  .rtitle { font-weight: 700; font-size: 10pt; letter-spacing: -.003em; }
+  .rtitle i { font-style: normal; font-weight: 500; color: var(--faint); }
+  .rtitle .mk { font-family: 'JetBrains Mono', monospace; font-size: 6.9pt; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--sig); white-space: nowrap; }
+  .lead { flex: 1; min-width: 10pt; border-bottom: 1px dotted var(--lead); margin: 0 6.5pt; transform: translateY(-3.5pt); }
+  .rmeta { font-family: 'JetBrains Mono', monospace; font-size: 7.4pt; color: var(--faint); white-space: nowrap; }
+
+  .bl { list-style: none; }
+  .bl li { position: relative; padding-left: 10pt; color: var(--body); margin-bottom: 1.6pt; }
+  .bl li::before { content: '•'; position: absolute; left: 1pt; color: var(--sig); font-weight: 600; }
+  .bl li b { color: var(--ink); font-weight: 600; }
+  .bl li code { font-family: 'JetBrains Mono', monospace; font-size: .92em; color: var(--ink); }
+  .bl li a { color: var(--ink); text-decoration: none; }
+
+  /* single-line entries (flat list) */
+  .one { margin-bottom: 4.5pt; break-inside: avoid; }
+  .one .rtitle { font-size: 9.4pt; }
+
+  /* inline project links */
+  .rlinks { margin-top: 2.5pt; font-family: 'JetBrains Mono', monospace; font-size: 7.1pt; color: var(--faint); }
+  .rlinks a { color: var(--sig); font-weight: 600; text-decoration: none; letter-spacing: .03em; }
+
+  /* skills inline */
+  .skill { margin-bottom: 3pt; color: var(--body); break-inside: avoid; }
+  .skill b { color: var(--ink); font-weight: 600; }
+
+  .fine { margin-top: 12pt; padding-top: 5.5pt; border-top: .8pt solid var(--rule); display: flex; justify-content: space-between; gap: 8pt; flex-wrap: wrap; font-family: 'JetBrains Mono', monospace; font-size: 6.6pt; letter-spacing: .12em; text-transform: uppercase; color: var(--faint); }
+
+  @page { size: A4; margin: 0; }
+  @media print {
+    .pbreak { break-before: page; }
+  }
+
+  /* ── phones: real reading layout — the desktop sheet geometry doesn't survive 360px ── */
+  @media (max-width: 700px) {
+    .toolbar { flex-direction: column; align-items: stretch; gap: 10px; margin-top: 16px; }
+    .tb-btns { order: 1; }
+    .tb-btns .tbtn { flex: 1; justify-content: center; }
+    .tbtn.solid { order: 2; justify-content: center; }
+    .tb-note { order: 3; text-align: center; }
+    .sheet { margin: 14px auto 40px; padding: 11mm 8mm; }
+    .cv-head { flex-direction: column; align-items: flex-start; gap: 9pt; }
+    .cv-name { font-size: 19pt; }
+    .cv-contact { text-align: left; font-size: 7pt; overflow-wrap: anywhere; }
+    .cv-contact span { display: grid; grid-template-columns: 58px 1fr; column-gap: 4pt; }
+    .sec { margin-top: 11pt; }
+    .sec-head { flex-wrap: wrap; }
+    .sec-head .note { flex-basis: 100%; margin: 1pt 0 0 15px; }
+    .grp { flex-wrap: wrap; row-gap: 0; }
+    .grp .gn { margin-left: auto; }
+    .lead { display: none; }
+    .rhead { flex-wrap: wrap; row-gap: 1pt; }
+    .rtitle { flex: 1 1 100%; }
+    .rmeta { margin-left: auto; }
+    .fine { flex-direction: column; gap: 2pt; align-items: flex-start; }
+  }
+  @media (max-width: 430px) {
+    .sheet { padding: 9mm 6mm; font-size: 9.3pt; }
+    .cv-name { font-size: 17.5pt; }
+    .cv-role { font-size: 8.8pt; }
+  }
+
+  /* print comes LAST so it wins the cascade over the phone blocks —
+     even printing from a narrow window yields the full-width A4 sheet */
+  @media print {
+    body { background: #fff; }
+    .toolbar { display: none !important; }
+    .sheet { width: auto; max-width: none; margin: 0; border-radius: 0; box-shadow: none; padding: 14mm 15mm 12mm; font-size: 9.6pt; }
+    a { text-decoration: none; color: inherit; }
+    .role, .one, .cv-head, .cv-sum { break-inside: avoid; }
+    .bl li { break-inside: avoid; }
+    /* neutralize the phone blocks */
+    .cv-head { flex-direction: row; align-items: flex-end; gap: 14pt; }
+    .cv-name { font-size: 22.5pt; }
+    .cv-role { font-size: 9.4pt; }
+    .cv-contact { text-align: right; font-size: 7.4pt; }
+    .cv-contact span { display: block; }
+    .grp { flex-wrap: nowrap; }
+    .lead { display: block; }
+    .rhead { flex-wrap: nowrap; }
+    .rtitle { flex: 0 1 auto; }
+    .rmeta { margin-left: 0; }
+    .sec { margin-top: 12.5pt; }
+    .sec-head { flex-wrap: nowrap; }
+    .sec-head .note { flex-basis: auto; margin: 0 0 0 auto; }
+    .fine { flex-direction: row; align-items: normal; gap: 8pt; }
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="tb-btns">
+    <a class="tbtn ghost" href="about.html">← Back to site</a>
+    <a class="tbtn ghost" href="projects.html">Work dossier →</a>
+  </div>
+  <span class="tb-note">choose “Save as PDF” in the dialog — clean vector PDF, selectable &amp; ATS-parseable text</span>
+  <button class="tbtn solid" type="button" id="dl-cv">⇩ Download CV (PDF)</button>
+</div>
+
+<main class="sheet" id="cv" aria-label="Curriculum vitae — Hassan Mohamed">
+
+  <header class="cv-head">
+    <div>
+      <h1 class="cv-name">Hassan Mohamed</h1>
+      <div class="cv-role">Systems Builder <b>—</b> Backend · Business Platforms · ERP · SaaS · Desktop Software · Open Source</div>
+    </div>
+    <div class="cv-contact">
+      <span><b>EMAIL</b> <a href="mailto:hasanmo3080vr@gmail.com">hasanmo3080vr@gmail.com</a></span>
+      <span><b>PHONE</b> <a href="tel:+201104391245">+20 110 439 1245</a></span>
+      <span><b>GITHUB</b> <a href="https://github.com/HMH-3080">github.com/HMH-3080</a></span>
+      <span><b>LINKEDIN</b> <a href="https://www.linkedin.com/in/hasan-mohamed-81a187289">linkedin.com/in/hasan-mohamed-81a187289</a></span>
+      <span><b>LOCATION</b> Egypt · open to remote work</span>
+    </div>
+  </header>
+
+  <section class="sec">
+    <h2 class="sec-head">Professional Summary</h2>
+    <p class="cv-sum">Independent software engineer who designs, builds, deploys and maintains complete systems — architecture, backend, databases, interfaces <b>and</b> the production servers they run on. Since 2022 I have delivered <b>15 production systems</b> for retail, pharmacy, industrial-supplies and e-commerce operations and still maintain them, many engineered <b>offline-first</b> so multi-branch businesses keep trading through internet outages and reconcile cleanly on reconnect. I also <b>create and maintain my own open-source software</b> — most notably the Altair web framework for Crystal and the Marsad VPS fleet platform — and contribute to projects owned by others, with <b>eight merged pull requests</b> including the Elixir compiler and Ktor.</p>
+  </section>
+
+  <section class="sec">
+    <h2 class="sec-head">Technical Skills</h2>
+    <p class="skill"><b>Programming languages.</b> Kotlin · Java · TypeScript · JavaScript · Elixir · Crystal · Rust · Python · SQL</p>
+    <p class="skill"><b>Frameworks &amp; application development.</b> Phoenix/LiveView · Erlang/Elixir OTP · Spring Boot · Ktor · Vert.x · Express.js · http4k · HTMX · Kotlin Multiplatform · Altair (Crystal)</p>
+    <p class="skill"><b>Databases &amp; data management.</b> PostgreSQL · MySQL/MariaDB · MongoDB · SQLite · Turso (MVCC concurrent writes)</p>
+    <p class="skill"><b>Infrastructure &amp; operations.</b> Linux server administration · Docker · nginx · systemd · networking · k6 load testing</p>
+    <p class="skill"><b>Architecture &amp; engineering practices.</b> Offline-first synchronization &amp; conflict resolution · multi-tenant isolation · RBAC &amp; audit trails · compile-time-validated design · CI governance gates · benchmarking &amp; profiling</p>
+  </section>
+
+  <section class="sec">
+    <h2 class="sec-head">Selected Projects &amp; Engineering Experience <span class="note">built, deployed &amp; maintained in production</span></h2>
+
+    <h3 class="grp">Business Platforms &amp; Production Systems <span class="gn">independent engagements</span></h3>
+
+    <div class="role">
+      <div class="rhead"><span class="rtitle">El Fath Pharmacies <i>— multi-branch pharmacy POS &amp; loyalty platform</i></span><span class="lead"></span><span class="rmeta">2024 · LIVE</span></div>
+      <ul class="bl">
+        <li>Built an <b>offline-first multi-branch POS</b>: batch/lot inventory with expiry monitoring, automated replenishment alerts, cross-branch stock synchronization and full product-movement audit history.</li>
+        <li>Implemented <b>conflict-free cloud sync over local-first persistence</b>, so branches continue selling through internet outages and reconcile on reconnect.</li>
+        <li>Designed <b>granular role-based access control</b> with multi-level authorization, activity logging and operational audit trails across branches.</li>
+        <li>Delivered POS with automated invoicing, financial reporting with margin monitoring, and a loyalty CRM.</li>
+      </ul>
+    </div>
+
+    <div class="role">
+      <div class="rhead"><span class="rtitle">GAL Factory Supplies <i>— industrial supplies enterprise platform</i></span><span class="lead"></span><span class="rmeta">2023 → present · LIVE</span></div>
+      <ul class="bl">
+        <li>Delivered a <b>cloud enterprise platform</b> for remote operations: sales, inventory, role-based access and secure workflow monitoring across distributed teams (<a href="https://galimport.shop">galimport.shop</a>).</li>
+        <li>Deployed and hardened the production infrastructure; <b>continuously own the servers, security and maintenance contract</b> since launch.</li>
+      </ul>
+    </div>
+
+    <div class="role">
+      <div class="rhead"><span class="rtitle">El Tawfikia Auto Parts Markets <i>— automotive spare-parts trading system</i></span><span class="lead"></span><span class="rmeta">2022 → present · MAINTAINED</span></div>
+      <ul class="bl">
+        <li>Centralized sales, warehouse inventory, employee operations and workflow tracking on a <b>secure internal network</b> with real-time monitoring.</li>
+        <li>Continue to provide <b>hardware maintenance and server administration</b> for the delivered system to this day.</li>
+      </ul>
+    </div>
+
+    <div class="role">
+      <div class="rhead"><span class="rtitle">Pioneer General Supplies &amp; Contracting <i>— business management platform</i></span><span class="lead"></span><span class="rmeta">2026</span></div>
+      <ul class="bl">
+        <li>Integrated platform covering sales &amp; invoicing, customer and supplier management, employee roles and cross-department workflow control.</li>
+      </ul>
+    </div>
+
+    <h3 class="grp">SaaS &amp; Commercial Products <span class="gn">own products</span></h3>
+
+    <div class="role">
+      <div class="rhead"><span class="rtitle">Rocket System 2 <i>— distributed ERP + mobile companion</i></span><span class="lead"></span><span class="rmeta">2026 · LIVE</span></div>
+      <ul class="bl">
+        <li><b>Multi-location warehouse ERP</b>, offline-first with cloud sync and conflict-free reconciliation; companion mobile app for remote monitoring.</li>
+        <li>Deployable on <b>local servers or the cloud</b> per customer infrastructure needs.</li>
+      </ul>
+    </div>
+
+    <div class="role">
+      <div class="rhead"><span class="rtitle">Egyfy <i>— multi-tenant SaaS e-commerce builder</i></span><span class="lead"></span><span class="rmeta">2025 → present · BETA</span></div>
+      <ul class="bl">
+        <li>Architected <b>tenant isolation</b>, a SaaS subscription model and a store builder with production-grade scalability.</li>
+        <li><b>3 tenants live in production</b>; customer feedback drives the roadmap toward commercial launch.</li>
+      </ul>
+    </div>
+
+    <div class="role">
+      <div class="rhead"><span class="rtitle">Rocket System 1 <i>— retail POS &amp; inventory</i></span><span class="lead"></span><span class="rmeta">2025</span></div>
+      <ul class="bl">
+        <li>Lightweight <b>desktop retail solution</b> for small shops and warehouses — inventory, automated invoices and reporting; designed for teams with limited technical experience.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2 class="sec-head">Open-Source Projects — Created &amp; Led <span class="note">my own repositories</span></h2>
+
+    <div class="role">
+      <div class="rhead"><span class="rtitle">Altair <i>— web framework for Crystal</i>&nbsp;&nbsp;<span class="mk">Creator · Sole Builder</span></span><span class="lead"></span><span class="rmeta">MIT · PHASES 0–7</span></div>
+      <ul class="bl">
+        <li>Designed and built the framework end to end: a <b>compile-time routing DSL</b> with typed action references, typed ECR views/layouts/partials and per-request controllers with typed params — invalid programs fail <b>at compile time, not in production</b>.</li>
+        <li>Implemented a <b>dual-adapter ORM</b> (SQLite3 / PostgreSQL) validated through shared contract tests, plus migrations, validations, associations and callbacks.</li>
+        <li>Shipped the CLI toolchain (new / generate / server / routes / db), automatic development hot-reload watcher, sessions, CSRF protection, JWT authentication and background jobs.</li>
+        <li>Verified by a <b>~992-spec automated suite</b> across the stack; performance measured with public <b>k6 benchmarks</b> against Express.js and Fiber, run through a dedicated benchmark collector.</li>
+      </ul>
+      <div class="rlinks"><a href="https://github.com/Arab-Open-Source/Altair">Repository</a> · <a href="https://arab-open-source.github.io/Altair/">Documentation</a></div>
+    </div>
+
+    <div class="role">
+      <div class="rhead"><span class="rtitle">Marsad <i>— self-hosted VPS fleet management</i>&nbsp;&nbsp;<span class="mk">Sole Builder</span></span><span class="lead"></span><span class="rmeta">2026 → present · CC BY-NC 4.0</span></div>
+      <ul class="bl">
+        <li>Browser-based <b>LiveView mini-OS desktop</b> in Elixir/Phoenix: one <b>supervised GenServer with persistent SSH</b> per managed server (Registry + DynamicSupervisor).</li>
+        <li>xterm.js terminal over persistent PTYs (vim, pipes, job control), SFTP explorer with its own query language, inline remote editing and an offline mode.</li>
+        <li>Docker / systemd / nginx control panels with SSL-expiry monitoring and per-core live metrics; <b>AES-256-GCM credential vault</b> (OTP <code>:crypto</code>) with TOFU host-key records.</li>
+        <li>Hardened remote execution: <b>allow-list regex validation</b> on every value interpolated into shell commands.</li>
+      </ul>
+      <div class="rlinks"><a href="https://github.com/Arab-Open-Source/Marsad">Repository</a></div>
+    </div>
+
+    <div class="role">
+      <div class="rhead"><span class="rtitle">EgyFy Parser <i>— local OCR workspace</i></span><span class="lead"></span><span class="rmeta">Apache-2.0</span></div>
+      <ul class="bl">
+        <li>Converts PDFs and images into Markdown, JSON and structured tables with per-page confidence review and a clean-output mode; runs as a single-process Python workspace — <b>documents never leave the machine</b>.</li>
+      </ul>
+    </div>
+
+    <h3 class="grp">Desktop, Automation &amp; Utility Projects <span class="gn">personal open source</span></h3>
+
+    <div class="one">
+      <div class="rhead"><span class="rtitle">KPM · EG-ID Checker · Pomodoro Timer</span><span class="lead"></span><span class="rmeta">Kotlin · Kotlin · RUST</span></div>
+      <ul class="bl">
+        <li><b>KPM</b> — Maven-backed package access behind an npm-like CLI for the JVM (Kotlin).</li>
+        <li><b>EG-ID Checker</b> — Egyptian national-ID validation &amp; demographics library (Kotlin).</li>
+        <li><b>Pomodoro Timer</b> — native Windows tray application with toasts and focus screen-blocking (Rust / egui).</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec pbreak">
+    <h2 class="sec-head">Open-Source Contributions — External Projects <span class="note">maintained by others · merged &amp; ongoing</span></h2>
+
+    <div class="role">
+      <div class="rhead"><span class="rtitle">ASN — Open Social Network <small>(DevHustlers)</small>&nbsp;&nbsp;<span class="mk">Leading Contributor</span></span><span class="lead"></span><span class="rmeta">AGPL-3.0</span></div>
+      <ul class="bl">
+        <li><b>Leading contributor by commit count</b> to an Elixir-first service monorepo spanning communities, messaging and real-time features: event broker, typed contracts, PostgreSQL persistence.</li>
+        <li>Strengthened project governance with <b>changelog-enforcing CI gates</b>, contract-drift checks and CODEOWNERS review.</li>
+      </ul>
+    </div>
+
+    <h3 class="grp">Upstream fixes merged <span class="gn">reproduce → patch → test → PR → merged</span></h3>
+    <ul class="bl">
+      <li><code>elixir-lang/elixir #15770</code> — fixed a type-checker crash on non-returning <code>for … into:</code> clauses (Elixir compiler).</li>
+      <li><code>ktorio/ktor #5633</code> — corrected CORS default-methods filtering (Kotlin Ktor framework).</li>
+      <li><code>LiveCodes/browser-elixir #1</code> — delivered the build toolchain for single-threaded AtomVM targets.</li>
+      <li><code>loco-rs/loco #1785</code> — contributed an Arabic translation of the project README (Rust Loco framework).</li>
+      <li><code>Racore #2</code> — fixed an LRU-eviction memory leak in <code>inMemoryIndexes</code>.</li>
+      <li><code>404-coffee-backend #1</code> — added core and user-management test coverage.</li>
+    </ul>
+  </section>
+
+  <section class="sec">
+    <h2 class="sec-head">Technical Writing</h2>
+    <ul class="bl">
+      <li><b>Nine published engineering articles</b>: BEAM/Elixir internals and the memory model, distributed-systems design, Kotlin Multiplatform in production, and SQLite MVCC concurrent writes.</li>
+    </ul>
+  </section>
+
+  <section class="sec">
+    <h2 class="sec-head">Languages</h2>
+    <ul class="bl">
+      <li><b>Arabic</b> — native.</li>
+      <li><b>English</b> — professional working proficiency.</li>
+    </ul>
+  </section>
+
+  <div class="fine">
+    <span>© 2026 Hassan Mohamed — Systems Builder</span>
+    <span>References available on request</span>
+    <span>github.com/HMH-3080</span>
+  </div>
+
+</main>
+
+<script>
+  document.getElementById('dl-cv').addEventListener('click', function(){ window.print(); });
+</script>
+</body>
+</html>
