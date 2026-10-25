@@ -1,505 +1,835 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Selected work — business platforms, ERP, SaaS, and open-source tooling by Hassan Mohamed.">
-    <title>Projects — Hassan Mohamed</title>
-    <link rel="stylesheet" href="style.css">
-    <script>
-    (function(){try{var t=localStorage.getItem('hmh-theme');if(!t){t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.dataset.theme=t;}catch(e){}})();
-    </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Selected work — business platforms, ERP, SaaS, and open-source tooling by Hassan Mohamed.">
+<title>Projects — Hassan Mohamed</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <input type="checkbox" id="menu-toggle" class="menu-toggle">
-    <header>
-        <div class="header-inner">
-            <a href="about.html" class="brand"><span class="brand-mark">HM</span><span class="brand-name">Hassan Mohamed <span>/ sys.builder</span></span></a>
-            <label for="menu-toggle" class="menu-btn" aria-label="Menu"><span></span><span></span><span></span></label>
-            <nav>
-                <a href="about.html">About</a>
-                <a href="projects.html" class="active">Projects</a>
-                <a href="articles.html">Articles</a>
-                <button class="cmdbtn" id="cmdk-btn" type="button" title="Command menu (Ctrl/⌘ K)">⌘K</button>
-                <button class="theme-btn" id="theme-btn" type="button">MODE: LIGHT</button>
-            </nav>
+<div class="field" aria-hidden="true"></div>
+<div id="spot" aria-hidden="true"></div>
+<div id="beam" aria-hidden="true"></div>
+
+<div class="topbar">
+  <div class="wrap-in">
+    <a class="brand" href="about.html"><i>HM</i><span>Hassan Mohamed</span></a>
+    <nav>
+      <a href="about.html">About</a>
+      <a href="projects.html" class="on">Work</a>
+      <a href="articles.html">Writing</a>
+      <a href="cv.html">CV</a>
+      <button class="cmdbtn" id="cmdk-btn" type="button" title="Command menu (Ctrl/⌘ K)">⌘K</button>
+    </nav>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="hero page-hero">
+    <span class="over">Selected work · 15 systems · filter, then read</span>
+    <h1>
+      <span class="w" style="--w:0">Every</span>
+      <span class="w" style="--w:1">system,</span>
+      <span class="w sig" style="--w:2">on the record.</span>
+    </h1>
+    <p class="bio reveal" style="--d:.55s">Business platforms, enterprise systems, SaaS products, and open-source tools I have designed, built, and maintained — spanning <b>inventory management, ERP, e-commerce, and developer tooling</b>.</p>
+  </header>
+
+  <div class="filters" id="filters">
+    <button data-f="all" class="on">All · 15</button>
+    <button data-f="enterprise">Enterprise · 4</button>
+    <button data-f="product">Products &amp; SaaS · 3</button>
+    <button data-f="oss">Open source · 7</button>
+    <button data-f="upstream">Upstream · 1</button>
+  </div>
+
+  <div class="grid" id="cards">
+    <a class="card reveal" data-c="enterprise" href="#tawfikia" style="--d:.02s">
+      <div class="chead"><span class="cat">Enterprise</span><span class="yr">2022</span></div>
+      <h3>El Tawfikia Auto Parts Markets</h3>
+      <p>Sales, inventory and operations on a secure internal network — first build, still standing.</p>
+      <div class="chips"><span>internal network</span><span>hardware</span></div>
+    </a>
+    <a class="card reveal" data-c="enterprise" href="#gal" style="--d:.06s">
+      <div class="chead"><span class="cat">Enterprise</span><span class="yr">2023</span></div>
+      <h3>GAL Factory Supplies</h3>
+      <p>Cloud enterprise platform for industrial supplies — remote teams, secure workflows.</p>
+      <div class="chips"><span>cloud</span><span>galimport.shop</span></div>
+    </a>
+    <a class="card reveal" data-c="enterprise" href="#pioneer" style="--d:.1s">
+      <div class="chead"><span class="cat">Enterprise</span><span class="yr">2026</span></div>
+      <h3>Pioneer Supplies &amp; Contracting</h3>
+      <p>CRM, suppliers and workflow control across the organization.</p>
+      <div class="chips"><span>CRM</span><span>workflows</span></div>
+    </a>
+    <a class="card reveal" data-c="enterprise" href="#elfath" style="--d:.14s">
+      <div class="chead"><span class="cat">Live</span><span class="pill live">LIVE</span></div>
+      <h3>El Fath Pharmacies</h3>
+      <p>Offline-first multi-branch POS + loyalty — branches keep selling through outages.</p>
+      <div class="chips"><span>offline-first</span><span>RBAC</span></div>
+    </a>
+    <a class="card reveal" data-c="product" href="#rocket1" style="--d:.02s">
+      <div class="chead"><span class="cat">Product</span><span class="yr">2025</span></div>
+      <h3>Rocket System 1</h3>
+      <p>Lightweight retail sales + inventory for small shops and warehouses.</p>
+      <div class="chips"><span>retail</span><span>inventory</span></div>
+    </a>
+    <a class="card reveal" data-c="product" href="#rocket2" style="--d:.06s">
+      <div class="chead"><span class="cat">Live</span><span class="pill live">LIVE</span></div>
+      <h3>Rocket System 2</h3>
+      <p>Distributed ERP with cloud sync and a mobile companion app.</p>
+      <div class="chips"><span>ERP</span><span>mobile</span></div>
+    </a>
+    <a class="card reveal" data-c="product" href="#egyfy" style="--d:.1s">
+      <div class="chead"><span class="cat">Beta</span><span class="pill beta">BETA</span></div>
+      <h3>Egyfy</h3>
+      <p>Multi-tenant SaaS e-commerce — 3 real tenants in production during beta.</p>
+      <div class="chips"><span>SaaS</span><span>multi-tenant</span></div>
+    </a>
+    <a class="card reveal" data-c="oss" href="https://github.com/HMH-3080/kpm" target="_blank" rel="noopener" style="--d:.02s">
+      <div class="chead"><span class="cat">OSS</span><span class="yr">GitHub</span></div>
+      <h3>KPM — Kotlin Package Manager</h3>
+      <p>npm-like dependency workflow for the JVM, Maven-backed.</p>
+      <div class="chips"><span>Kotlin</span><span>Maven</span></div>
+    </a>
+    <a class="card reveal" data-c="oss" href="https://github.com/HMH-3080/egyptian-national-id-checker" target="_blank" rel="noopener" style="--d:.06s">
+      <div class="chead"><span class="cat">OSS</span><span class="yr">GitHub</span></div>
+      <h3>EG-ID Checker</h3>
+      <p>Egyptian National ID validation + demographic extraction library.</p>
+      <div class="chips"><span>Kotlin</span></div>
+    </a>
+    <a class="card reveal" data-c="oss" href="#altair" style="--d:.1s">
+      <div class="chead"><span class="cat">OSS</span><span class="pill live">CREATED</span></div>
+      <h3>Altair</h3>
+      <p>Web framework for Crystal — created and led by me · phases 0–7 shipped, ~992 specs.</p>
+      <div class="chips"><span>Crystal</span><span>ORM</span></div>
+    </a>
+    <a class="card reveal" data-c="oss" href="https://github.com/HMH-3080/Pomodoro_Timer" target="_blank" rel="noopener" style="--d:.14s">
+      <div class="chead"><span class="cat">OSS</span><span class="yr">GitHub</span></div>
+      <h3>Pomodoro Timer</h3>
+      <p>Native Windows timer in Rust + egui — tray, toasts, screen blocking.</p>
+      <div class="chips"><span>Rust</span><span>egui</span></div>
+    </a>
+    <a class="card reveal" data-c="oss" href="#featured" style="--d:.18s">
+      <div class="chead"><span class="cat">OSS</span><span class="pill live">FEATURED</span></div>
+      <h3>Marsad</h3>
+      <p>Self-hosted VPS fleet management, built solo — LiveView mini-OS desktop.</p>
+      <div class="chips"><span>Elixir</span><span>LiveView</span></div>
+    </a>
+    <a class="card reveal" data-c="oss" href="https://github.com/DevHustlers-Community/ASN" target="_blank" rel="noopener" style="--d:.22s">
+      <div class="chead"><span class="cat">OSS</span><span class="yr">2026</span></div>
+      <h3>ASN — Open Social Network</h3>
+      <p>Communities, messaging, real-time — Elixir-first monorepo (AGPL-3.0).</p>
+      <div class="chips"><span>Elixir</span><span>Bun</span></div>
+    </a>
+    <a class="card reveal" data-c="oss" href="https://github.com/Arab-Open-Source/egyfy-parser" target="_blank" rel="noopener" style="--d:.26s">
+      <div class="chead"><span class="cat">OSS</span><span class="yr">2026</span></div>
+      <h3>EgyFy Parser</h3>
+      <p>Local OCR workspace — PDF/images → Markdown, JSON &amp; tables.</p>
+      <div class="chips"><span>Python</span><span>OCR</span></div>
+    </a>
+    <a class="card reveal" data-c="upstream" href="#upstream" style="--d:.3s">
+      <div class="chead"><span class="cat">Upstream</span><span class="pill live">8 MERGED</span></div>
+      <h3>Merged Upstream Revisions</h3>
+      <p>Elixir #15770 · Ktor #5633 · LiveCodes #1 · Loco #1785 · Racore #2 · +3.</p>
+      <div class="chips"><span>compiler</span><span>CORS</span><span>+6</span></div>
+    </a>
+  </div>
+
+  <div class="beambox reveal" id="altair">
+    <div class="dossier">
+      <div class="head">
+        <h3>Altair — Web Framework for Crystal</h3>
+        <span class="badge a">CREATED — SOLE BUILDER</span>
+        <span class="badge b">MIT LICENSE</span>
+        <span class="badge b">PHASES 0–7 · ~992 SPECS</span>
+      </div>
+      <p>My web framework: <b>batteries-included, built for the Crystal language</b> under the Arab-Open-Source organization (MIT licensed). I designed and built it end to end — <b>convention over configuration</b> with native performance and single-binary deployment. Early development — phases 0–7 complete with a <b>~992-spec suite</b>.</p>
+      <div class="dcols">
+        <div class="dcol">
+          <h4>Capabilities</h4>
+          <ul>
+            <li>Compile-time routing DSL with typed action references</li>
+            <li>Per-request controllers with typed params</li>
+            <li>Typed compile-time ECR views, layouts &amp; partials</li>
+            <li>ORM with SQLite3 + PostgreSQL adapters</li>
+            <li>Migrations, validations, associations, callbacks</li>
+            <li>CLI — new, generate, server, routes, db commands</li>
+            <li>Automatic development hot-reload watcher</li>
+            <li>Sessions, CSRF, JWT auth &amp; background jobs</li>
+          </ul>
         </div>
-    </header>
-
-    <div class="container">
-        <div class="page-header">
-            <span class="label">Selected work</span>
-            <h1>Projects</h1>
-            <div class="path">~/projects — 11 systems · filter, then read the dossier</div>
+        <div class="dcol v">
+          <h4>Engineering</h4>
+          <ul>
+            <li>Framework architecture from the ground up</li>
+            <li>Compiler-leveraged correctness (errors at build time)</li>
+            <li>Dual-backend ORM design with contract tests</li>
+            <li>~992-spec suite across the stack</li>
+            <li>Public k6 benchmarks vs Express &amp; Fiber</li>
+          </ul>
         </div>
-        <p class="page-intro">Business platforms, enterprise systems, SaaS products, and open-source tools I have designed, built, and maintained — spanning inventory management, ERP, e-commerce, and developer tooling.</p>
-
-        <div class="filters" role="tablist" aria-label="Filter projects">
-            <button class="filter-btn on" data-f="all">All / 11</button>
-            <button class="filter-btn" data-f="enterprise">Enterprise / 4</button>
-            <button class="filter-btn" data-f="product">Products &amp; SaaS / 3</button>
-            <button class="filter-btn" data-f="oss">Open source / 4</button>
-        </div>
-
-        <div class="index-table" id="index">
-            <a class="index-row" data-cat="enterprise" href="#tawfikia"><span class="yr">2022</span><span class="nm">El Tawfikia Auto Parts Markets<small>Sales · inventory · internal-network ops</small></span><span class="cat">Enterprise</span><span class="arr">→</span></a>
-            <a class="index-row" data-cat="enterprise" href="#gal"><span class="yr">2023</span><span class="nm">GAL Factory Supplies<small>Cloud enterprise platform — galimport.shop</small></span><span class="cat">Enterprise</span><span class="arr">→</span></a>
-            <a class="index-row" data-cat="enterprise" href="#pioneer"><span class="yr">2026</span><span class="nm">Pioneer General Supplies &amp; Contracting<small>CRM · suppliers · workflow control</small></span><span class="cat">Enterprise</span><span class="arr">→</span></a>
-            <a class="index-row" data-cat="enterprise" href="#elfath"><span class="yr">2024</span><span class="nm">El Fath Pharmacies<small>Offline-first multi-branch POS + loyalty</small></span><span class="status status-live">Live</span><span class="arr">→</span></a>
-            <a class="index-row" data-cat="product" href="#rocket1"><span class="yr">2025</span><span class="nm">Rocket System 1<small>Lightweight retail sales + inventory</small></span><span class="cat">Product</span><span class="arr">→</span></a>
-            <a class="index-row" data-cat="product" href="#rocket2"><span class="yr">2026</span><span class="nm">Rocket System 2<small>Distributed ERP + mobile companion</small></span><span class="status status-live">Live</span><span class="arr">→</span></a>
-            <a class="index-row" data-cat="product" href="#egyfy"><span class="yr">2025—</span><span class="nm">Egyfy<small>Multi-tenant SaaS e-commerce · 3 live tenants</small></span><span class="status status-beta">Beta</span><span class="arr">→</span></a>
-            <a class="index-row" data-cat="oss" href="#kpm"><span class="yr">OSS</span><span class="nm">KPM — Kotlin Package Manager<small>JVM dependency workflow · Maven-backed</small></span><span class="status status-oss">OSS</span><span class="arr">→</span></a>
-            <a class="index-row" data-cat="oss" href="#idchecker"><span class="yr">OSS</span><span class="nm">Egyptian National ID Checker<small>Validation + demographic extraction lib</small></span><span class="status status-oss">OSS</span><span class="arr">→</span></a>
-            <a class="index-row" data-cat="oss" href="#altair"><span class="yr">OSS</span><span class="nm">Altair<small>Batteries-included web framework for Crystal</small></span><span class="status status-oss">OSS</span><span class="arr">→</span></a>
-            <a class="index-row" data-cat="oss" href="#pomodoro"><span class="yr">OSS</span><span class="nm">Pomodoro Timer<small>Native Rust/egui Windows app</small></span><span class="status status-oss">OSS</span><span class="arr">→</span></a>
-        </div>
-
-        <div class="section-divider">Business &amp; Enterprise — 04 dossiers</div>
-
-        <div class="project-block" id="tawfikia" data-cat="enterprise">
-            <span class="project-id">PRJ-01 / ENTERPRISE</span>
-            <div class="project-header">
-                <h2>El Tawfikia Auto Parts Markets</h2>
-                <div class="project-badges"><span class="project-year">2022</span></div>
-            </div>
-            <p class="project-summary">Comprehensive business management system for one of Egypt's automotive spare parts companies. Built to centralize sales, inventory, and employee operations under a single reliable platform running on a secure internal network.</p>
-            <div class="project-cols">
-                <div><div class="project-section-title">Scope</div>
-                    <ul class="project-features">
-                        <li>Sales management and transaction tracking</li>
-                        <li>Inventory and warehouse management</li>
-                        <li>Employee management and role control</li>
-                        <li>Operational workflow tracking</li>
-                        <li>Real-time monitoring via secure internal network</li>
-                    </ul>
-                </div>
-                <div><div class="project-section-title">Responsibilities</div>
-                    <ul class="project-features">
-                        <li>System architecture and implementation</li>
-                        <li>Database design and optimization</li>
-                        <li>Internal networking infrastructure</li>
-                        <li>Performance tuning and query optimization</li>
-                        <li>Ongoing hardware maintenance and server administration</li>
-                    </ul>
-                </div>
-            </div>
-            <p class="project-note">Continuing to provide hardware maintenance and server administration services to this day.</p>
-        </div>
-
-        <div class="project-block" id="gal" data-cat="enterprise">
-            <span class="project-id">PRJ-02 / ENTERPRISE</span>
-            <div class="project-header">
-                <h2>GAL Factory Supplies</h2>
-                <div class="project-badges"><span class="project-year">2023</span></div>
-            </div>
-            <p class="project-summary">Cloud-based enterprise management platform for an industrial supplies company. Designed for remote operations, multi-user access, and secure workflow monitoring across distributed teams.</p>
-            <div class="project-cols">
-                <div><div class="project-section-title">Scope</div>
-                    <ul class="project-features">
-                        <li>Sales and inventory management</li>
-                        <li>Employee management with access control</li>
-                        <li>Secure workflow monitoring</li>
-                        <li>Multi-user role-based access</li>
-                        <li>Cloud deployment and remote operations</li>
-                    </ul>
-                </div>
-                <div><div class="project-section-title">Responsibilities</div>
-                    <ul class="project-features">
-                        <li>Full-stack system development</li>
-                        <li>Cloud infrastructure deployment</li>
-                        <li>Server management and security hardening</li>
-                        <li>Hardware maintenance</li>
-                        <li>Operational workflow enforcement</li>
-                    </ul>
-                </div>
-            </div>
-            <a href="https://galimport.shop" target="_blank" rel="noopener" class="project-link">↗ galimport.shop</a>
-            <p class="project-note">Continuing to maintain the company's infrastructure and servers.</p>
-        </div>
-
-        <div class="project-block" id="pioneer" data-cat="enterprise">
-            <span class="project-id">PRJ-03 / ENTERPRISE</span>
-            <div class="project-header">
-                <h2>Pioneer General Supplies &amp; Contracting</h2>
-                <div class="project-badges"><span class="project-year">2026</span></div>
-            </div>
-            <p class="project-summary">Integrated business management platform designed to streamline company operations, manage supplier and customer relationships, and improve workflow reliability across the organization.</p>
-            <div class="project-cols">
-                <div><div class="project-section-title">Scope</div>
-                    <ul class="project-features">
-                        <li>Sales management and invoicing</li>
-                        <li>Customer relationship management</li>
-                        <li>Supplier management</li>
-                        <li>Employee management</li>
-                        <li>Operational workflow control</li>
-                        <li>Business process monitoring</li>
-                    </ul>
-                </div>
-                <div><div class="project-section-title">Responsibilities</div>
-                    <ul class="project-features">
-                        <li>System architecture and database engineering</li>
-                        <li>Server administration</li>
-                        <li>Infrastructure maintenance</li>
-                        <li>Security and operational management</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="project-block" id="elfath" data-cat="enterprise">
-            <span class="project-id">PRJ-04 / ENTERPRISE</span>
-            <div class="project-header">
-                <h2>El Fath Pharmacies Management System</h2>
-                <div class="project-badges"><span class="project-year">2024</span><span class="status status-live">Live</span></div>
-            </div>
-            <p class="project-summary">Comprehensive pharmacy management and operations platform for multi-branch pharmacy businesses with strict operational control, inventory accuracy, and customer retention. Offline-first architecture keeps branches running through outages, with cloud sync on reconnect.</p>
-            <div class="project-cols full">
-                <div><div class="project-section-title">Inventory &amp; pharmaceutical management</div>
-                    <ul class="project-features two">
-                        <li>Real-time stock tracking with batch and lot management</li>
-                        <li>Expiration date monitoring and automated alerts</li>
-                        <li>Automatic stock replenishment notifications</li>
-                        <li>Multi-branch inventory synchronization</li>
-                        <li>Product movement tracking and audit history</li>
-                        <li>Controlled medication handling workflows</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="project-cols">
-                <div><div class="project-section-title">Employee &amp; permissions</div>
-                    <ul class="project-features">
-                        <li>Granular role-based access control (RBAC)</li>
-                        <li>Multi-level authorization system</li>
-                        <li>Activity logging and operational auditing</li>
-                        <li>Employee performance monitoring</li>
-                        <li>Shift and responsibility management</li>
-                    </ul>
-                </div>
-                <div><div class="project-section-title">CRM</div>
-                    <ul class="project-features">
-                        <li>Comprehensive customer management</li>
-                        <li>Loyalty points and rewards program</li>
-                        <li>Purchase history tracking and segmentation</li>
-                        <li>Automated promotional and retention campaigns</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="project-cols">
-                <div><div class="project-section-title">Sales &amp; finance</div>
-                    <ul class="project-features">
-                        <li>Point-of-sale (POS) management</li>
-                        <li>Automated invoicing and billing</li>
-                        <li>Financial reporting and margin monitoring</li>
-                        <li>Daily operational performance tracking</li>
-                    </ul>
-                </div>
-                <div><div class="project-section-title">Architecture</div>
-                    <ul class="project-features">
-                        <li>Offline-first with local-first persistence</li>
-                        <li>Secure cloud sync with conflict resolution</li>
-                        <li>Distributed branch management</li>
-                        <li>Fault-tolerant operational workflows</li>
-                        <li>Real-time reporting</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="project-cols full">
-                <div><div class="project-section-title">Key achievements</div>
-                    <ul class="project-features two">
-                        <li>Improved inventory accuracy, fewer stock errors</li>
-                        <li>Strict operational controls and accountability</li>
-                        <li>Higher retention via integrated loyalty</li>
-                        <li>Uninterrupted operation without internet</li>
-                        <li>Scalable infrastructure for new branches</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="project-tech"><span>Offline-First</span><span>Cloud Sync</span><span>RBAC</span><span>Multi-Branch</span><span>POS</span><span>Loyalty</span><span>Pharmacy</span></div>
-        </div>
-
-        <div class="section-divider">Products &amp; SaaS — 03 dossiers</div>
-
-        <div class="project-block" id="rocket1" data-cat="product">
-            <span class="project-id">PRJ-05 / PRODUCT</span>
-            <div class="project-header">
-                <h2>Rocket System 1</h2>
-                <div class="project-badges"><span class="project-year">2025</span></div>
-            </div>
-            <p class="project-summary">Lightweight sales and inventory management solution for retail stores and small warehouses. Built for simplicity, reliability, and adoption by businesses with limited technical experience.</p>
-            <div class="project-cols full">
-                <div><div class="project-section-title">Key features</div>
-                    <ul class="project-features two">
-                        <li>Complete inventory and product tracking</li>
-                        <li>Automated invoice calculations</li>
-                        <li>Sales management and reporting</li>
-                        <li>Simple, intuitive user experience</li>
-                        <li>Beginner-friendly workflow</li>
-                        <li>Secure local operation</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="project-tech"><span>Desktop</span><span>Local Database</span><span>Inventory</span><span>Invoicing</span></div>
-        </div>
-
-        <div class="project-block" id="rocket2" data-cat="product">
-            <span class="project-id">PRJ-06 / PRODUCT</span>
-            <div class="project-header">
-                <h2>Rocket System 2</h2>
-                <div class="project-badges"><span class="project-year">2026</span><span class="status status-live">Live</span></div>
-            </div>
-            <p class="project-summary">Complete ERP platform for distributed business operations. Offline-first with cloud sync, multi-location warehouses, and a mobile companion app for remote monitoring.</p>
-            <div class="project-cols">
-                <div><div class="project-section-title">Core</div>
-                    <ul class="project-features">
-                        <li>Distributed warehouse management</li>
-                        <li>Customer and supplier management</li>
-                        <li>Employee management and roles</li>
-                        <li>Operational workflow monitoring</li>
-                        <li>Offline-first architecture</li>
-                        <li>Cloud deployment and sync</li>
-                        <li>Multi-location operations support</li>
-                    </ul>
-                </div>
-                <div><div class="project-section-title">Additional</div>
-                    <ul class="project-features">
-                        <li>Mobile app for remote monitoring</li>
-                        <li>Flexible deployment — local or cloud</li>
-                        <li>Conflict-free data synchronization</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="project-tech"><span>ERP</span><span>Offline-First</span><span>Cloud Sync</span><span>Mobile App</span><span>Multi-Location</span></div>
-        </div>
-
-        <div class="project-block" id="egyfy" data-cat="product">
-            <span class="project-id">PRJ-07 / SAAS</span>
-            <div class="project-header">
-                <h2>Egyfy</h2>
-                <div class="project-badges"><span class="project-year">2025 — Present</span><span class="status status-beta">Beta</span></div>
-            </div>
-            <p class="project-summary">High-performance multi-tenant SaaS e-commerce platform built for scalability, customization, and competitive pricing. Businesses launch fully branded stores with tenant isolation and subscription management.</p>
-            <div class="project-cols full">
-                <div><div class="project-section-title">Platform</div>
-                    <ul class="project-features two">
-                        <li>Multi-tenant architecture with tenant isolation</li>
-                        <li>High-performance infrastructure</li>
-                        <li>E-commerce store builder</li>
-                        <li>Extensive customization capabilities</li>
-                        <li>SaaS subscription model</li>
-                        <li>Production-grade scalability</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="project-section-title" style="margin-top:1.25rem">Active customers</div>
-            <div class="project-customers">
-                <a href="https://twins.egyfy.shop" target="_blank" rel="noopener">↗ twins.egyfy.shop</a>
-                <a href="https://omhassan.egyfy.shop" target="_blank" rel="noopener">↗ omhassan.egyfy.shop</a>
-                <a href="https://tm.egyfy.shop" target="_blank" rel="noopener">↗ tm.egyfy.shop</a>
-            </div>
-            <p class="project-note">Real customers onboarded during beta. Their feedback directly shaped the product. Preparing for official commercial launch.</p>
-            <div class="project-tech"><span>SaaS</span><span>Multi-Tenant</span><span>E-Commerce</span><span>Cloud</span><span>Scalable</span></div>
-        </div>
-
-        <div class="section-divider">Open source — 04 dossiers</div>
-
-        <div class="project-block" id="kpm" data-cat="oss">
-            <span class="project-id">PRJ-08 / OSS</span>
-            <div class="project-header">
-                <h2>KPM — Kotlin Package Manager</h2>
-                <div class="project-badges"><span class="status status-oss">Open source</span></div>
-            </div>
-            <p class="project-summary">Package management tool for the JVM ecosystem. Dependency discovery, repository search, installation, and Maven integration — an npm-like workflow for Kotlin, Java, and Scala developers.</p>
-            <div class="project-cols">
-                <div><div class="project-section-title">Capabilities</div>
-                    <ul class="project-features">
-                        <li>Interactive dependency discovery</li>
-                        <li>Repository search and installation</li>
-                        <li>Maven repository integration</li>
-                        <li>Modern CLI experience</li>
-                        <li>Package management automation</li>
-                        <li>Kotlin, Java, and Scala support</li>
-                    </ul>
-                </div>
-                <div><div class="project-section-title">Engineering</div>
-                    <ul class="project-features">
-                        <li>Compiler ecosystem understanding</li>
-                        <li>Developer tooling architecture</li>
-                        <li>CLI application design</li>
-                        <li>Open-source engineering practices</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="project-tech"><span>Kotlin</span><span>JVM</span><span>CLI</span><span>Maven</span><span>Package Manager</span></div>
-            <a href="https://github.com/HMH-3080/kpm" target="_blank" rel="noopener" class="project-link">↗ GitHub — HMH-3080/kpm</a>
-            <div class="cmdline"><code>gh repo clone HMH-3080/kpm</code><button class="copybtn" type="button" data-copy="gh repo clone HMH-3080/kpm">COPY</button></div>
-        </div>
-
-        <div class="project-block" id="idchecker" data-cat="oss">
-            <span class="project-id">PRJ-09 / OSS</span>
-            <div class="project-header">
-                <h2>Egyptian National ID Checker</h2>
-                <div class="project-badges"><span class="status status-oss">Open source</span></div>
-            </div>
-            <p class="project-summary">Library for validating and analyzing Egyptian national ID numbers. High-performance validation, data extraction, and demographic analysis through a developer-friendly API.</p>
-            <div class="project-cols">
-                <div><div class="project-section-title">Features</div>
-                    <ul class="project-features">
-                        <li>National ID validation and verification</li>
-                        <li>Demographic data extraction</li>
-                        <li>High-performance processing</li>
-                        <li>Developer-friendly API design</li>
-                    </ul>
-                </div>
-                <div><div class="project-section-title">Engineering</div>
-                    <ul class="project-features">
-                        <li>Localized software engineering</li>
-                        <li>Data validation architecture</li>
-                        <li>Library and package design</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="project-tech"><span>Library</span><span>Validation</span><span>API Design</span></div>
-            <a href="https://github.com/HMH-3080/egyptian-national-id-checker" target="_blank" rel="noopener" class="project-link">↗ GitHub — egyptian-national-id-checker</a>
-            <div class="cmdline"><code>gh repo clone HMH-3080/egyptian-national-id-checker</code><button class="copybtn" type="button" data-copy="gh repo clone HMH-3080/egyptian-national-id-checker">COPY</button></div>
-        </div>
-
-        <div class="project-block" id="pomodoro" data-cat="oss">
-            <span class="project-id">PRJ-10 / OSS</span>
-            <div class="project-header">
-                <h2>Pomodoro Timer</h2>
-                <div class="project-badges"><span class="status status-oss">Open source</span></div>
-            </div>
-            <p class="project-summary">Lightweight native productivity app for Windows. Built with Rust and egui for a minimal, fast desktop experience with tray integration, native notifications, and optional break-time screen blocking.</p>
-            <div class="project-cols">
-                <div><div class="project-section-title">Features</div>
-                    <ul class="project-features">
-                        <li>Native desktop experience</li>
-                        <li>Pomodoro workflow management</li>
-                        <li>Focus and break cycle tracking</li>
-                        <li>System tray integration</li>
-                        <li>Native Windows toast notifications</li>
-                        <li>Optional break-time screen blocking</li>
-                        <li>Minimal resource consumption</li>
-                    </ul>
-                </div>
-                <div><div class="project-section-title">Technical</div>
-                    <ul class="project-features">
-                        <li>Rust systems programming</li>
-                        <li>Native desktop application architecture</li>
-                        <li>Event-driven UI with egui/eframe</li>
-                        <li>Cross-platform UI framework experience</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="project-tech"><span>Rust</span><span>egui</span><span>Native Desktop</span><span>Windows</span><span>Systems Programming</span></div>
-            <a href="https://github.com/HMH-3080/Pomodoro_Timer" target="_blank" rel="noopener" class="project-link">↗ GitHub — Pomodoro_Timer</a>
-            <div class="cmdline"><code>gh repo clone HMH-3080/Pomodoro_Timer</code><button class="copybtn" type="button" data-copy="gh repo clone HMH-3080/Pomodoro_Timer">COPY</button></div>
-        </div>
-
-        <div class="project-block" id="altair" data-cat="oss">
-            <span class="project-id">PRJ-11 / OSS</span>
-            <div class="project-header">
-                <h2>Altair — Web Framework for Crystal</h2>
-                <div class="project-badges"><span class="status status-oss">Open source</span></div>
-            </div>
-            <p class="project-summary">Batteries-included web framework for the Crystal language, built under the Arab-Open-Source organization (MIT licensed). Convention over configuration with native performance and single-binary deployment. Early development — phases 0–7 complete with a ~992-spec suite.</p>
-            <div class="project-cols">
-                <div><div class="project-section-title">Capabilities</div>
-                    <ul class="project-features">
-                        <li>Compile-time routing DSL with typed action references</li>
-                        <li>Per-request controllers with typed params</li>
-                        <li>Typed compile-time ECR views, layouts &amp; partials</li>
-                        <li>ORM with SQLite3 + PostgreSQL adapters</li>
-                        <li>Migrations, validations, associations, callbacks</li>
-                        <li>CLI — new, generate, server, routes, db commands</li>
-                        <li>Sessions, CSRF, JWT auth &amp; background jobs</li>
-                    </ul>
-                </div>
-                <div><div class="project-section-title">Engineering</div>
-                    <ul class="project-features">
-                        <li>Framework architecture from the ground up</li>
-                        <li>Compiler-leveraged correctness (errors at build time)</li>
-                        <li>Dual-backend ORM design with contract tests</li>
-                        <li>~992-spec suite across the stack</li>
-                        <li>Public k6 benchmarks vs Express &amp; Fiber</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="project-tech"><span>Crystal</span><span>MVC Framework</span><span>ORM</span><span>CLI</span><span>SQLite</span><span>PostgreSQL</span></div>
-            <a href="https://github.com/Arab-Open-Source/Altair" target="_blank" rel="noopener" class="project-link">↗ GitHub — Arab-Open-Source/Altair</a>
-            <div class="cmdline"><code>gh repo clone Arab-Open-Source/Altair</code><button class="copybtn" type="button" data-copy="gh repo clone Arab-Open-Source/Altair">COPY</button></div>
-            <a href="https://arab-open-source.github.io/Altair/" target="_blank" rel="noopener" class="project-link">↗ Documentation site</a>
-        </div>
+      </div>
+      <div class="dchips">
+        <span>Crystal</span><span>MVC Framework</span><span>ORM</span><span>CLI</span><span>SQLite</span><span>PostgreSQL</span>
+      </div>
+      <div class="cmdline"><code>gh repo clone Arab-Open-Source/Altair</code><button class="copybtn" type="button" data-copy="gh repo clone Arab-Open-Source/Altair">COPY</button></div>
+      <div class="dfoot">
+        <a class="btn btn-a" href="https://github.com/Arab-Open-Source/Altair" target="_blank" rel="noopener">↗ Open Altair on GitHub</a>
+        <a class="btn btn-b" href="https://arab-open-source.github.io/Altair/" target="_blank" rel="noopener">↗ Documentation site</a>
+        <span class="txt">Created and built <b>end to end by Hassan</b> — part of my open-source work.</span>
+      </div>
     </div>
+  </div>
 
-    <footer>
-        <div class="footer-inner">
-            <span>© 2026 HASSAN MOHAMED</span>
-            <span><a href="about.html" style="color:inherit">~/about</a> · <a href="articles.html" style="color:inherit">~/articles</a></span>
+  <div class="beambox reveal" id="featured">
+    <div class="dossier">
+      <div class="head">
+        <h3>Marsad — VPS fleet management</h3>
+        <span class="badge a">OPEN SOURCE</span>
+        <span class="badge b">2026 — PRESENT</span>
+        <span class="badge b">SOLE CONTRIBUTOR</span>
+      </div>
+      <p>Self-hosted platform that turns VPS fleet management into a <b>browser-based mini-OS desktop</b>. Built with Phoenix LiveView and Elixir/OTP (sole contributor, under the Arab-Open-Source organization): every managed server runs behind a <b>supervised GenServer holding a persistent SSH connection</b> — terminal, file explorer, Docker, systemd, nginx, and live metrics in one themeable UI.</p>
+      <div class="dcols">
+        <div class="dcol">
+          <h4>Desktop &amp; terminal</h4>
+          <ul>
+            <li>Draggable, resizable windows with taskbar and app launcher over LiveView WebSockets</li>
+            <li>xterm.js SSH terminal — one persistent PTY shell per window (vim, pipes, job control work natively)</li>
+            <li>SFTP file explorer with a smart query language — "exact phrase", -exclude, ext:conf, size:&gt;10M, depth:3</li>
+            <li>Inline remote code editing with save-to-remote and syntax-highlighted previews</li>
+            <li>Offline mode: dedicated page plus automatic overlay when the connection drops</li>
+          </ul>
         </div>
-    </footer>
-
-    <script>
-    (function() {
-        var btns = document.querySelectorAll(".filter-btn");
-        function apply(f) {
-            document.querySelectorAll(".index-row").forEach(function(r) {
-                r.style.display = (f === "all" || r.getAttribute("data-cat") === f) ? "" : "none";
-            });
-            document.querySelectorAll(".project-block").forEach(function(b) {
-                b.style.display = (f === "all" || b.getAttribute("data-cat") === f) ? "" : "none";
-            });
-            document.querySelectorAll(".section-divider").forEach(function(d) {
-                d.style.display = (f === "all") ? "" : "none";
-            });
-        }
-        btns.forEach(function(b) {
-            b.addEventListener("click", function() {
-                btns.forEach(function(x) { x.classList.remove("on"); });
-                b.classList.add("on");
-                apply(b.getAttribute("data-f"));
-            });
-        });
-    })();
-    </script>
-
-    <script>
-    (function() {
-        var btn = document.getElementById("theme-btn");
-        function label() { btn.textContent = document.documentElement.dataset.theme === "dark" ? "MODE: DARK" : "MODE: LIGHT"; }
-        btn.addEventListener("click", function() {
-            var next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
-            document.documentElement.dataset.theme = next;
-            try { localStorage.setItem("hmh-theme", next); } catch (e) {}
-            label();
-        });
-        label();
-    })();
-    </script>
-
-    <div class="palette-backdrop" id="pal-bg" hidden>
-        <div class="palette" role="dialog" aria-modal="true" aria-label="Command menu">
-            <div class="pal-input-row"><span class="pal-prompt">›</span><input id="pal-input" placeholder="Type a command or search…" autocomplete="off" spellcheck="false" aria-label="Command menu"></div>
-            <div class="pal-list" id="pal-list" role="listbox"></div>
-            <div class="pal-foot"><span><kbd>↑↓</kbd> navigate</span><span><kbd>↵</kbd> run</span><span><kbd>esc</kbd> close</span></div>
+        <div class="dcol v">
+          <h4>Ops &amp; engineering</h4>
+          <ul>
+            <li>Docker panels — containers, images, Compose stacks, live resource stats, audit trail</li>
+            <li>systemd service control + nginx management with SSL-certificate expiry monitoring</li>
+            <li>Live metrics — per-core CPU, memory, disk, network I/O, process table with kill</li>
+            <li>One supervised <code>ServerSession</code> GenServer per server (Registry + DynamicSupervisor)</li>
+            <li>AES-256-GCM credential vault via OTP <code>:crypto</code>; TOFU host-key fingerprint records</li>
+            <li>Allow-list regex validation on every name interpolated into remote shell commands</li>
+          </ul>
         </div>
+      </div>
+      <div class="dchips">
+        <span>Elixir</span><span>Phoenix LiveView</span><span>OTP</span><span>SSH · SFTP</span><span>Docker</span><span>systemd</span><span>nginx</span><span>SQLite</span><span>xterm.js</span>
+      </div>
+      <div class="dfoot">
+        <a class="btn btn-a" href="https://github.com/Arab-Open-Source/Marsad" target="_blank" rel="noopener">↗ Open Marsad on GitHub</a>
+        <span class="txt">Licensed <b>CC BY-NC 4.0</b> — free to share and adapt for non-commercial use.</span>
+      </div>
     </div>
-    <script>
-    window.HMH_INDEX = [
-        { group: "On this page", title: "El Tawfikia Auto Parts Markets", hint: "PRJ-01", run: function() { window.location.href = "#tawfikia"; } },
-        { group: "On this page", title: "GAL Factory Supplies", hint: "PRJ-02", run: function() { window.location.href = "#gal"; } },
-        { group: "On this page", title: "Pioneer General Supplies", hint: "PRJ-03", run: function() { window.location.href = "#pioneer"; } },
-        { group: "On this page", title: "El Fath Pharmacies", hint: "PRJ-04", run: function() { window.location.href = "#elfath"; } },
-        { group: "On this page", title: "Rocket System 1", hint: "PRJ-05", run: function() { window.location.href = "#rocket1"; } },
-        { group: "On this page", title: "Rocket System 2", hint: "PRJ-06", run: function() { window.location.href = "#rocket2"; } },
-        { group: "On this page", title: "Egyfy — SaaS", hint: "PRJ-07 · beta", run: function() { window.location.href = "#egyfy"; } },
-        { group: "On this page", title: "KPM — Kotlin Package Manager", hint: "PRJ-08 · oss", run: function() { window.location.href = "#kpm"; } },
-        { group: "On this page", title: "Egyptian National ID Checker", hint: "PRJ-09 · oss", run: function() { window.location.href = "#idchecker"; } },
-        { group: "On this page", title: "Pomodoro Timer — Rust", hint: "PRJ-10 · oss", run: function() { window.location.href = "#pomodoro"; } },
-        { group: "On this page", title: "Altair — Crystal web framework", hint: "PRJ-11 · oss", run: function() { window.location.href = "#altair"; } }
-    ];
-    </script>
-    <script src="palette.js"></script>
+  </div>
+
+  <div class="sechead reveal" data-g="enterprise">
+    <h2 class="disp">Business &amp; enterprise</h2>
+    <span class="note">04 dossiers · PRJ-01–04</span>
+  </div>
+
+  <article class="dossier-block reveal" id="tawfikia" data-c="enterprise">
+    <div class="dossier">
+      <div class="head">
+        <h3>El Tawfikia Auto Parts Markets</h3>
+        <span class="badge b">PRJ-01 / ENTERPRISE</span>
+        <span class="badge b">2022</span>
+      </div>
+      <p>Comprehensive business management system for one of Egypt's automotive spare parts companies. Built to centralize <b>sales, inventory, and employee operations</b> under a single reliable platform running on a <b>secure internal network</b>.</p>
+      <div class="dcols">
+        <div class="dcol">
+          <h4>Scope</h4>
+          <ul>
+            <li>Sales management and transaction tracking</li>
+            <li>Inventory and warehouse management</li>
+            <li>Employee management and role control</li>
+            <li>Operational workflow tracking</li>
+            <li>Real-time monitoring via secure internal network</li>
+          </ul>
+        </div>
+        <div class="dcol v">
+          <h4>Responsibilities</h4>
+          <ul>
+            <li>System architecture and implementation</li>
+            <li>Database design and optimization</li>
+            <li>Internal networking infrastructure</li>
+            <li>Performance tuning and query optimization</li>
+            <li>Ongoing hardware maintenance and server administration</li>
+          </ul>
+        </div>
+      </div>
+      <div class="dfoot">
+        <span class="txt">Continuing to provide <b>hardware maintenance and server administration</b> services to this day.</span>
+      </div>
+    </div>
+  </article>
+
+  <article class="dossier-block reveal" id="gal" data-c="enterprise">
+    <div class="dossier">
+      <div class="head">
+        <h3>GAL Factory Supplies</h3>
+        <span class="badge b">PRJ-02 / ENTERPRISE</span>
+        <span class="badge b">2023</span>
+      </div>
+      <p>Cloud-based enterprise management platform for an industrial supplies company. Designed for <b>remote operations, multi-user access, and secure workflow monitoring</b> across distributed teams.</p>
+      <div class="dcols">
+        <div class="dcol">
+          <h4>Scope</h4>
+          <ul>
+            <li>Sales and inventory management</li>
+            <li>Employee management with access control</li>
+            <li>Secure workflow monitoring</li>
+            <li>Multi-user role-based access</li>
+            <li>Cloud deployment and remote operations</li>
+          </ul>
+        </div>
+        <div class="dcol v">
+          <h4>Responsibilities</h4>
+          <ul>
+            <li>Full-stack system development</li>
+            <li>Cloud infrastructure deployment</li>
+            <li>Server management and security hardening</li>
+            <li>Hardware maintenance</li>
+            <li>Operational workflow enforcement</li>
+          </ul>
+        </div>
+      </div>
+      <div class="dfoot">
+        <a class="btn btn-b" href="https://galimport.shop" target="_blank" rel="noopener">↗ galimport.shop</a>
+        <span class="txt">Continuing to maintain the company's <b>infrastructure and servers</b>.</span>
+      </div>
+    </div>
+  </article>
+
+  <article class="dossier-block reveal" id="pioneer" data-c="enterprise">
+    <div class="dossier">
+      <div class="head">
+        <h3>Pioneer General Supplies &amp; Contracting</h3>
+        <span class="badge b">PRJ-03 / ENTERPRISE</span>
+        <span class="badge b">2026</span>
+      </div>
+      <p>Integrated business management platform designed to <b>streamline company operations</b>, manage supplier and customer relationships, and improve workflow reliability across the organization.</p>
+      <div class="dcols">
+        <div class="dcol">
+          <h4>Scope</h4>
+          <ul>
+            <li>Sales management and invoicing</li>
+            <li>Customer relationship management</li>
+            <li>Supplier management</li>
+            <li>Employee management</li>
+            <li>Operational workflow control</li>
+            <li>Business process monitoring</li>
+          </ul>
+        </div>
+        <div class="dcol v">
+          <h4>Responsibilities</h4>
+          <ul>
+            <li>System architecture and database engineering</li>
+            <li>Server administration</li>
+            <li>Infrastructure maintenance</li>
+            <li>Security and operational management</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <article class="dossier-block reveal" id="elfath" data-c="enterprise">
+    <div class="dossier">
+      <div class="head">
+        <h3>El Fath Pharmacies Management System</h3>
+        <span class="badge a">LIVE</span>
+        <span class="badge b">PRJ-04 / ENTERPRISE</span>
+        <span class="badge b">2024</span>
+      </div>
+      <p>Comprehensive pharmacy management and operations platform for multi-branch pharmacy businesses with strict operational control, inventory accuracy, and customer retention. <b>Offline-first architecture keeps branches running through outages</b>, with cloud sync on reconnect.</p>
+      <div class="dcols">
+        <div class="dcol full">
+          <h4>Inventory &amp; pharmaceutical management</h4>
+          <ul>
+            <li>Real-time stock tracking with batch and lot management</li>
+            <li>Expiration date monitoring and automated alerts</li>
+            <li>Automatic stock replenishment notifications</li>
+            <li>Multi-branch inventory synchronization</li>
+            <li>Product movement tracking and audit history</li>
+            <li>Controlled medication handling workflows</li>
+          </ul>
+        </div>
+      </div>
+      <div class="dcols">
+        <div class="dcol">
+          <h4>Employee &amp; permissions</h4>
+          <ul>
+            <li>Granular role-based access control (RBAC)</li>
+            <li>Multi-level authorization system</li>
+            <li>Activity logging and operational auditing</li>
+            <li>Employee performance monitoring</li>
+            <li>Shift and responsibility management</li>
+          </ul>
+        </div>
+        <div class="dcol v">
+          <h4>CRM</h4>
+          <ul>
+            <li>Comprehensive customer management</li>
+            <li>Loyalty points and rewards program</li>
+            <li>Purchase history tracking and segmentation</li>
+            <li>Automated promotional and retention campaigns</li>
+          </ul>
+        </div>
+      </div>
+      <div class="dcols">
+        <div class="dcol">
+          <h4>Sales &amp; finance</h4>
+          <ul>
+            <li>Point-of-sale (POS) management</li>
+            <li>Automated invoicing and billing</li>
+            <li>Financial reporting and margin monitoring</li>
+            <li>Daily operational performance tracking</li>
+          </ul>
+        </div>
+        <div class="dcol v">
+          <h4>Architecture</h4>
+          <ul>
+            <li>Offline-first with local-first persistence</li>
+            <li>Secure cloud sync with conflict resolution</li>
+            <li>Distributed branch management</li>
+            <li>Fault-tolerant operational workflows</li>
+            <li>Real-time reporting</li>
+          </ul>
+        </div>
+      </div>
+      <div class="dcols">
+        <div class="dcol full">
+          <h4>Key achievements</h4>
+          <ul>
+            <li>Improved inventory accuracy, fewer stock errors</li>
+            <li>Strict operational controls and accountability</li>
+            <li>Higher retention via integrated loyalty</li>
+            <li>Uninterrupted operation without internet</li>
+            <li>Scalable infrastructure for new branches</li>
+          </ul>
+        </div>
+      </div>
+      <div class="dchips">
+        <span>Offline-First</span><span>Cloud Sync</span><span>RBAC</span><span>Multi-Branch</span><span>POS</span><span>Loyalty</span><span>Pharmacy</span>
+      </div>
+    </div>
+  </article>
+
+  <div class="sechead reveal" data-g="product">
+    <h2 class="disp">Products &amp; SaaS</h2>
+    <span class="note">03 dossiers · PRJ-05–07</span>
+  </div>
+
+  <article class="dossier-block reveal" id="rocket1" data-c="product">
+    <div class="dossier">
+      <div class="head">
+        <h3>Rocket System 1</h3>
+        <span class="badge b">PRJ-05 / PRODUCT</span>
+        <span class="badge b">2025</span>
+      </div>
+      <p>Lightweight sales and inventory management solution for retail stores and small warehouses. Built for <b>simplicity, reliability, and adoption</b> by businesses with limited technical experience.</p>
+      <div class="dcols">
+        <div class="dcol full">
+          <h4>Key features</h4>
+          <ul>
+            <li>Complete inventory and product tracking</li>
+            <li>Automated invoice calculations</li>
+            <li>Sales management and reporting</li>
+            <li>Simple, intuitive user experience</li>
+            <li>Beginner-friendly workflow</li>
+            <li>Secure local operation</li>
+          </ul>
+        </div>
+      </div>
+      <div class="dchips">
+        <span>Desktop</span><span>Local Database</span><span>Inventory</span><span>Invoicing</span>
+      </div>
+    </div>
+  </article>
+
+  <article class="dossier-block reveal" id="rocket2" data-c="product">
+    <div class="dossier">
+      <div class="head">
+        <h3>Rocket System 2</h3>
+        <span class="badge a">LIVE</span>
+        <span class="badge b">PRJ-06 / PRODUCT</span>
+        <span class="badge b">2026</span>
+      </div>
+      <p>Complete ERP platform for distributed business operations. <b>Offline-first with cloud sync</b>, multi-location warehouses, and a mobile companion app for remote monitoring.</p>
+      <div class="dcols">
+        <div class="dcol">
+          <h4>Core</h4>
+          <ul>
+            <li>Distributed warehouse management</li>
+            <li>Customer and supplier management</li>
+            <li>Employee management and roles</li>
+            <li>Operational workflow monitoring</li>
+            <li>Offline-first architecture</li>
+            <li>Cloud deployment and sync</li>
+            <li>Multi-location operations support</li>
+          </ul>
+        </div>
+        <div class="dcol v">
+          <h4>Additional</h4>
+          <ul>
+            <li>Mobile app for remote monitoring</li>
+            <li>Flexible deployment — local or cloud</li>
+            <li>Conflict-free data synchronization</li>
+          </ul>
+        </div>
+      </div>
+      <div class="dchips">
+        <span>ERP</span><span>Offline-First</span><span>Cloud Sync</span><span>Mobile App</span><span>Multi-Location</span>
+      </div>
+    </div>
+  </article>
+
+  <article class="dossier-block reveal" id="egyfy" data-c="product">
+    <div class="dossier">
+      <div class="head">
+        <h3>Egyfy</h3>
+        <span class="badge a">BETA</span>
+        <span class="badge b">PRJ-07 / SAAS</span>
+        <span class="badge b">2025 — PRESENT</span>
+      </div>
+      <p>High-performance <b>multi-tenant SaaS e-commerce platform</b> built for scalability, customization, and competitive pricing. Businesses launch fully branded stores with tenant isolation and subscription management.</p>
+      <div class="dcols">
+        <div class="dcol full">
+          <h4>Platform</h4>
+          <ul>
+            <li>Multi-tenant architecture with tenant isolation</li>
+            <li>High-performance infrastructure</li>
+            <li>E-commerce store builder</li>
+            <li>Extensive customization capabilities</li>
+            <li>SaaS subscription model</li>
+            <li>Production-grade scalability</li>
+          </ul>
+        </div>
+      </div>
+      <div class="dchips">
+        <a href="https://twins.egyfy.shop" target="_blank" rel="noopener">↗ twins.egyfy.shop</a>
+        <a href="https://omhassan.egyfy.shop" target="_blank" rel="noopener">↗ omhassan.egyfy.shop</a>
+        <a href="https://tm.egyfy.shop" target="_blank" rel="noopener">↗ tm.egyfy.shop</a>
+        <span>SaaS</span><span>Multi-Tenant</span><span>E-Commerce</span><span>Cloud</span><span>Scalable</span>
+      </div>
+      <div class="dfoot">
+        <span class="txt">Real customers onboarded during beta. Their feedback <b>directly shaped the product</b>. Preparing for official commercial launch.</span>
+      </div>
+    </div>
+  </article>
+
+  <div class="sechead reveal" data-g="oss">
+    <h2 class="disp">Open source</h2>
+    <span class="note">07 tools · Altair &amp; Marsad featured above</span>
+  </div>
+
+  <article class="dossier-block reveal" id="kpm" data-c="oss">
+    <div class="dossier">
+      <div class="head">
+        <h3>KPM — Kotlin Package Manager</h3>
+        <span class="badge b">PRJ-08 / OSS</span>
+      </div>
+      <p>Package management tool for the <b>JVM ecosystem</b>. Dependency discovery, repository search, installation, and Maven integration — an <b>npm-like workflow for Kotlin, Java, and Scala</b> developers.</p>
+      <div class="dcols">
+        <div class="dcol">
+          <h4>Capabilities</h4>
+          <ul>
+            <li>Interactive dependency discovery</li>
+            <li>Repository search and installation</li>
+            <li>Maven repository integration</li>
+            <li>Modern CLI experience</li>
+            <li>Package management automation</li>
+            <li>Kotlin, Java, and Scala support</li>
+          </ul>
+        </div>
+        <div class="dcol v">
+          <h4>Engineering</h4>
+          <ul>
+            <li>Compiler ecosystem understanding</li>
+            <li>Developer tooling architecture</li>
+            <li>CLI application design</li>
+            <li>Open-source engineering practices</li>
+          </ul>
+        </div>
+      </div>
+      <div class="dchips">
+        <span>Kotlin</span><span>JVM</span><span>CLI</span><span>Maven</span><span>Package Manager</span>
+      </div>
+      <div class="cmdline"><code>gh repo clone HMH-3080/kpm</code><button class="copybtn" type="button" data-copy="gh repo clone HMH-3080/kpm">COPY</button></div>
+      <div class="dfoot">
+        <a class="btn btn-b" href="https://github.com/HMH-3080/kpm" target="_blank" rel="noopener">↗ HMH-3080/kpm</a>
+      </div>
+    </div>
+  </article>
+
+  <article class="dossier-block reveal" id="idchecker" data-c="oss">
+    <div class="dossier">
+      <div class="head">
+        <h3>Egyptian National ID Checker</h3>
+        <span class="badge b">PRJ-09 / OSS</span>
+      </div>
+      <p>Library for <b>validating and analyzing Egyptian national ID numbers</b>. High-performance validation, data extraction, and demographic analysis through a developer-friendly API.</p>
+      <div class="dcols">
+        <div class="dcol">
+          <h4>Features</h4>
+          <ul>
+            <li>National ID validation and verification</li>
+            <li>Demographic data extraction</li>
+            <li>High-performance processing</li>
+            <li>Developer-friendly API design</li>
+          </ul>
+        </div>
+        <div class="dcol v">
+          <h4>Engineering</h4>
+          <ul>
+            <li>Localized software engineering</li>
+            <li>Data validation architecture</li>
+            <li>Library and package design</li>
+          </ul>
+        </div>
+      </div>
+      <div class="dchips">
+        <span>Library</span><span>Validation</span><span>API Design</span>
+      </div>
+      <div class="cmdline"><code>gh repo clone HMH-3080/egyptian-national-id-checker</code><button class="copybtn" type="button" data-copy="gh repo clone HMH-3080/egyptian-national-id-checker">COPY</button></div>
+      <div class="dfoot">
+        <a class="btn btn-b" href="https://github.com/HMH-3080/egyptian-national-id-checker" target="_blank" rel="noopener">↗ egyptian-national-id-checker</a>
+      </div>
+    </div>
+  </article>
+
+  <article class="dossier-block reveal" id="pomodoro" data-c="oss">
+    <div class="dossier">
+      <div class="head">
+        <h3>Pomodoro Timer</h3>
+        <span class="badge b">PRJ-10 / OSS</span>
+      </div>
+      <p>Lightweight <b>native productivity app for Windows</b>. Built with Rust and egui for a minimal, fast desktop experience with tray integration, native notifications, and optional break-time screen blocking.</p>
+      <div class="dcols">
+        <div class="dcol">
+          <h4>Features</h4>
+          <ul>
+            <li>Native desktop experience</li>
+            <li>Pomodoro workflow management</li>
+            <li>Focus and break cycle tracking</li>
+            <li>System tray integration</li>
+            <li>Native Windows toast notifications</li>
+            <li>Optional break-time screen blocking</li>
+            <li>Minimal resource consumption</li>
+          </ul>
+        </div>
+        <div class="dcol v">
+          <h4>Technical</h4>
+          <ul>
+            <li>Rust systems programming</li>
+            <li>Native desktop application architecture</li>
+            <li>Event-driven UI with egui/eframe</li>
+            <li>Cross-platform UI framework experience</li>
+          </ul>
+        </div>
+      </div>
+      <div class="dchips">
+        <span>Rust</span><span>egui</span><span>Native Desktop</span><span>Windows</span><span>Systems Programming</span>
+      </div>
+      <div class="cmdline"><code>gh repo clone HMH-3080/Pomodoro_Timer</code><button class="copybtn" type="button" data-copy="gh repo clone HMH-3080/Pomodoro_Timer">COPY</button></div>
+      <div class="dfoot">
+        <a class="btn btn-b" href="https://github.com/HMH-3080/Pomodoro_Timer" target="_blank" rel="noopener">↗ Pomodoro_Timer</a>
+      </div>
+    </div>
+  </article>
+
+  <article class="dossier-block reveal" id="asn" data-c="oss">
+    <div class="dossier">
+      <div class="head">
+        <h3>ASN — Open Social Network</h3>
+        <span class="badge b">PRJ-13 / OSS</span>
+        <span class="badge b">2026 — PRESENT</span>
+      </div>
+      <p>Open-source social networking platform focused on <b>communities, messaging, and real-time communication</b>. Built with the DevHustlers community (AGPL-3.0) as an <b>Elixir-first monorepo</b> — independent services, shared packages, typed contracts, and event-driven communication backed by PostgreSQL. <b>Leading contributor by commit count.</b></p>
+      <div class="dcols">
+        <div class="dcol">
+          <h4>Platform</h4>
+          <ul>
+            <li>Communities, messaging, and real-time communication as first-class domains</li>
+            <li>Service-oriented monorepo — apps, services, packages, contracts, infrastructure</li>
+            <li>Elixir backend (dominant language) + TypeScript web client under Bun</li>
+            <li>Event broker for cross-service communication</li>
+            <li>PostgreSQL persistence with disposable-DB test isolation</li>
+          </ul>
+        </div>
+        <div class="dcol v">
+          <h4>Engineering &amp; governance</h4>
+          <ul>
+            <li>Contract validation and client-generation drift checks</li>
+            <li>Governance gate CI — every commit needs a valid changelog record; doc links verified</li>
+            <li>Service gates — format, compile with warnings-as-errors, tests</li>
+            <li>CODEOWNERS per service, app, and contract path</li>
+            <li>Security policy with review, contract, and verification PR checklists</li>
+          </ul>
+        </div>
+      </div>
+      <div class="dchips">
+        <span>Elixir</span><span>TypeScript</span><span>Bun</span><span>PostgreSQL</span><span>Event Broker</span><span>Monorepo</span><span>AGPL-3.0</span>
+      </div>
+      <div class="cmdline"><code>gh repo clone DevHustlers-Community/ASN</code><button class="copybtn" type="button" data-copy="gh repo clone DevHustlers-Community/ASN">COPY</button></div>
+      <div class="dfoot">
+        <a class="btn btn-b" href="https://github.com/DevHustlers-Community/ASN" target="_blank" rel="noopener">↗ DevHustlers-Community/ASN</a>
+      </div>
+    </div>
+  </article>
+
+  <article class="dossier-block reveal" id="egyfy-parser" data-c="oss">
+    <div class="dossier">
+      <div class="head">
+        <h3>EgyFy Parser — Local OCR Workspace</h3>
+        <span class="badge b">PRJ-14 / OSS</span>
+        <span class="badge b">2026</span>
+      </div>
+      <p>Local OCR workspace for PDFs and scanned images built on Indra OCR — reads documents page by page and exports <b>clean Markdown, text, JSON, and tables</b>. Everything runs on <b>the user's machine; documents never leave it</b>. Zero-framework Python backend and a static JS client, published under the Arab-Open-Source organization (Apache-2.0).</p>
+      <div class="dcols">
+        <div class="dcol">
+          <h4>What it does</h4>
+          <ul>
+            <li>Reads PDF, PNG, JPG, TIFF, WebP — auto-selects text layer, OCR, or a mix per page</li>
+            <li>Per-page review: line confidence, layout blocks, reading-order overlay, raw JSON</li>
+            <li>Exports Markdown, text, lines CSV, JSON, print-ready HTML, tables &amp; complete ZIP</li>
+            <li>Clean-output mode strips layout markers and stray table pipes; LaTeX math as equations</li>
+          </ul>
+        </div>
+        <div class="dcol v">
+          <h4>Engineering</h4>
+          <ul>
+            <li>Single Python process — no framework, no database, no build step</li>
+            <li>Page cache shared by previews and exports: a page is never parsed twice</li>
+            <li>HTML/Markdown sanitization and table extraction covered by unit tests</li>
+            <li>Pinned OCR engine (Indra 0.3.2) with an offline --model-dir workflow</li>
+          </ul>
+        </div>
+      </div>
+      <div class="dchips">
+        <span>Python</span><span>Indra OCR</span><span>ONNX Runtime</span><span>OCR</span><span>PDF</span><span>Apache-2.0</span>
+      </div>
+      <div class="cmdline"><code>gh repo clone Arab-Open-Source/egyfy-parser</code><button class="copybtn" type="button" data-copy="gh repo clone Arab-Open-Source/egyfy-parser">COPY</button></div>
+      <div class="dfoot">
+        <a class="btn btn-b" href="https://github.com/Arab-Open-Source/egyfy-parser" target="_blank" rel="noopener">↗ Arab-Open-Source/egyfy-parser</a>
+      </div>
+    </div>
+  </article>
+
+  <div class="sechead reveal" data-g="upstream">
+    <h2 class="disp">Upstream — merged contributions</h2>
+    <span class="note">01 dossier · 8 PRs</span>
+  </div>
+
+  <article class="dossier-block reveal" id="upstream" data-c="upstream">
+    <div class="dossier">
+      <div class="head">
+        <h3>Merged Upstream Contributions</h3>
+        <span class="badge a">8 PRS MERGED</span>
+        <span class="badge b">PRJ-15 / UPSTREAM</span>
+        <span class="badge b">2026</span>
+      </div>
+      <p>Bug fixes and features merged into other open-source projects — from the <b>Elixir compiler's type checker</b> to Ktor's CORS plugin, the <b>LiveCodes ecosystem</b>, Rust and Crystal frameworks, and community repositories. Each contribution shipped end to end: <b>reproduce, patch, test, open the PR, get it merged</b>.</p>
+      <div class="dcols">
+        <div class="dcol">
+          <h4>Compiler &amp; frameworks</h4>
+          <ul>
+            <li>Elixir #15770 — fixed a type-checker crash on non-returning <code>for ... into:</code> expressions</li>
+            <li>Ktor #5633 — fixed default-methods filtering in the CORS plugin</li>
+            <li>LiveCodes/browser-elixir #1 — added the single-threaded AtomVM build toolchain</li>
+            <li>Loco #1785 — added the Arabic README translation</li>
+          </ul>
+        </div>
+        <div class="dcol v">
+          <h4>Community &amp; own orgs</h4>
+          <ul>
+            <li>Racore #2 — LRU eviction for inMemoryIndexes, fixing a memory leak</li>
+            <li>404-coffee-backend #1 — comprehensive test suite for core functionality and user management</li>
+            <li>Altair #22 — automatic development hot-reload watcher</li>
+            <li>Altair #23 — gcry 0.38.0 as the official collector + fresh four-arm benchmark session</li>
+          </ul>
+        </div>
+      </div>
+      <div class="dchips">
+        <span>Elixir</span><span>Kotlin</span><span>Ktor</span><span>LiveCodes</span><span>AtomVM</span><span>Rust</span><span>Crystal</span><span>Upstream</span>
+      </div>
+      <div class="dchips">
+        <a href="https://github.com/elixir-lang/elixir/pull/15770" target="_blank" rel="noopener">↗ elixir #15770</a>
+        <a href="https://github.com/ktorio/ktor/pull/5633" target="_blank" rel="noopener">↗ ktor #5633</a>
+        <a href="https://github.com/live-codes/browser-elixir/pull/1" target="_blank" rel="noopener">↗ browser-elixir #1</a>
+        <a href="https://github.com/loco-rs/loco/pull/1785" target="_blank" rel="noopener">↗ loco #1785</a>
+        <a href="https://github.com/loayabdalslam/Racore/pull/2" target="_blank" rel="noopener">↗ Racore #2</a>
+        <a href="https://github.com/ahmrf125ertg/404-coffee-backend/pull/1" target="_blank" rel="noopener">↗ 404-coffee-backend #1</a>
+        <a href="https://github.com/Arab-Open-Source/Altair/pull/22" target="_blank" rel="noopener">↗ Altair #22</a>
+        <a href="https://github.com/Arab-Open-Source/Altair/pull/23" target="_blank" rel="noopener">↗ Altair #23</a>
+      </div>
+    </div>
+  </article>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-links">
+      <a href="cv.html">CV ↓</a>
+      <a href="about.html">About →</a>
+      <a href="articles.html">Writing →</a>
+      <a href="https://github.com/HMH-3080" target="_blank" rel="noopener">GitHub ↗</a>
+      <a href="https://wa.me/201104391245" target="_blank" rel="noopener">WhatsApp ↗</a>
+      <a href="mailto:hasanmo3080vr@gmail.com">E-mail ↗</a>
+    </div>
+    <div class="foot-fine">
+      <span>© 2026 Hassan Mohamed — ~/work</span>
+      <span>Set in Space Grotesk + Inter · data in JetBrains Mono</span>
+      <span>One signal color · motion respects reduced-motion</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var btns = document.querySelectorAll('#filters button');
+  btns.forEach(function(b){ b.addEventListener('click', function(){
+    btns.forEach(function(x){ x.classList.remove('on'); }); b.classList.add('on');
+    var f = b.dataset.f;
+    document.querySelectorAll('#cards .card').forEach(function(r){ r.style.display = (f === 'all' || r.dataset.c === f) ? '' : 'none'; });
+    document.querySelectorAll('.dossier-block').forEach(function(r){ r.style.display = (f === 'all' || r.dataset.c === f) ? '' : 'none'; });
+    document.querySelectorAll('.sechead[data-g]').forEach(function(s){ s.style.display = (f === 'all') ? '' : 'none'; });
+    document.querySelectorAll('.beambox').forEach(function(x){ x.style.display = (f === 'all' || f === 'oss') ? '' : 'none'; });
+  }); });
+})();
+</script>
+
+<div class="palette-backdrop" id="pal-bg" hidden>
+  <div class="palette" role="dialog" aria-modal="true" aria-label="Command menu">
+    <div class="pal-input-row"><span class="pal-prompt">›</span><input id="pal-input" placeholder="Type a command or search…" autocomplete="off" spellcheck="false" aria-label="Command menu"></div>
+    <div class="pal-list" id="pal-list" role="listbox"></div>
+    <div class="pal-foot"><span><kbd>↑↓</kbd> navigate</span><span><kbd>↵</kbd> run</span><span><kbd>esc</kbd> close</span></div>
+  </div>
+</div>
+<script>
+window.HMH_INDEX = [
+    { group: "On this page", title: "El Tawfikia Auto Parts Markets", hint: "PRJ-01", run: function() { window.location.href = "#tawfikia"; } },
+    { group: "On this page", title: "GAL Factory Supplies", hint: "PRJ-02", run: function() { window.location.href = "#gal"; } },
+    { group: "On this page", title: "Pioneer General Supplies", hint: "PRJ-03", run: function() { window.location.href = "#pioneer"; } },
+    { group: "On this page", title: "El Fath Pharmacies", hint: "PRJ-04", run: function() { window.location.href = "#elfath"; } },
+    { group: "On this page", title: "Rocket System 1", hint: "PRJ-05", run: function() { window.location.href = "#rocket1"; } },
+    { group: "On this page", title: "Rocket System 2", hint: "PRJ-06", run: function() { window.location.href = "#rocket2"; } },
+    { group: "On this page", title: "Egyfy — SaaS", hint: "PRJ-07 · beta", run: function() { window.location.href = "#egyfy"; } },
+    { group: "On this page", title: "KPM — Kotlin Package Manager", hint: "PRJ-08 · oss", run: function() { window.location.href = "#kpm"; } },
+    { group: "On this page", title: "Egyptian National ID Checker", hint: "PRJ-09 · oss", run: function() { window.location.href = "#idchecker"; } },
+    { group: "On this page", title: "Pomodoro Timer — Rust", hint: "PRJ-10 · oss", run: function() { window.location.href = "#pomodoro"; } },
+    { group: "On this page", title: "Altair — Crystal web framework", hint: "PRJ-11 · featured", run: function() { window.location.href = "#altair"; } },
+    { group: "On this page", title: "Marsad — VPS fleet management", hint: "PRJ-12 · featured", run: function() { window.location.href = "#featured"; } },
+    { group: "On this page", title: "ASN — open social network", hint: "PRJ-13 · oss", run: function() { window.location.href = "#asn"; } },
+    { group: "On this page", title: "EgyFy Parser — local OCR", hint: "PRJ-14 · oss", run: function() { window.location.href = "#egyfy-parser"; } },
+    { group: "On this page", title: "Merged upstream contributions", hint: "PRJ-15 · 8 PRs", run: function() { window.location.href = "#upstream"; } }
+];
+</script>
+<script src="palette.js"></script>
+<script src="motion.js"></script>
 </body>
 </html>

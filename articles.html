@@ -1,59 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Technical writing on backends, Kotlin Multiplatform, and SQLite by Hassan Mohamed.">
-    <title>Articles — Hassan Mohamed</title>
-    <link rel="stylesheet" href="style.css">
-    <script>
-    (function(){try{var t=localStorage.getItem('hmh-theme');if(!t){t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.dataset.theme=t;}catch(e){}})();
-    </script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Technical writing on backends, Kotlin Multiplatform, and SQLite by Hassan Mohamed.">
+<title>Articles — Hassan Mohamed</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
-    <input type="checkbox" id="menu-toggle" class="menu-toggle">
-    <header>
-        <div class="header-inner">
-            <a href="about.html" class="brand"><span class="brand-mark">HM</span><span class="brand-name">Hassan Mohamed <span>/ sys.builder</span></span></a>
-            <label for="menu-toggle" class="menu-btn" aria-label="Menu"><span></span><span></span><span></span></label>
-            <nav>
-                <a href="about.html">About</a>
-                <a href="projects.html">Projects</a>
-                <a href="articles.html" class="active">Articles</a>
-                <button class="cmdbtn" id="cmdk-btn" type="button" title="Command menu (Ctrl/⌘ K)">⌘K</button>
-                <button class="theme-btn" id="theme-btn" type="button">MODE: LIGHT</button>
-            </nav>
-        </div>
-    </header>
+<div class="field" aria-hidden="true"></div>
+<div id="spot" aria-hidden="true"></div>
+<div id="beam" aria-hidden="true"></div>
 
-    <div class="container">
-        <div class="page-header">
-            <span class="label">Writing</span>
-            <h1>Articles</h1>
-            <div class="path">~/articles — engineering notes, no filler</div>
-        </div>
-        <div class="articles-table" id="articles-grid">
-            <div class="loading-msg" style="padding:1.5rem">Loading articles…</div>
-        </div>
-        <div class="pagination" id="pagination"></div>
-        <div class="article-view" id="article-view">
-            <span class="back" id="back-btn">← Back to articles</span>
-            <div class="article-header" id="article-header"></div>
-            <div class="article-body" id="article-content"></div>
-        </div>
+<div class="topbar">
+  <div class="wrap-in">
+    <a class="brand" href="about.html"><i>HM</i><span>Hassan Mohamed</span></a>
+    <nav>
+      <a href="about.html">About</a>
+      <a href="projects.html">Work</a>
+      <a href="articles.html" class="on">Writing</a>
+      <a href="cv.html">CV</a>
+      <button class="cmdbtn" id="cmdk-btn" type="button" title="Command menu (Ctrl/⌘ K)">⌘K</button>
+    </nav>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="hero page-hero">
+    <span class="over">Writing · engineering notes · no filler</span>
+    <h1>
+      <span class="w" style="--w:0">Notes</span>
+      <span class="w" style="--w:1">in</span>
+      <span class="w sig" style="--w:2">mono.</span>
+    </h1>
+    <p class="bio reveal" style="--d:.55s">Backends, <b>Kotlin Multiplatform</b>, and <b>SQLite</b> — written the way they run: <b>short on theory, heavy on what actually happened</b>.</p>
+  </header>
+
+  <div class="articles-table" id="articles-grid">
+    <div class="loading-msg">Loading articles…</div>
+  </div>
+  <div class="pagination" id="pagination"></div>
+  <div class="article-view" id="article-view">
+    <span class="back" id="back-btn">← Back to articles</span>
+    <div class="article-header" id="article-header"></div>
+    <div class="article-body" id="article-content"></div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-links">
+      <a href="cv.html">CV ↓</a>
+      <a href="about.html">About →</a>
+      <a href="projects.html">Work →</a>
+      <a href="https://github.com/HMH-3080" target="_blank" rel="noopener">GitHub ↗</a>
+      <a href="https://wa.me/201104391245" target="_blank" rel="noopener">WhatsApp ↗</a>
+      <a href="mailto:hasanmo3080vr@gmail.com">E-mail ↗</a>
     </div>
+    <div class="foot-fine">
+      <span>© 2026 Hassan Mohamed — ~/writing</span>
+      <span>Set in Space Grotesk + Inter · data in JetBrains Mono</span>
+      <span>One signal color · motion respects reduced-motion</span>
+    </div>
+  </div>
+</footer>
 
-    <footer>
-        <div class="footer-inner">
-            <span>© 2026 HASSAN MOHAMED</span>
-            <span><a href="about.html" style="color:inherit">~/about</a> · <a href="projects.html" style="color:inherit">~/projects</a></span>
-        </div>
-    </footer>
-
-    <script>
+<script>
     (function() {
         var grid = document.getElementById("articles-grid");
         var view = document.getElementById("article-view");
@@ -69,9 +85,6 @@
 
         function esc(s) {
             return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
-        }
-        function formatDate(d) {
-            return new Date(d).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "2-digit" }).toUpperCase();
         }
         function extractTitle(md) {
             var match = md.match(/^#\s+(.+)/m);
@@ -118,8 +131,7 @@
             for (var i = 0; i < pageArticles.length; i++) {
                 var a = pageArticles[i];
                 var idx = start + i;
-                html += '<div class="article-row" data-idx="' + idx + '" role="link" tabindex="0">';
-                html += '<span class="date">' + formatDate(a.date) + '</span>';
+                html += '<div class="article-row reveal" style="--d:' + ((i % PER_PAGE) * 0.04).toFixed(2) + 's" data-idx="' + idx + '" role="link" tabindex="0">';
                 html += '<div><h3>' + esc(a.title) + '</h3>';
                 html += '<p>' + esc(getExcerpt(a.content)) + '…</p>';
                 html += '<div class="tags">';
@@ -138,6 +150,7 @@
                     el.addEventListener("keydown", function(e) { if (e.key === "Enter") openArticle(parseInt(el.getAttribute("data-idx"))); });
                 })(cards[c]);
             }
+            if (window.HMH_MOTION) window.HMH_MOTION.refresh();
             renderPagination();
         }
         function renderPagination() {
@@ -162,12 +175,13 @@
         }
         function openArticle(i) {
             var a = articles[i];
-            headerEl.innerHTML = '<h1>' + esc(a.title) + '</h1><div class="article-meta"><span>' + formatDate(a.date) + '</span><span>' + esc(a.tags.join(" / ")) + '</span><span>' + a.mins + ' min read</span></div>';
+            headerEl.innerHTML = '<h1>' + esc(a.title) + '</h1><div class="article-meta"><span>' + esc(a.tags.join(" / ")) + '</span><span>' + a.mins + ' min read</span></div>';
             contentEl.innerHTML = marked.parse(a.content);
             highlightCodeblocks(contentEl);
             grid.style.display = "none";
             paginationEl.style.display = "none";
             view.classList.add("active");
+            if (window.HMH_MOTION) window.HMH_MOTION.refresh();
             window.scrollTo({ top: 0, behavior: "smooth" });
         }
         function showGrid() {
@@ -207,47 +221,34 @@
                     if (deepIdx >= 0) openArticle(deepIdx);
                 } catch (e) {}
             } catch (e) {
-                grid.innerHTML = '<div class="loading-msg" style="padding:1.5rem">Failed to load articles. Use a local server or deploy to GitHub Pages.</div>';
+                grid.innerHTML = '<div class="loading-msg">Failed to load articles. Use a local server or deploy to GitHub Pages.</div>';
             }
         }
         loadArticles();
     })();
-    </script>
+</script>
 
-    <script>
-    (function() {
-        var btn = document.getElementById("theme-btn");
-        function label() { btn.textContent = document.documentElement.dataset.theme === "dark" ? "MODE: DARK" : "MODE: LIGHT"; }
-        btn.addEventListener("click", function() {
-            var next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
-            document.documentElement.dataset.theme = next;
-            try { localStorage.setItem("hmh-theme", next); } catch (e) {}
-            label();
-        });
-        label();
-    })();
-    </script>
-
-    <div class="palette-backdrop" id="pal-bg" hidden>
-        <div class="palette" role="dialog" aria-modal="true" aria-label="Command menu">
-            <div class="pal-input-row"><span class="pal-prompt">›</span><input id="pal-input" placeholder="Type a command or search…" autocomplete="off" spellcheck="false" aria-label="Command menu"></div>
-            <div class="pal-list" id="pal-list" role="listbox"></div>
-            <div class="pal-foot"><span><kbd>↑↓</kbd> navigate</span><span><kbd>↵</kbd> run</span><span><kbd>esc</kbd> close</span></div>
-        </div>
-    </div>
-    <script>
-    window.HMH_INDEX = [
-        { group: "Articles", title: "Backpressure: when the chef outruns the waiter", hint: "2026-09-03", run: function() { window.location.href = "articles.html?f=backpressure-fast-producer-slow-consumer.md"; } },
-        { group: "Articles", title: "The BEAM memory model: isolation instead of sharing", hint: "2026-09-02", run: function() { window.location.href = "articles.html?f=beam-memory-model-isolation.md"; } },
-        { group: "Articles", title: "Why the BEAM is different for distributed systems", hint: "2026-09-01", run: function() { window.location.href = "articles.html?f=beam-distributed-systems.md"; } },
-        { group: "Articles", title: "Why the BEAM VM is special", hint: "2026-08-31", run: function() { window.location.href = "articles.html?f=why-the-beam-vm-is-special.md"; } },
-        { group: "Articles", title: "WebSockets are not just faster HTTP", hint: "2026-08-30", run: function() { window.location.href = "articles.html?f=websockets-are-not-faster-http.md"; } },
-        { group: "Articles", title: "Elixir processes are not threads", hint: "2026-08-29", run: function() { window.location.href = "articles.html?f=elixir-processes-are-not-threads.md"; } },
-        { group: "Articles", title: "SQLite concurrent writes & MVCC with Turso", hint: "2026-07-02", run: function() { window.location.href = "articles.html?f=sqlite-concurrent-writes-mvcc-turso.md"; } },
-        { group: "Articles", title: "Kotlin Multiplatform in production", hint: "2026-06-28", run: function() { window.location.href = "articles.html?f=kotlin-multiplatform-production.md"; } },
-        { group: "Articles", title: "Building reliable backend systems", hint: "2026-06-15", run: function() { window.location.href = "articles.html?f=building-reliable-backends.md"; } }
-    ];
-    </script>
-    <script src="palette.js"></script>
+<div class="palette-backdrop" id="pal-bg" hidden>
+  <div class="palette" role="dialog" aria-modal="true" aria-label="Command menu">
+    <div class="pal-input-row"><span class="pal-prompt">›</span><input id="pal-input" placeholder="Type a command or search…" autocomplete="off" spellcheck="false" aria-label="Command menu"></div>
+    <div class="pal-list" id="pal-list" role="listbox"></div>
+    <div class="pal-foot"><span><kbd>↑↓</kbd> navigate</span><span><kbd>↵</kbd> run</span><span><kbd>esc</kbd> close</span></div>
+  </div>
+</div>
+<script>
+window.HMH_INDEX = [
+    { group: "Writing", title: "Backpressure: when the chef outruns the waiter", run: function() { window.location.href = "articles.html?f=backpressure-fast-producer-slow-consumer.md"; } },
+    { group: "Writing", title: "The BEAM memory model: isolation instead of sharing", run: function() { window.location.href = "articles.html?f=beam-memory-model-isolation.md"; } },
+    { group: "Writing", title: "Why the BEAM is different for distributed systems", run: function() { window.location.href = "articles.html?f=beam-distributed-systems.md"; } },
+    { group: "Writing", title: "Why the BEAM VM is special", run: function() { window.location.href = "articles.html?f=why-the-beam-vm-is-special.md"; } },
+    { group: "Writing", title: "WebSockets are not just faster HTTP", run: function() { window.location.href = "articles.html?f=websockets-are-not-faster-http.md"; } },
+    { group: "Writing", title: "Elixir processes are not threads", run: function() { window.location.href = "articles.html?f=elixir-processes-are-not-threads.md"; } },
+    { group: "Writing", title: "SQLite concurrent writes & MVCC with Turso", run: function() { window.location.href = "articles.html?f=sqlite-concurrent-writes-mvcc-turso.md"; } },
+    { group: "Writing", title: "Kotlin Multiplatform in production", run: function() { window.location.href = "articles.html?f=kotlin-multiplatform-production.md"; } },
+    { group: "Writing", title: "Building reliable backend systems", run: function() { window.location.href = "articles.html?f=building-reliable-backends.md"; } }
+];
+</script>
+<script src="palette.js"></script>
+<script src="motion.js"></script>
 </body>
 </html>

@@ -9,13 +9,16 @@ Live at **https://hmh-3080.github.io/HMH/** — deployed by the
 
 | File | What |
 |---|---|
-| `about.html` | Profile, ship log (changelog), stack, selected work, contact |
-| `projects.html` | 11 systems: 4 enterprise, 3 products/SaaS, 4 open source — filterable index + dossiers |
+| `about.html` | Profile, status board, stats tiles, the 15-card work index with filters, article index |
+| `projects.html` | Work dossiers: 15 cards + ray-wrapped featured builds (Altair, Marsad) + full dossier room — filterable |
 | `articles.html` | 9 engineering notes, paginated reader with syntax highlighting |
+| `cv.html` | Master CV — prints to A4 vector PDF (`build-cv.sh` or the in-page button) |
 | `index.html` | Redirects to `about.html` |
 
-Shared assets: `style.css` (single design system, light + dark via `data-theme`), `palette.js`
-(`⌘K` command palette + copy buttons, fed per-page by `window.HMH_INDEX`), `logo.png`.
+Shared assets: `style.css` (single design system, dark-only), `motion.js`
+(kinetic runtime: scroll beam, pointer spotlight, reveals, count-ups, card tilt),
+`palette.js` (`⌘K` command palette + copy buttons, fed per-page by `window.HMH_INDEX`),
+`logo.png`.
 
 ## Articles
 
@@ -33,8 +36,7 @@ Titles are taken from the first `#` heading; reading time is computed automatica
 
 Tokens and rules live in [`DESIGN.md`](DESIGN.md) (lint with
 `npx -y @google/design.md lint DESIGN.md`). Monochrome + one signal accent,
-Inter + JetBrains Mono, hairline structure, no gradients. Throwaway explorations
-live in `sketches/` and are not part of the site.
+Inter + JetBrains Mono, hairline structure, no gradients, dark-only.
 
 ## Local preview
 

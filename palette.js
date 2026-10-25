@@ -39,24 +39,14 @@
       return text;
     };
   }
-  function theme() {
-    var h = document.documentElement;
-    var next = h.dataset.theme === "dark" ? "light" : "dark";
-    h.dataset.theme = next;
-    try { localStorage.setItem("hmh-theme", next); } catch (e) {}
-    var tb = document.getElementById("theme-btn");
-    if (tb) tb.textContent = next === "dark" ? "MODE: DARK" : "MODE: LIGHT";
-    return "Theme: " + next;
-  }
-
   var ACTIONS = [
-    { group: "Actions", title: "Toggle color theme", hint: "theme", run: theme },
     { group: "Actions", title: "Copy email address", hint: EMAIL, run: copy(EMAIL) },
     { group: "Actions", title: "Open GitHub profile", hint: "HMH-3080", run: open(GITHUB) },
     { group: "Actions", title: "Open X profile", hint: "@mohamed_ha31364", run: open(X_PROFILE) },
     { group: "Actions", title: "Chat on WhatsApp", hint: "0110 439 1245", run: open(WHATSAPP) },
     { group: "Go to", title: "About — profile & status", hint: "g a", run: go("about.html") },
-    { group: "Go to", title: "Projects — 11 systems", hint: "g p", run: go("projects.html") },
+    { group: "Go to", title: "CV — print or save as PDF", hint: "g c", run: go("cv.html") },
+    { group: "Go to", title: "Projects — 15 systems", hint: "g p", run: go("projects.html") },
     { group: "Go to", title: "Articles — engineering notes", hint: "g r", run: go("articles.html") }
   ];
 
@@ -76,7 +66,7 @@
     });
     if (sel >= visible.length) sel = 0;
     if (!visible.length) {
-      list.innerHTML = '<div class="pal-empty">No match — try “projects”, “theme”, “email”…</div>';
+      list.innerHTML = '<div class="pal-empty">No match — try “projects”, “email”…</div>';
       return;
     }
     var html = "";
