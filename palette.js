@@ -28,6 +28,7 @@
   /* ── palette ── */
   var EMAIL = "hasanmo3080vr@gmail.com";
   var GITHUB = "https://github.com/HMH-3080";
+  var LINKEDIN = "https://www.linkedin.com/in/hassan-mohamed-81a187289";
   var X_PROFILE = "https://x.com/mohamed_ha31364";
   var WHATSAPP = "https://wa.me/201104391245";
 
@@ -42,6 +43,7 @@
   var ACTIONS = [
     { group: "Actions", title: "Copy email address", hint: EMAIL, run: copy(EMAIL) },
     { group: "Actions", title: "Open GitHub profile", hint: "HMH-3080", run: open(GITHUB) },
+    { group: "Actions", title: "Open LinkedIn profile", hint: "in/hassan-mohamed", run: open(LINKEDIN) },
     { group: "Actions", title: "Open X profile", hint: "@mohamed_ha31364", run: open(X_PROFILE) },
     { group: "Actions", title: "Chat on WhatsApp", hint: "0110 439 1245", run: open(WHATSAPP) },
     { group: "Go to", title: "About — profile & status", hint: "g a", run: go("about.html") },
