@@ -28,7 +28,7 @@
 
 <div class="wrap">
   <header class="hero page-hero">
-    <span class="over">Selected work · 18 systems · filter, then read</span>
+    <span class="over">Selected work · 19 systems · filter, then read</span>
     <h1>
       <span class="w" style="--w:0">Every</span>
       <span class="w" style="--w:1">system,</span>
@@ -38,8 +38,8 @@
   </header>
 
   <div class="filters" id="filters">
-    <button data-f="all" class="on">All · 18</button>
-    <button data-f="enterprise">Enterprise · 4</button>
+    <button data-f="all" class="on">All · 19</button>
+    <button data-f="enterprise">Enterprise · 5</button>
     <button data-f="product">Products &amp; SaaS · 3</button>
     <button data-f="oss">Open source · 10</button>
     <button data-f="upstream">Upstream · 1</button>
@@ -69,6 +69,12 @@
       <h3>El Fath Pharmacies</h3>
       <p>Offline-first multi-branch POS + loyalty — branches keep selling through outages.</p>
       <div class="chips"><span>offline-first</span><span>RBAC</span></div>
+    </a>
+    <a class="card reveal" data-c="enterprise" href="#sifr" style="--d:.18s">
+      <div class="chead"><span class="cat">Client</span><span class="yr">2026</span></div>
+      <h3>sifr — studio marketing site</h3>
+      <p>Static Astro landing page with an enhanced WebGL hero and EN/AR support, built for an engineering studio.</p>
+      <div class="chips"><span>Astro</span><span>three.js</span></div>
     </a>
     <a class="card reveal" data-c="product" href="#rocket1" style="--d:.02s">
       <div class="chead"><span class="cat">Product</span><span class="yr">2025</span></div>
@@ -246,7 +252,7 @@
 
   <div class="sechead reveal" data-g="enterprise">
     <h2 class="disp">Business &amp; enterprise</h2>
-    <span class="note">04 dossiers · PRJ-01–04</span>
+    <span class="note">05 dossiers · PRJ-01–04, PRJ-19</span>
   </div>
 
   <article class="dossier-block reveal" id="tawfikia" data-c="enterprise">
@@ -433,6 +439,46 @@
       </div>
       <div class="dchips">
         <span>Offline-First</span><span>Cloud Sync</span><span>RBAC</span><span>Multi-Branch</span><span>POS</span><span>Loyalty</span><span>Pharmacy</span>
+      </div>
+    </div>
+  </article>
+
+  <article class="dossier-block reveal" id="sifr" data-c="enterprise">
+    <div class="dossier">
+      <div class="head">
+        <h3>sifr — marketing site for an engineering studio</h3>
+        <span class="badge b">PRJ-19 / CLIENT</span>
+        <span class="badge b">2026</span>
+      </div>
+      <p>A <b>commercial landing page</b> for an independent engineering studio, rebuilt as a static Astro site from the original single-file HTML design. The hero centres on an <b>enhanced three.js WebGL scene</b> that degrades gracefully to CSS.</p>
+      <div class="dcols">
+        <div class="dcol">
+          <h4>Site</h4>
+          <ul>
+            <li>Static Astro 7 output — no client UI framework, strict TypeScript and plain CSS design tokens</li>
+            <li>Component-split page: header, hero, capabilities, method, work, FAQ, contact and footer</li>
+            <li>Bilingual EN/AR dictionaries with RTL layout, persisted language choice and scroll-spy navigation</li>
+            <li>Inquiry form with mail/endpoint delivery, clipboard fallback and a honeypot for bots</li>
+          </ul>
+        </div>
+        <div class="dcol v">
+          <h4>Engineering</h4>
+          <ul>
+            <li>Glass torus and icosahedron hero with orbital satellites, particles, cursor light and pointer parallax</li>
+            <li>Lazy-booted on approach; loop pauses off-screen or in a hidden tab, with adaptive pixel ratio</li>
+            <li>CSS-only fallback for no WebGL, reduced motion, saveData or low-memory devices; recovers from context loss</li>
+            <li>three.js isolated in its own cacheable chunk, fetched only when the hero enters the viewport</li>
+            <li>Accessibility: skip link, focus trap, aria-live status and keyboard-operable mobile menu</li>
+          </ul>
+        </div>
+      </div>
+      <div class="dchips">
+        <span>Astro</span><span>TypeScript</span><span>three.js</span><span>WebGL</span><span>i18n</span><span>Accessibility</span>
+      </div>
+      <div class="cmdline"><code>gh repo clone HMH-3080/sifr-astro</code><button class="copybtn" type="button" data-copy="gh repo clone HMH-3080/sifr-astro">COPY</button></div>
+      <div class="dfoot">
+        <a class="btn btn-b" href="https://hmh-3080.github.io/sifr-astro/" target="_blank" rel="noopener">↗ Live preview</a>
+        <a class="btn btn-b" href="https://github.com/HMH-3080/sifr-astro" target="_blank" rel="noopener">↗ HMH-3080/sifr-astro</a>
       </div>
     </div>
   </article>
@@ -966,6 +1012,7 @@ window.HMH_INDEX = [
     { group: "On this page", title: "KittenTTS Studio — browser TTS editor", hint: "PRJ-16 · oss", run: function() { window.location.href = "#kitten-tts-studio"; } },
     { group: "On this page", title: "atomvm-wasm — Elixir in the browser", hint: "PRJ-17 · oss", run: function() { window.location.href = "#atomvm-wasm"; } },
     { group: "On this page", title: "Mizan — offline expense tracker", hint: "PRJ-18 · oss", run: function() { window.location.href = "#mizan"; } },
+    { group: "On this page", title: "sifr — studio marketing site", hint: "PRJ-19 · client", run: function() { window.location.href = "#sifr"; } },
     { group: "On this page", title: "Merged upstream contributions", hint: "PRJ-15 · 9 PRs", run: function() { window.location.href = "#upstream"; } }
 ];
 </script>
