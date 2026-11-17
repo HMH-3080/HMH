@@ -319,6 +319,16 @@
     </div>
 
     <div class="role">
+      <div class="rhead"><span class="rtitle">atomvm-wasm <i>— single-threaded AtomVM WebAssembly runtime</i>&nbsp;&nbsp;<span class="mk">Creator · Sole Builder</span></span><span class="lead"></span><span class="rmeta">2026 · Apache-2.0</span></div>
+      <ul class="bl">
+        <li>Built a <b>pthread-free AtomVM runtime</b> that runs Elixir and Erlang in the browser — no <code>SharedArrayBuffer</code> and no COOP/COEP headers, so it works in ordinary pages and cross-origin iframes.</li>
+        <li>Patched FissionVM for a single-threaded loop and direct dispatch, compiled with Emscripten 3.1.74 / mbedTLS, added the missing <code>erlang:md5/1</code> NIF, and shipped checksum-verified artifacts published as <code>@hmh-3080/atomvm-wasm</code>.</li>
+        <li>Adopted by <b>LiveCodes</b> as its Elixir/Erlang <code>beam-wasm</code> worker — the foundation of two merged upstream PRs in <code>live-codes/browser-elixir</code>.</li>
+      </ul>
+      <div class="rlinks"><a href="https://github.com/HMH-3080/atomvm-wasm">Repository</a> · <a href="https://www.npmjs.com/package/@hmh-3080/atomvm-wasm">npm package</a></div>
+    </div>
+
+    <div class="role">
       <div class="rhead"><span class="rtitle">EgyFy Parser <i>— local OCR workspace</i></span><span class="lead"></span><span class="rmeta">Apache-2.0</span></div>
       <ul class="bl">
         <li>Converts PDFs and images into Markdown, JSON and structured tables with per-page confidence review and a clean-output mode; runs as a single-process Python workspace — <b>documents never leave the machine</b>.</li>
