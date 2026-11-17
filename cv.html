@@ -6,406 +6,278 @@
 <meta name="author" content="Hassan Mohamed">
 <meta name="description" content="Master CV — Hassan Mohamed, Systems Builder. Backend, business platforms, ERP, SaaS, desktop software and open source. Single-column, ATS-friendly, prints to A4 vector PDF.">
 <title>Hassan Mohamed — CV (Systems Builder)</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  /* ── Master résumé document ──
-     Single column · standard section headings · semantic h1–h3 · real hyperlinks.
-     Prints to A4 vector PDF via window.print() or build-cv.sh (headless Chromium). */
+  /* Quiet Ledger — calm single-column CV. One accent, generous rhythm, no competing furniture.
+     Prints to a clean A4 vector PDF via window.print() or build-cv.sh. */
   :root {
-    --paper: #FFFFFF;
-    --ink: #1A1713;
-    --body: #44403A;
-    --faint: #7C766C;
-    --rule: #E4DFD6;
-    --rule-soft: #EEEAE2;
-    --sig: #B8440A;                        /* International Orange, darkened for print */
-    --lead: #D3CEC4;
+    --paper: #F7F5F1;
+    --sheet: #FFFFFF;
+    --ink: #1B1A17;
+    --body: #4A4740;
+    --faint: #837D73;
+    --line: #DED9CF;
+    --accent: #B4441D;
+    --display: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+    --text: 'Inter', 'Helvetica Neue', Arial, sans-serif;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body { background: #000; font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif; -webkit-font-smoothing: antialiased; }
-  a { color: inherit; }
-  h1, h2, h3 { font-weight: inherit; }
+  html { scroll-behavior: smooth; overflow-x: clip; }
+  body { background: var(--paper); color: var(--body); font-family: var(--text); font-size: 10pt; line-height: 1.62; overflow-x: clip; -webkit-font-smoothing: antialiased; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
+  h1, h2, h3 { font-family: var(--display); color: var(--ink); font-weight: 600; }
 
-  /* ── toolbar (screen only) ── */
-  .toolbar {
-    max-width: 210mm; margin: 22px auto 0; padding: 0 4mm;
-    display: flex; gap: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap;
-    font-family: 'JetBrains Mono', monospace;
-  }
-  .tb-btns { display: flex; gap: 10px; flex-wrap: wrap; }
-  .tbtn {
-    font-family: 'JetBrains Mono', monospace; font-size: .72rem; font-weight: 600; letter-spacing: .08em;
-    padding: 11px 15px; min-height: 44px; border-radius: 8px; cursor: pointer;
-    display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
-    transition: transform .15s, border-color .15s, box-shadow .15s;
-  }
-  .tbtn:active { transform: translateY(1px); }
-  .tbtn.solid { background: #F2EFE9; color: #000; border: 1px solid #F2EFE9; }
-  .tbtn.solid:hover { background: #FFF; transform: translateY(-2px); box-shadow: 0 10px 30px rgba(242,239,233,.12); }
-  .tbtn.ghost { background: rgba(11,10,9,.5); color: #F2EFE9; border: 1px solid rgba(242,239,233,.13); }
-  .tbtn.ghost:hover { border-color: #A8A49B; transform: translateY(-2px); }
-  .tb-note { font-size: .68rem; letter-spacing: .04em; color: #A8A49B; text-align: right; }
+  .toolbar { max-width: 210mm; margin: 22px auto 0; padding: 0 20px; display: flex; gap: 12px; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+  .toolbar a, .toolbar button { font-family: var(--text); font-size: .85rem; color: var(--body); background: transparent; border: 1px solid var(--line); border-radius: 6px; padding: 10px 16px; min-height: 44px; cursor: pointer; transition: background .15s, border-color .15s; }
+  .toolbar a:hover, .toolbar button:hover { background: var(--sheet); border-color: var(--faint); text-decoration: none; }
 
-  /* ── the A4 sheet ── */
-  .sheet {
-    width: 210mm; max-width: calc(100% - 20px); margin: 18px auto 56px;
-    background: var(--paper); color: var(--ink);
-    padding: 16mm 17mm 14mm;
-    border-radius: 6px; box-shadow: 0 30px 80px rgba(0,0,0,.7);
-    font-size: 9.6pt; line-height: 1.5;
-  }
+  .sheet { width: 210mm; max-width: calc(100% - 36px); margin: 24px auto 64px; background: var(--sheet); border: 1px solid var(--line); padding: 20mm 19mm 18mm; }
+  .cv-name { font-size: 27pt; line-height: 1; letter-spacing: -.03em; }
+  .cv-role { margin-top: 9px; font-size: 11pt; color: var(--body); }
+  .cv-contact { display: flex; flex-wrap: wrap; gap: 5px 22px; margin-top: 16px; padding-bottom: 16px; border-bottom: 2px solid var(--ink); font-size: 9pt; color: var(--faint); }
+  .cv-contact a { color: var(--faint); }
 
-  /* header */
-  .cv-head { border-bottom: 1.1pt solid var(--ink); padding-bottom: 9pt; display: flex; justify-content: space-between; align-items: flex-end; gap: 14pt; }
-  .cv-name { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 22.5pt; letter-spacing: -.015em; line-height: 1; }
-  .cv-role { margin-top: 4.5pt; font-size: 9.4pt; color: var(--body); }
-  .cv-role b { color: var(--sig); font-weight: 600; }
-  .cv-contact { display: grid; gap: 2pt; text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 7.4pt; line-height: 1.5; color: var(--body); white-space: nowrap; }
-  .cv-contact b { color: var(--faint); font-weight: 600; }
-  .cv-contact a { text-decoration: none; }
+  .sec { margin-top: 25px; }
+  .sec h2 { font-size: 12pt; letter-spacing: -.01em; padding-bottom: 6px; border-bottom: 1px solid var(--line); margin-bottom: 12px; }
+  .cv-summary { max-width: 68ch; }
+  .skill-line { margin-bottom: 6px; }
+  .skill-line b { color: var(--ink); font-weight: 600; }
 
-  /* standard sections */
-  .sec { margin-top: 12.5pt; }
-  .sec-head {
-    font-family: 'Inter', sans-serif; font-size: 9pt; font-weight: 700; letter-spacing: .13em; text-transform: uppercase;
-    color: var(--ink); border-bottom: .8pt solid var(--ink); padding-bottom: 3pt; margin-bottom: 6.5pt;
-    display: flex; align-items: baseline; gap: 6pt;
-    break-after: avoid;
-  }
-  .sec-head::before { content: ''; width: 5.5pt; height: 5.5pt; background: var(--sig); transform: translateY(-.5pt); }
-  .sec-head .note { margin-left: auto; font-size: 7pt; font-weight: 500; letter-spacing: .06em; color: var(--faint); }
+  .group-label { font-size: 8.7pt; color: var(--faint); margin: 16px 0 8px; }
+  .job { margin-bottom: 15px; break-inside: avoid; }
+  .job-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
+  .job-title { font-size: 10.6pt; font-weight: 600; }
+  .job-title em { font-style: normal; font-weight: 400; font-family: var(--text); font-size: 9.4pt; color: var(--faint); }
+  .job-date { font-size: 8.4pt; color: var(--faint); white-space: nowrap; }
+  .job ul { list-style: none; margin-top: 5px; }
+  .job li { position: relative; padding-left: 14px; margin-bottom: 4px; }
+  .job li::before { content: '—'; position: absolute; left: 0; color: var(--accent); }
+  .job b, .plain b { color: var(--ink); font-weight: 600; }
 
-  .cv-sum { color: var(--body); break-inside: avoid; }
-  .cv-sum b { color: var(--ink); font-weight: 600; }
-
-  /* project group subheadings */
-  .grp {
-    display: flex; align-items: baseline; gap: 6pt;
-    font-family: 'Inter', sans-serif; font-weight: 700; font-size: 9.3pt; letter-spacing: .01em; color: var(--ink);
-    margin: 8pt 0 3.5pt;
-    break-after: avoid;
-  }
-  .grp .gn { margin-left: auto; font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 6.8pt; letter-spacing: .09em; text-transform: uppercase; color: var(--faint); white-space: nowrap; }
-
-  /* role block: employer line, then bullets */
-  .role { margin-bottom: 7.5pt; break-inside: avoid; }
-  .rhead { display: flex; align-items: baseline; margin-bottom: 1.5pt; break-after: avoid; }
-  .rtitle { font-weight: 700; font-size: 10pt; letter-spacing: -.003em; }
-  .rtitle i { font-style: normal; font-weight: 500; color: var(--faint); }
-  .rtitle .mk { font-family: 'JetBrains Mono', monospace; font-size: 6.9pt; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--sig); white-space: nowrap; }
-  .lead { flex: 1; min-width: 10pt; border-bottom: 1px dotted var(--lead); margin: 0 6.5pt; transform: translateY(-3.5pt); }
-  .rmeta { font-family: 'JetBrains Mono', monospace; font-size: 7.4pt; color: var(--faint); white-space: nowrap; }
-
-  .bl { list-style: none; }
-  .bl li { position: relative; padding-left: 10pt; color: var(--body); margin-bottom: 1.6pt; }
-  .bl li::before { content: '•'; position: absolute; left: 1pt; color: var(--sig); font-weight: 600; }
-  .bl li b { color: var(--ink); font-weight: 600; }
-  .bl li code { font-family: 'JetBrains Mono', monospace; font-size: .92em; color: var(--ink); }
-  .bl li a { color: var(--ink); text-decoration: none; }
-
-  /* single-line entries (flat list) */
-  .one { margin-bottom: 4.5pt; break-inside: avoid; }
-  .one .rtitle { font-size: 9.4pt; }
-
-  /* inline project links */
-  .rlinks { margin-top: 2.5pt; font-family: 'JetBrains Mono', monospace; font-size: 7.1pt; color: var(--faint); }
-  .rlinks a { color: var(--sig); font-weight: 600; text-decoration: none; letter-spacing: .03em; }
-
-  /* skills inline */
-  .skill { margin-bottom: 3pt; color: var(--body); break-inside: avoid; }
-  .skill b { color: var(--ink); font-weight: 600; }
-
-  .fine { margin-top: 12pt; padding-top: 5.5pt; border-top: .8pt solid var(--rule); display: flex; justify-content: space-between; gap: 8pt; flex-wrap: wrap; font-family: 'JetBrains Mono', monospace; font-size: 6.6pt; letter-spacing: .12em; text-transform: uppercase; color: var(--faint); }
+  .cv-foot { margin-top: 26px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 8.4pt; color: var(--faint); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 
   @page { size: A4; margin: 0; }
-  @media print {
-    .pbreak { break-before: page; }
-  }
-
-  /* ── phones: real reading layout — the desktop sheet geometry doesn't survive 360px ── */
   @media (max-width: 700px) {
-    .toolbar { flex-direction: column; align-items: stretch; gap: 10px; margin-top: 16px; }
-    .tb-btns { order: 1; }
-    .tb-btns .tbtn { flex: 1; justify-content: center; }
-    .tbtn.solid { order: 2; justify-content: center; }
-    .tb-note { order: 3; text-align: center; }
-    .sheet { margin: 14px auto 40px; padding: 11mm 8mm; }
-    .cv-head { flex-direction: column; align-items: flex-start; gap: 9pt; }
-    .cv-name { font-size: 19pt; }
-    .cv-contact { text-align: left; font-size: 7pt; overflow-wrap: anywhere; }
-    .cv-contact span { display: grid; grid-template-columns: 58px 1fr; column-gap: 4pt; }
-    .sec { margin-top: 11pt; }
-    .sec-head { flex-wrap: wrap; }
-    .sec-head .note { flex-basis: 100%; margin: 1pt 0 0 15px; }
-    .grp { flex-wrap: wrap; row-gap: 0; }
-    .grp .gn { margin-left: auto; }
-    .lead { display: none; }
-    .rhead { flex-wrap: wrap; row-gap: 1pt; }
-    .rtitle { flex: 1 1 100%; }
-    .rmeta { margin-left: auto; }
-    .fine { flex-direction: column; gap: 2pt; align-items: flex-start; }
+    .toolbar { flex-direction: column; align-items: stretch; }
+    .sheet { padding: 12mm 8mm; }
+    .cv-name { font-size: 23pt; }
+    .job-head { flex-direction: column; gap: 2px; }
   }
-  @media (max-width: 430px) {
-    .sheet { padding: 9mm 6mm; font-size: 9.3pt; }
-    .cv-name { font-size: 17.5pt; }
-    .cv-role { font-size: 8.8pt; }
-  }
-
-  /* print comes LAST so it wins the cascade over the phone blocks —
-     even printing from a narrow window yields the full-width A4 sheet */
   @media print {
-    body { background: #fff; }
+    body { background: #fff; font-size: 9.6pt; }
     .toolbar { display: none !important; }
-    .sheet { width: auto; max-width: none; margin: 0; border-radius: 0; box-shadow: none; padding: 14mm 15mm 12mm; font-size: 9.6pt; }
+    .sheet { width: auto; max-width: none; margin: 0; border: none; box-shadow: none; padding: 14mm 15mm 12mm; }
     a { text-decoration: none; color: inherit; }
-    .role, .one, .cv-head, .cv-sum { break-inside: avoid; }
-    .bl li { break-inside: avoid; }
-    /* neutralize the phone blocks */
-    .cv-head { flex-direction: row; align-items: flex-end; gap: 14pt; }
-    .cv-name { font-size: 22.5pt; }
-    .cv-role { font-size: 9.4pt; }
-    .cv-contact { text-align: right; font-size: 7.4pt; }
-    .cv-contact span { display: block; }
-    .grp { flex-wrap: nowrap; }
-    .lead { display: block; }
-    .rhead { flex-wrap: nowrap; }
-    .rtitle { flex: 0 1 auto; }
-    .rmeta { margin-left: 0; }
-    .sec { margin-top: 12.5pt; }
-    .sec-head { flex-wrap: nowrap; }
-    .sec-head .note { flex-basis: auto; margin: 0 0 0 auto; }
-    .fine { flex-direction: row; align-items: normal; gap: 8pt; }
+    .job, .sec, .cv-foot { break-inside: avoid; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    html { scroll-behavior: auto; }
   }
 </style>
 </head>
 <body>
 
 <div class="toolbar">
-  <div class="tb-btns">
-    <a class="tbtn ghost" href="about.html">← Back to site</a>
-    <a class="tbtn ghost" href="projects.html">Work dossier →</a>
-  </div>
-  <span class="tb-note">choose “Save as PDF” in the dialog — clean vector PDF, selectable &amp; ATS-parseable text</span>
-  <button class="tbtn solid" type="button" id="dl-cv">⇩ Download CV (PDF)</button>
+  <a href="about.html">← Back to site</a>
+  <a href="projects.html">Work dossier →</a>
+  <button type="button" id="dl-cv">⇩ Download CV (PDF)</button>
 </div>
 
 <main class="sheet" id="cv" aria-label="Curriculum vitae — Hassan Mohamed">
 
-  <header class="cv-head">
-    <div>
-      <h1 class="cv-name">Hassan Mohamed</h1>
-      <div class="cv-role">Systems Builder <b>—</b> Backend · Business Platforms · ERP · SaaS · Desktop Software · Open Source</div>
-    </div>
+  <header>
+    <h1 class="cv-name">Hassan Mohamed</h1>
+    <div class="cv-role">Systems Builder — backend, business platforms, ERP, SaaS, desktop software and open source</div>
     <div class="cv-contact">
-      <span><b>EMAIL</b> <a href="mailto:hasanmo3080vr@gmail.com">hasanmo3080vr@gmail.com</a></span>
-      <span><b>PHONE</b> <a href="tel:+201104391245">+20 110 439 1245</a></span>
-      <span><b>GITHUB</b> <a href="https://github.com/HMH-3080">github.com/HMH-3080</a></span>
-      <span><b>LINKEDIN</b> <a href="https://www.linkedin.com/in/hassan-mohamed-81a187289">linkedin.com/in/hassan-mohamed-81a187289</a></span>
-      <span><b>LOCATION</b> Egypt · open to remote work</span>
+      <a href="mailto:hasanmo3080vr@gmail.com">hasanmo3080vr@gmail.com</a>
+      <a href="tel:+201104391245">+20 110 439 1245</a>
+      <a href="https://github.com/HMH-3080">github.com/HMH-3080</a>
+      <a href="https://www.linkedin.com/in/hassan-mohamed-81a187289">linkedin.com/in/hassan-mohamed-81a187289</a>
+      <span>Egypt — open to remote work</span>
     </div>
   </header>
 
   <section class="sec">
-    <h2 class="sec-head">Professional Summary</h2>
-    <p class="cv-sum">Independent software engineer who designs, builds, deploys and maintains complete systems — architecture, backend, databases, interfaces <b>and</b> the production servers they run on. Since 2022 I have delivered <b>15 production systems</b> for retail, pharmacy, industrial-supplies and e-commerce operations and still maintain them, many engineered <b>offline-first</b> so multi-branch businesses keep trading through internet outages and reconcile cleanly on reconnect. I also <b>create and maintain my own open-source software</b> — most notably the Altair web framework for Crystal and the Marsad VPS fleet platform — and contribute to projects owned by others, with <b>nine merged pull requests</b> including the Elixir compiler and Ktor.</p>
+    <h2>Summary</h2>
+    <p class="cv-summary">Independent software engineer who designs, builds, deploys and maintains complete systems — architecture, backend, databases, interfaces <b>and</b> the production servers they run on. Since 2022 I have delivered <b>15 production systems</b> for retail, pharmacy, industrial-supplies and e-commerce operations and still maintain them, many engineered <b>offline-first</b> so multi-branch businesses keep trading through internet outages and reconcile cleanly on reconnect. I also <b>create and maintain my own open-source software</b> — most notably the Altair web framework for Crystal and the Marsad VPS fleet platform — and contribute to projects owned by others, with <b>nine merged pull requests</b> including the Elixir compiler and Ktor.</p>
   </section>
 
   <section class="sec">
-    <h2 class="sec-head">Technical Skills</h2>
-    <p class="skill"><b>Programming languages.</b> Kotlin · Java · TypeScript · JavaScript · Elixir · Crystal · Rust · Python · SQL</p>
-    <p class="skill"><b>Frameworks &amp; application development.</b> Phoenix/LiveView · Erlang/Elixir OTP · Spring Boot · Ktor · Vert.x · Express.js · http4k · HTMX · Kotlin Multiplatform · Altair (Crystal)</p>
-    <p class="skill"><b>Databases &amp; data management.</b> PostgreSQL · MySQL/MariaDB · MongoDB · SQLite · Turso (MVCC concurrent writes)</p>
-    <p class="skill"><b>Infrastructure &amp; operations.</b> Linux server administration · Docker · nginx · systemd · networking · k6 load testing</p>
-    <p class="skill"><b>Architecture &amp; engineering practices.</b> Offline-first synchronization &amp; conflict resolution · multi-tenant isolation · RBAC &amp; audit trails · compile-time-validated design · CI governance gates · benchmarking &amp; profiling</p>
+    <h2>Technical skills</h2>
+    <p class="skill-line"><b>Programming languages.</b> Kotlin · Java · TypeScript · JavaScript · Elixir · Crystal · Rust · Python · SQL</p>
+    <p class="skill-line"><b>Frameworks &amp; application development.</b> Phoenix/LiveView · Erlang/Elixir OTP · Spring Boot · Ktor · Vert.x · Express.js · http4k · HTMX · Kotlin Multiplatform · Altair (Crystal)</p>
+    <p class="skill-line"><b>Databases &amp; data management.</b> PostgreSQL · MySQL/MariaDB · MongoDB · SQLite · Turso (MVCC concurrent writes)</p>
+    <p class="skill-line"><b>Infrastructure &amp; operations.</b> Linux server administration · Docker · nginx · systemd · networking · k6 load testing</p>
+    <p class="skill-line"><b>Architecture &amp; practices.</b> Offline-first synchronization and conflict resolution · multi-tenant isolation · RBAC and audit trails · compile-time-validated design · CI governance gates · benchmarking and profiling</p>
   </section>
 
   <section class="sec">
-    <h2 class="sec-head">Selected Projects &amp; Engineering Experience <span class="note">built, deployed &amp; maintained in production</span></h2>
+    <h2>Experience</h2>
 
-    <h3 class="grp">Business Platforms &amp; Production Systems <span class="gn">independent engagements</span></h3>
+    <div class="group-label">Client systems — built, deployed and maintained</div>
 
-    <div class="role">
-      <div class="rhead"><span class="rtitle">El Fath Pharmacies <i>— multi-branch pharmacy POS &amp; loyalty platform</i></span><span class="lead"></span><span class="rmeta">2024 · LIVE</span></div>
-      <ul class="bl">
+    <div class="job">
+      <div class="job-head"><span class="job-title">El Fath Pharmacies <em>— multi-branch pharmacy POS &amp; loyalty platform</em></span><span class="job-date">2024 · LIVE</span></div>
+      <ul>
         <li>Built an <b>offline-first multi-branch POS</b>: batch/lot inventory with expiry monitoring, automated replenishment alerts, cross-branch stock synchronization and full product-movement audit history.</li>
-        <li>Implemented <b>conflict-free cloud sync over local-first persistence</b>, so branches continue selling through internet outages and reconcile on reconnect.</li>
-        <li>Designed <b>granular role-based access control</b> with multi-level authorization, activity logging and operational audit trails across branches.</li>
+        <li>Implemented <b>conflict-free cloud sync over local-first persistence</b>, so branches keep selling through outages and reconcile on reconnect.</li>
+        <li>Designed <b>granular role-based access control</b> with multi-level authorization, activity logging and operational audit trails.</li>
         <li>Delivered POS with automated invoicing, financial reporting with margin monitoring, and a loyalty CRM.</li>
       </ul>
     </div>
 
-    <div class="role">
-      <div class="rhead"><span class="rtitle">GAL Factory Supplies <i>— industrial supplies enterprise platform</i></span><span class="lead"></span><span class="rmeta">2023 → present · LIVE</span></div>
-      <ul class="bl">
+    <div class="job">
+      <div class="job-head"><span class="job-title">GAL Factory Supplies <em>— industrial supplies enterprise platform</em></span><span class="job-date">2023 → present · LIVE</span></div>
+      <ul>
         <li>Delivered a <b>cloud enterprise platform</b> for remote operations: sales, inventory, role-based access and secure workflow monitoring across distributed teams (<a href="https://gal.egyfy.shop">gal.egyfy.shop</a>).</li>
         <li>Deployed and hardened the production infrastructure; <b>continuously own the servers, security and maintenance contract</b> since launch.</li>
       </ul>
     </div>
 
-    <div class="role">
-      <div class="rhead"><span class="rtitle">El Tawfikia Auto Parts Markets <i>— automotive spare-parts trading system</i></span><span class="lead"></span><span class="rmeta">2022 → present · MAINTAINED</span></div>
-      <ul class="bl">
+    <div class="job">
+      <div class="job-head"><span class="job-title">El Tawfikia Auto Parts Markets <em>— automotive spare-parts trading system</em></span><span class="job-date">2022 → present · MAINTAINED</span></div>
+      <ul>
         <li>Centralized sales, warehouse inventory, employee operations and workflow tracking on a <b>secure internal network</b> with real-time monitoring.</li>
         <li>Continue to provide <b>hardware maintenance and server administration</b> for the delivered system to this day.</li>
       </ul>
     </div>
 
-    <div class="role">
-      <div class="rhead"><span class="rtitle">Pioneer General Supplies &amp; Contracting <i>— business management platform</i></span><span class="lead"></span><span class="rmeta">2026</span></div>
-      <ul class="bl">
-        <li>Integrated platform covering sales &amp; invoicing, customer and supplier management, employee roles and cross-department workflow control.</li>
-      </ul>
+    <div class="job">
+      <div class="job-head"><span class="job-title">Pioneer General Supplies &amp; Contracting <em>— business management platform</em></span><span class="job-date">2026</span></div>
+      <ul><li>Integrated platform covering sales &amp; invoicing, customer and supplier management, employee roles and cross-department workflow control.</li></ul>
     </div>
 
-    <div class="role">
-      <div class="rhead"><span class="rtitle">sifr <i>— marketing site for an engineering studio</i></span><span class="lead"></span><span class="rmeta">2026 · CLIENT</span></div>
-      <ul class="bl">
+    <div class="job">
+      <div class="job-head"><span class="job-title">sifr <em>— marketing site for an engineering studio</em></span><span class="job-date">2026 · CLIENT</span></div>
+      <ul>
         <li>Rebuilt a <b>commercial landing page</b> as a <b>static Astro site</b> with strict TypeScript, component-split sections and plain-CSS design tokens — no client UI framework, no server runtime.</li>
-        <li>Implemented an <b>enhanced three.js WebGL hero</b> (glass torus, wireframe core, orbital satellites, particles, cursor light) with lazy boot, off-screen pausing, adaptive pixel ratio and a CSS-only fallback for reduced-motion / low-power devices.</li>
-        <li>Delivered <b>bilingual EN/AR content with RTL support</b>, an inquiry form with mail/endpoint delivery and honeypot, and accessibility features including skip link, focus trap and aria-live status.</li>
+        <li>Implemented an <b>enhanced three.js WebGL hero</b> with lazy boot, off-screen pausing, adaptive pixel ratio and a CSS-only fallback for reduced-motion and low-power devices.</li>
+        <li>Delivered <b>bilingual EN/AR content with RTL support</b>, an inquiry form with mail/endpoint delivery and a honeypot, and accessibility features including skip link, focus trap and aria-live status.</li>
       </ul>
-      <div class="rlinks"><a href="https://hmh-3080.github.io/sifr-astro/">Live preview</a> · <a href="https://github.com/HMH-3080/sifr-astro">Repository</a></div>
     </div>
 
-    <h3 class="grp">SaaS &amp; Commercial Products <span class="gn">own products</span></h3>
+    <div class="group-label">Own products</div>
 
-    <div class="role">
-      <div class="rhead"><span class="rtitle">Rocket System 2 <i>— distributed ERP + mobile companion</i></span><span class="lead"></span><span class="rmeta">2026 · LIVE</span></div>
-      <ul class="bl">
+    <div class="job">
+      <div class="job-head"><span class="job-title">Rocket System 2 <em>— distributed ERP + mobile companion</em></span><span class="job-date">2026 · LIVE</span></div>
+      <ul>
         <li><b>Multi-location warehouse ERP</b>, offline-first with cloud sync and conflict-free reconciliation; companion mobile app for remote monitoring.</li>
         <li>Deployable on <b>local servers or the cloud</b> per customer infrastructure needs.</li>
       </ul>
     </div>
 
-    <div class="role">
-      <div class="rhead"><span class="rtitle">Egyfy <i>— multi-tenant SaaS e-commerce builder</i></span><span class="lead"></span><span class="rmeta">2025 → present · BETA</span></div>
-      <ul class="bl">
+    <div class="job">
+      <div class="job-head"><span class="job-title">Egyfy <em>— multi-tenant SaaS e-commerce builder</em></span><span class="job-date">2025 → present · BETA</span></div>
+      <ul>
         <li>Architected <b>tenant isolation</b>, a SaaS subscription model and a store builder with production-grade scalability.</li>
         <li><b>3 tenants live in production</b>; customer feedback drives the roadmap toward commercial launch.</li>
       </ul>
     </div>
 
-    <div class="role">
-      <div class="rhead"><span class="rtitle">Rocket System 1 <i>— retail POS &amp; inventory</i></span><span class="lead"></span><span class="rmeta">2025</span></div>
-      <ul class="bl">
-        <li>Lightweight <b>desktop retail solution</b> for small shops and warehouses — inventory, automated invoices and reporting; designed for teams with limited technical experience.</li>
-      </ul>
+    <div class="job">
+      <div class="job-head"><span class="job-title">Rocket System 1 <em>— retail POS &amp; inventory</em></span><span class="job-date">2025</span></div>
+      <ul><li>Lightweight <b>desktop retail solution</b> for small shops and warehouses — inventory, automated invoices and reporting; designed for teams with limited technical experience.</li></ul>
     </div>
-  </section>
 
-  <section class="sec">
-    <h2 class="sec-head">Open-Source Projects — Created &amp; Led <span class="note">my own repositories</span></h2>
+    <div class="group-label">Open source — created and led</div>
 
-    <div class="role">
-      <div class="rhead"><span class="rtitle">Altair <i>— web framework for Crystal</i>&nbsp;&nbsp;<span class="mk">Creator · Sole Builder</span></span><span class="lead"></span><span class="rmeta">MIT · PHASES 0–7</span></div>
-      <ul class="bl">
+    <div class="job">
+      <div class="job-head"><span class="job-title">Altair <em>— web framework for Crystal</em></span><span class="job-date">MIT · PHASES 0–7</span></div>
+      <ul>
         <li>Designed and built the framework end to end: a <b>compile-time routing DSL</b> with typed action references, typed ECR views/layouts/partials and per-request controllers with typed params — invalid programs fail <b>at compile time, not in production</b>.</li>
         <li>Implemented a <b>dual-adapter ORM</b> (SQLite3 / PostgreSQL) validated through shared contract tests, plus migrations, validations, associations and callbacks.</li>
-        <li>Shipped the CLI toolchain (new / generate / server / routes / db), automatic development hot-reload watcher, sessions, CSRF protection, JWT authentication and background jobs.</li>
-        <li>Verified by a <b>~992-spec automated suite</b> across the stack; performance measured with public <b>k6 benchmarks</b> against Express.js and Fiber, run through a dedicated benchmark collector.</li>
+        <li>Shipped the CLI toolchain, automatic development hot-reload watcher, sessions, CSRF protection, JWT authentication and background jobs.</li>
+        <li>Verified by a <b>~992-spec automated suite</b>; performance measured with public <b>k6 benchmarks</b> against Express.js and Fiber.</li>
       </ul>
-      <div class="rlinks"><a href="https://github.com/Arab-Open-Source/Altair">Repository</a> · <a href="https://arab-open-source.github.io/Altair/">Documentation</a></div>
     </div>
 
-    <div class="role">
-      <div class="rhead"><span class="rtitle">Marsad <i>— self-hosted VPS fleet management</i>&nbsp;&nbsp;<span class="mk">Sole Builder</span></span><span class="lead"></span><span class="rmeta">2026 → present · CC BY-NC 4.0</span></div>
-      <ul class="bl">
-        <li>Browser-based <b>LiveView mini-OS desktop</b> in Elixir/Phoenix: one <b>supervised GenServer with persistent SSH</b> per managed server (Registry + DynamicSupervisor).</li>
-        <li>xterm.js terminal over persistent PTYs (vim, pipes, job control), SFTP explorer with its own query language, inline remote editing and an offline mode.</li>
-        <li>Docker / systemd / nginx control panels with SSL-expiry monitoring and per-core live metrics; <b>AES-256-GCM credential vault</b> (OTP <code>:crypto</code>) with TOFU host-key records.</li>
+    <div class="job">
+      <div class="job-head"><span class="job-title">Marsad <em>— self-hosted VPS fleet management</em></span><span class="job-date">2026 → present · CC BY-NC 4.0</span></div>
+      <ul>
+        <li>Browser-based <b>LiveView mini-OS desktop</b> in Elixir/Phoenix: one <b>supervised GenServer with persistent SSH</b> per managed server.</li>
+        <li>xterm.js terminal over persistent PTYs, SFTP explorer with its own query language, inline remote editing and an offline mode.</li>
+        <li>Docker / systemd / nginx panels with SSL-expiry monitoring and per-core live metrics; <b>AES-256-GCM credential vault</b> with TOFU host-key records.</li>
         <li>Hardened remote execution: <b>allow-list regex validation</b> on every value interpolated into shell commands.</li>
       </ul>
-      <div class="rlinks"><a href="https://github.com/Arab-Open-Source/Marsad">Repository</a></div>
     </div>
 
-    <div class="role">
-      <div class="rhead"><span class="rtitle">KittenTTS Studio <i>— browser-based text-to-speech editor</i>&nbsp;&nbsp;<span class="mk">Creator · Sole Builder</span></span><span class="lead"></span><span class="rmeta">2026</span></div>
-      <ul class="bl">
-        <li>Built a <b>Phoenix LiveView editor</b> that generates and downloads natural-sounding English speech using the compact <b>KittenTTS Mini</b> model on an <b>ONNX CPU runtime</b>, with eight built-in voices, WAV preview/download and live generation progress.</li>
-        <li>Bridged Elixir and Python with a <b>line-delimited JSON protocol</b> to a long-lived worker that loads and caches the model once, then serves later synthesis requests in memory.</li>
+    <div class="job">
+      <div class="job-head"><span class="job-title">KittenTTS Studio <em>— browser-based text-to-speech editor</em></span><span class="job-date">2026</span></div>
+      <ul>
+        <li>Built a <b>Phoenix LiveView editor</b> that generates and downloads English speech using <b>KittenTTS Mini</b> on an <b>ONNX CPU runtime</b>, with eight voices and WAV preview/download.</li>
+        <li>Bridged Elixir and Python with a <b>line-delimited JSON protocol</b> to a long-lived worker that loads and caches the model once.</li>
       </ul>
-      <div class="rlinks"><a href="https://github.com/HMH-3080/kitten-tts-studio">Repository</a></div>
     </div>
 
-    <div class="role">
-      <div class="rhead"><span class="rtitle">atomvm-wasm <i>— single-threaded AtomVM WebAssembly runtime</i>&nbsp;&nbsp;<span class="mk">Creator · Sole Builder</span></span><span class="lead"></span><span class="rmeta">2026 · Apache-2.0</span></div>
-      <ul class="bl">
+    <div class="job">
+      <div class="job-head"><span class="job-title">atomvm-wasm <em>— single-threaded AtomVM WebAssembly runtime</em></span><span class="job-date">2026 · Apache-2.0</span></div>
+      <ul>
         <li>Built a <b>pthread-free AtomVM runtime</b> that runs Elixir and Erlang in the browser — no <code>SharedArrayBuffer</code> and no COOP/COEP headers, so it works in ordinary pages and cross-origin iframes.</li>
-        <li>Patched FissionVM for a single-threaded loop and direct dispatch, compiled with Emscripten 3.1.74 / mbedTLS, added the missing <code>erlang:md5/1</code> NIF, and shipped checksum-verified artifacts published as <code>@hmh-3080/atomvm-wasm</code>.</li>
-        <li>Adopted by <b>LiveCodes</b> as its Elixir/Erlang <code>beam-wasm</code> worker — the foundation of two merged upstream PRs in <code>live-codes/browser-elixir</code>.</li>
+        <li>Patched FissionVM for a single-threaded loop and direct dispatch, added the missing <code>erlang:md5/1</code> NIF, and shipped checksum-verified artifacts published as <code>@hmh-3080/atomvm-wasm</code>.</li>
+        <li>Adopted by <b>LiveCodes</b> as its Elixir/Erlang <code>beam-wasm</code> worker — the foundation of two merged upstream PRs.</li>
       </ul>
-      <div class="rlinks"><a href="https://github.com/HMH-3080/atomvm-wasm">Repository</a> · <a href="https://www.npmjs.com/package/@hmh-3080/atomvm-wasm">npm package</a></div>
     </div>
 
-    <div class="role">
-      <div class="rhead"><span class="rtitle">Mizan <i>— offline-first personal expense tracker</i>&nbsp;&nbsp;<span class="mk">Creator · Sole Builder</span></span><span class="lead"></span><span class="rmeta">2026</span></div>
-      <ul class="bl">
+    <div class="job">
+      <div class="job-head"><span class="job-title">Mizan <em>— offline-first personal expense tracker</em></span><span class="job-date">2026</span></div>
+      <ul>
         <li>Built a <b>Kotlin Multiplatform / Compose Multiplatform</b> expense tracker on a local Room 3 database — income, expenses, reports, CSV export and OS sharing, with <b>no account, server or network dependency</b>.</li>
-        <li>Shipped <b>seven locales with per-language RTL/LTR layouts</b> and locale-invariant EGP formatting, plus an optional PIN lock that stores only a salted, iterated SHA-256 hash.</li>
-        <li>Enforced one-way module boundaries (<code>composeApp</code> → <code>core</code> / <code>designsystem</code>) and gated both JVM desktop and Kotlin/Wasm builds, with SQLite over OPFS for the web target.</li>
-      </ul>
-      <div class="rlinks"><a href="https://github.com/Arab-Open-Source/Mizan">Repository</a></div>
-    </div>
-
-    <div class="role">
-      <div class="rhead"><span class="rtitle">EgyFy Parser <i>— local OCR workspace</i></span><span class="lead"></span><span class="rmeta">Apache-2.0</span></div>
-      <ul class="bl">
-        <li>Converts PDFs and images into Markdown, JSON and structured tables with per-page confidence review and a clean-output mode; runs as a single-process Python workspace — <b>documents never leave the machine</b>.</li>
+        <li>Shipped <b>seven locales with per-language RTL/LTR layouts</b> and locale-invariant EGP formatting, plus an optional PIN lock storing only a salted, iterated SHA-256 hash.</li>
       </ul>
     </div>
 
-    <h3 class="grp">Desktop, Automation &amp; Utility Projects <span class="gn">personal open source</span></h3>
+    <div class="job">
+      <div class="job-head"><span class="job-title">EgyFy Parser <em>— local OCR workspace</em></span><span class="job-date">Apache-2.0</span></div>
+      <ul><li>Converts PDFs and images into Markdown, JSON and structured tables with per-page confidence review; runs as a single-process Python workspace — <b>documents never leave the machine</b>.</li></ul>
+    </div>
 
-    <div class="one">
-      <div class="rhead"><span class="rtitle">KPM · EG-ID Checker · Pomodoro Timer</span><span class="lead"></span><span class="rmeta">Kotlin · Kotlin · RUST</span></div>
-      <ul class="bl">
+    <div class="job">
+      <div class="job-head"><span class="job-title">KPM · EG-ID Checker · Pomodoro Timer</span><span class="job-date">personal open source</span></div>
+      <ul>
         <li><b>KPM</b> — Maven-backed package access behind an npm-like CLI for the JVM (Kotlin).</li>
-        <li><b>EG-ID Checker</b> — Egyptian national-ID validation &amp; demographics library (Kotlin).</li>
+        <li><b>EG-ID Checker</b> — Egyptian national-ID validation and demographics library (Kotlin).</li>
         <li><b>Pomodoro Timer</b> — native Windows tray application with toasts and focus screen-blocking (Rust / egui).</li>
       </ul>
     </div>
-  </section>
 
-  <section class="sec pbreak">
-    <h2 class="sec-head">Open-Source Contributions — External Projects <span class="note">maintained by others · merged &amp; ongoing</span></h2>
+    <div class="group-label">External contributions</div>
 
-    <div class="role">
-      <div class="rhead"><span class="rtitle">ASN — Open Social Network <small>(DevHustlers)</small>&nbsp;&nbsp;<span class="mk">Leading Contributor</span></span><span class="lead"></span><span class="rmeta">AGPL-3.0</span></div>
-      <ul class="bl">
+    <div class="job">
+      <div class="job-head"><span class="job-title">ASN — Open Social Network <em>(DevHustlers)</em></span><span class="job-date">AGPL-3.0</span></div>
+      <ul>
         <li><b>Leading contributor by commit count</b> to an Elixir-first service monorepo spanning communities, messaging and real-time features: event broker, typed contracts, PostgreSQL persistence.</li>
         <li>Strengthened project governance with <b>changelog-enforcing CI gates</b>, contract-drift checks and CODEOWNERS review.</li>
       </ul>
     </div>
 
-    <h3 class="grp">Upstream fixes merged <span class="gn">reproduce → patch → test → PR → merged</span></h3>
-    <ul class="bl">
-      <li><code>elixir-lang/elixir #15770</code> — fixed a type-checker crash on non-returning <code>for … into:</code> clauses (Elixir compiler).</li>
-      <li><code>ktorio/ktor #5633</code> — corrected CORS default-methods filtering (Kotlin Ktor framework).</li>
-      <li><code>LiveCodes/browser-elixir #1</code> — delivered the build toolchain for single-threaded AtomVM targets.</li>
-      <li><code>LiveCodes/browser-elixir #2</code> — built the runtime and eval bundle from source with pinned dependencies and SHA-256 checksums.</li>
-      <li><code>loco-rs/loco #1785</code> — contributed an Arabic translation of the project README (Rust Loco framework).</li>
-      <li><code>Racore #2</code> — fixed an LRU-eviction memory leak in <code>inMemoryIndexes</code>.</li>
-      <li><code>404-coffee-backend #1</code> — added core and user-management test coverage.</li>
-    </ul>
+    <div class="job">
+      <div class="job-head"><span class="job-title">Upstream fixes merged</span><span class="job-date">9 pull requests</span></div>
+      <ul>
+        <li><code>elixir-lang/elixir #15770</code> — fixed a type-checker crash on non-returning <code>for … into:</code> clauses.</li>
+        <li><code>ktorio/ktor #5633</code> — corrected CORS default-methods filtering.</li>
+        <li><code>LiveCodes/browser-elixir #1</code> — delivered the build toolchain for single-threaded AtomVM targets.</li>
+        <li><code>LiveCodes/browser-elixir #2</code> — built the runtime and eval bundle from source with pinned dependencies and SHA-256 checksums.</li>
+        <li><code>loco-rs/loco #1785</code> — contributed an Arabic translation of the project README.</li>
+        <li><code>Racore #2</code> — fixed an LRU-eviction memory leak in <code>inMemoryIndexes</code>.</li>
+        <li><code>404-coffee-backend #1</code> — added core and user-management test coverage.</li>
+      </ul>
+    </div>
   </section>
 
   <section class="sec">
-    <h2 class="sec-head">Technical Writing</h2>
-    <ul class="bl">
-      <li><b>Nine published engineering articles</b>: BEAM/Elixir internals and the memory model, distributed-systems design, Kotlin Multiplatform in production, and SQLite MVCC concurrent writes.</li>
-    </ul>
+    <h2>Technical writing</h2>
+    <p><b>Nine published engineering articles</b>: BEAM/Elixir internals and the memory model, distributed-systems design, Kotlin Multiplatform in production, and SQLite MVCC concurrent writes.</p>
   </section>
 
   <section class="sec">
-    <h2 class="sec-head">Languages</h2>
-    <ul class="bl">
-      <li><b>Arabic</b> — native.</li>
-      <li><b>English</b> — professional working proficiency.</li>
-    </ul>
+    <h2>Languages</h2>
+    <p><b>Arabic</b> — native. <b>English</b> — professional working proficiency.</p>
   </section>
 
-  <div class="fine">
+  <div class="cv-foot">
     <span>© 2026 Hassan Mohamed — Systems Builder</span>
     <span>References available on request</span>
     <span>github.com/HMH-3080</span>
