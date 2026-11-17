@@ -33,7 +33,7 @@
       <span class="w" style="--w:0">Hassan</span>
       <span class="w" style="--w:1">Mohamed</span>
     </h1>
-    <p class="bio reveal" style="--d:.55s">Backend, frontend, databases — I build <b>business platforms, ERP and SaaS</b> that stay up <b>offline-first</b> through outages and sync clean on reconnect. <b>15 systems shipped and maintained,</b> plus <b>8 fixes merged upstream</b> into the Elixir compiler, Ktor and LiveCodes.</p>
+    <p class="bio reveal" style="--d:.55s">Backend, frontend, databases — I build <b>business platforms, ERP and SaaS</b> that stay up <b>offline-first</b> through outages and sync clean on reconnect. <b>16 systems shipped and maintained,</b> plus <b>8 fixes merged upstream</b> into the Elixir compiler, Ktor and LiveCodes.</p>
     <div class="cta-row reveal" style="--d:.7s">
       <a href="#projects" class="btn btn-a">See the work</a>
       <a href="cv.html" class="btn btn-b" title="Open CV — print or save as PDF">CV ⇩ PDF</a>
@@ -43,8 +43,8 @@
   </header>
 
   <div class="stats">
-    <div class="stat reveal" style="--d:.05s"><small>Systems shipped</small><b data-count="15">0</b><em>enterprise, product &amp; OSS — all maintained</em></div>
-    <div class="stat reveal" style="--d:.12s"><small>Open source</small><b data-count="7">0</b><em>libraries &amp; platforms in the commons</em></div>
+    <div class="stat reveal" style="--d:.05s"><small>Systems shipped</small><b data-count="16">0</b><em>enterprise, product &amp; OSS — all maintained</em></div>
+    <div class="stat reveal" style="--d:.12s"><small>Open source</small><b data-count="8">0</b><em>libraries &amp; platforms in the commons</em></div>
     <div class="stat sigline reveal" style="--d:.19s"><small>Upstream PRs</small><b data-count="8">0</b><em>merged into foreign codebases</em></div>
     <div class="stat reveal" style="--d:.26s"><small>Maintaining since</small><b>2022</b><em>infra &amp; halls — continuous</em></div>
   </div>
@@ -68,21 +68,21 @@
       <div class="sys-row"><span class="nm">Egyfy<small>Multi-tenant SaaS e-commerce</small></span><span class="loc">3 tenants · production</span><span class="dot b">BETA</span></div>
       <div class="sys-row"><span class="nm">El Fath Pharmacies<small>Offline-first multi-branch POS + loyalty</small></span><span class="loc">keeps selling through outages</span><span class="dot">LIVE</span></div>
       <div class="sys-row"><span class="nm">Rocket System 2<small>Distributed ERP + mobile companion</small></span><span class="loc">cloud sync</span><span class="dot">LIVE</span></div>
-      <div class="sys-row"><span class="nm">GAL Factory Supplies<small>Industrial supplies platform</small></span><span class="loc">galimport.shop</span><span class="dot">LIVE</span></div>
+      <div class="sys-row"><span class="nm">GAL Factory Supplies<small>Industrial supplies platform</small></span><span class="loc">gal.egyfy.shop</span><span class="dot">LIVE</span></div>
     </div>
   </section>
 
   <section id="projects">
     <div class="sechead reveal">
       <h2 class="disp">The index</h2>
-      <span class="note">15 items · filter the grid</span>
+      <span class="note">16 items · filter the grid</span>
     </div>
 
     <div class="filters" id="filters">
-      <button data-f="all" class="on">All · 15</button>
+      <button data-f="all" class="on">All · 16</button>
       <button data-f="enterprise">Enterprise · 4</button>
       <button data-f="product">Products &amp; SaaS · 3</button>
-      <button data-f="oss">Open source · 7</button>
+      <button data-f="oss">Open source · 8</button>
       <button data-f="upstream">Upstream · 1</button>
     </div>
 
@@ -97,7 +97,7 @@
         <div class="chead"><span class="cat">Enterprise</span><span class="yr">2023</span></div>
         <h3>GAL Factory Supplies</h3>
         <p>Cloud enterprise platform for industrial supplies — remote teams, secure workflows.</p>
-        <div class="chips"><span>cloud</span><span>galimport.shop</span></div>
+        <div class="chips"><span>cloud</span><span>gal.egyfy.shop</span></div>
       </a>
       <a class="card reveal" data-c="enterprise" href="projects.html#pioneer" style="--d:.1s">
         <div class="chead"><span class="cat">Enterprise</span><span class="yr">2026</span></div>
@@ -170,6 +170,12 @@
         <h3>EgyFy Parser</h3>
         <p>Local OCR workspace — PDF/images → Markdown, JSON &amp; tables.</p>
         <div class="chips"><span>Python</span><span>OCR</span></div>
+      </a>
+      <a class="card reveal" data-c="oss" href="https://github.com/HMH-3080/kitten-tts-studio" target="_blank" rel="noopener" style="--d:.3s">
+        <div class="chead"><span class="cat">OSS</span><span class="yr">2026</span></div>
+        <h3>KittenTTS Studio</h3>
+        <p>Browser-based text-to-speech editor — Phoenix LiveView + KittenTTS Mini on an ONNX CPU runtime.</p>
+        <div class="chips"><span>Elixir</span><span>ONNX</span></div>
       </a>
       <a class="card reveal" data-c="upstream" href="projects.html#upstream" style="--d:.3s">
         <div class="chead"><span class="cat">Upstream</span><span class="pill live">8 MERGED</span></div>
@@ -273,6 +279,7 @@ window.HMH_INDEX = [
     { group: "Work", title: "Marsad — VPS fleet management", hint: "oss", run: function() { window.location.href = "projects.html#featured"; } },
     { group: "Work", title: "ASN — open social network", hint: "oss", run: function() { window.location.href = "projects.html#asn"; } },
     { group: "Work", title: "EgyFy Parser — local OCR", hint: "oss", run: function() { window.location.href = "projects.html#egyfy-parser"; } },
+    { group: "Work", title: "KittenTTS Studio — browser TTS editor", hint: "oss", run: function() { window.location.href = "https://github.com/HMH-3080/kitten-tts-studio"; } },
     { group: "Work", title: "Merged upstream contributions", hint: "elixir · ktor · livecodes", run: function() { window.location.href = "projects.html#upstream"; } },
     { group: "Writing", title: "Backpressure: when the chef outruns the waiter", run: function() { window.location.href = "articles.html?f=backpressure-fast-producer-slow-consumer.md"; } },
     { group: "Writing", title: "The BEAM memory model: isolation instead of sharing", run: function() { window.location.href = "articles.html?f=beam-memory-model-isolation.md"; } },
