@@ -53,6 +53,8 @@ def build():
             "tags": item.get("tags", []),
             "title": title_of(md),
             "mins": mins_of(md),
+            "lang": item.get("lang", "ar"),
+            "dir": item.get("dir", "rtl"),
             "content": md,
         })
     articles.sort(key=lambda a: a["date"], reverse=True)
@@ -75,4 +77,4 @@ if __name__ == "__main__":
         print("articles-data.js is up to date")
     else:
         OUT.write_text(output, encoding="utf-8")
-        print(f"built articles-data.js ({count} articles)")
+        print(f"built articles-data.js ({count} article{'s' if count != 1 else ''})")

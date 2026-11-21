@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Technical writing on backends, Kotlin Multiplatform, and SQLite by Hassan Mohamed.">
 <title>Articles — Hassan Mohamed</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
@@ -16,7 +16,7 @@
 <div id="spot" aria-hidden="true"></div>
 <div id="beam" aria-hidden="true"></div>
 
-<div class="topbar">
+<div class="topbar" dir="ltr">
   <div class="wrap-in">
     <a class="brand" href="about.html"><i>HM</i><span>Hassan Mohamed</span></a>
     <nav>
@@ -30,7 +30,7 @@
 </div>
 
 <div class="wrap">
-  <header class="hero page-hero">
+  <header class="hero page-hero" dir="ltr">
     <span class="over">Writing · engineering notes · no filler</span>
     <h1>
       <span class="w" style="--w:0">Notes</span>
@@ -43,7 +43,7 @@
   <div class="articles-table" id="articles-grid"></div>
   <div class="pagination" id="pagination"></div>
   <div class="article-view" id="article-view">
-    <span class="back" id="back-btn">← Back to articles</span>
+    <span class="back" id="back-btn">→ الرجوع للمقالات</span>
     <div class="article-header" id="article-header"></div>
     <div class="article-body" id="article-content"></div>
   </div>
@@ -62,7 +62,7 @@
     </div>
     <div class="foot-fine">
       <span>© 2026 Hassan Mohamed — ~/writing</span>
-      <span>Set in Space Grotesk + Inter · data in JetBrains Mono</span>
+      <span>Set in Space Grotesk + Inter + IBM Plex Sans Arabic · data in JetBrains Mono</span>
       <span>One signal color · motion respects reduced-motion</span>
     </div>
   </div>
@@ -124,8 +124,9 @@
                 var a = pageArticles[i];
                 var idx = start + i;
                 html += '<div class="article-row reveal" style="--d:' + ((i % PER_PAGE) * 0.04).toFixed(2) + 's" data-idx="' + idx + '" role="link" tabindex="0">';
-                html += '<div><h3>' + esc(a.title) + '</h3>';
-                html += '<p>' + esc(getExcerpt(a.content)) + '…</p>';
+                var titleDir = /[\u0600-\u06FF]/.test(a.title) ? "rtl" : "ltr";
+                html += '<div><h3 dir="' + titleDir + '" lang="' + (titleDir === "rtl" ? "ar" : "en") + '">' + esc(a.title) + '</h3>';
+                html += '<p dir="' + (a.dir || "rtl") + '" lang="' + (a.lang || "ar") + '">' + esc(getExcerpt(a.content)) + '…</p>';
                 html += '<div class="tags">';
                 for (var t = 0; t < a.tags.length; t++) {
                     html += '<span class="article-tag">' + esc(a.tags[t]) + '</span>';
@@ -170,8 +171,13 @@
         }
         function openArticle(i) {
             var a = articles[i];
-            headerEl.innerHTML = '<h1>' + esc(a.title) + '</h1><div class="article-meta"><span>' + esc(a.tags.join(" / ")) + '</span><span>' + a.mins + ' min read</span><button class="copy-link" type="button" data-copy="' + esc(shareUrl(a)) + '">COPY LINK ↗</button></div>';
-            contentEl.innerHTML = marked.parse(a.content);
+            headerEl.setAttribute("lang", a.lang || "ar");
+            headerEl.setAttribute("dir", a.dir || "rtl");
+            contentEl.setAttribute("lang", a.lang || "ar");
+            contentEl.setAttribute("dir", a.dir || "rtl");
+            document.body.classList.add("reading");
+            headerEl.innerHTML = '<h1 dir="auto">' + esc(a.title) + '</h1><div class="article-meta"><span>' + esc(a.tags.join(" / ")) + '</span><span>' + a.mins + ' min read</span><button class="copy-link" type="button" dir="ltr" data-copy="' + esc(shareUrl(a)) + '">COPY LINK ↗</button></div>';
+            contentEl.innerHTML = marked.parse(a.content.replace(/^\s*#\s+[^\n]*\r?\n/, ""));
             highlightCodeblocks(contentEl);
             grid.style.display = "none";
             paginationEl.style.display = "none";
@@ -181,6 +187,7 @@
             window.scrollTo({ top: 0, behavior: "smooth" });
         }
         function showGrid() {
+            document.body.classList.remove("reading");
             view.classList.remove("active");
             grid.style.display = "";
             paginationEl.style.display = "";
@@ -216,15 +223,7 @@
 </div>
 <script>
 window.HMH_INDEX = [
-    { group: "Writing", title: "Backpressure: when the chef outruns the waiter", hint: "s=backpressure", run: function() { window.location.href = "articles.html?s=backpressure"; } },
-    { group: "Writing", title: "The BEAM memory model: isolation instead of sharing", hint: "s=beam-memory-model", run: function() { window.location.href = "articles.html?s=beam-memory-model"; } },
-    { group: "Writing", title: "Why the BEAM is different for distributed systems", hint: "s=beam-distributed", run: function() { window.location.href = "articles.html?s=beam-distributed"; } },
-    { group: "Writing", title: "Why the BEAM VM is special", hint: "s=why-beam-is-special", run: function() { window.location.href = "articles.html?s=why-beam-is-special"; } },
-    { group: "Writing", title: "WebSockets are not just faster HTTP", hint: "s=websockets-vs-http", run: function() { window.location.href = "articles.html?s=websockets-vs-http"; } },
-    { group: "Writing", title: "Elixir processes are not threads", hint: "s=elixir-processes-vs-threads", run: function() { window.location.href = "articles.html?s=elixir-processes-vs-threads"; } },
-    { group: "Writing", title: "SQLite concurrent writes & MVCC with Turso", hint: "s=sqlite-mvcc-turso", run: function() { window.location.href = "articles.html?s=sqlite-mvcc-turso"; } },
-    { group: "Writing", title: "Kotlin Multiplatform in production", hint: "s=kmp-in-production", run: function() { window.location.href = "articles.html?s=kmp-in-production"; } },
-    { group: "Writing", title: "Building reliable backend systems", hint: "s=reliable-backends", run: function() { window.location.href = "articles.html?s=reliable-backends"; } }
+    { group: "Writing", title: ".env in Production — Are We Handling Secrets Correctly?", hint: "s=env-secrets-in-production", run: function() { window.location.href = "articles.html?s=env-secrets-in-production"; } }
 ];
 </script>
 <script src="palette.js"></script>

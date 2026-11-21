@@ -11,7 +11,7 @@ Live at **https://hmh-3080.github.io/HMH/** — deployed by the
 |---|---|
 | `about.html` | Profile, status board, stats tiles, the 15-card work index with filters, article index |
 | `projects.html` | Work dossiers: 15 cards + ray-wrapped featured builds (Altair, Marsad) + full dossier room — filterable |
-| `articles.html` | 9 engineering notes, paginated reader with syntax highlighting |
+| `articles.html` | RTL-first reader with syntax highlighting (Arabic by default) |
 | `cv.html` | Master CV — prints to A4 vector PDF (`build-cv.sh` or the in-page button) |
 | `index.html` | Redirects to `about.html` |
 
@@ -28,6 +28,10 @@ with a short, URL-safe `slug` (lowercase words separated by dashes):
 ```json
 { "file": "my-new-post.md", "slug": "my-new-post", "date": "2026-09-10", "tags": ["elixir", "backend"] }
 ```
+
+Arabic / RTL is the default. For an English (LTR) article add
+`"lang": "en", "dir": "ltr"` to its manifest entry; code blocks stay LTR either
+way. The page hero is hidden automatically while an article is open.
 
 Then regenerate the committed data file:
 

@@ -76,7 +76,7 @@
     visible.forEach(function(it, i) {
       if (it.group !== lastGroup) { html += '<div class="pal-group">' + esc(it.group || "Results") + "</div>"; lastGroup = it.group; }
       html += '<button class="pal-item' + (i === sel ? " sel" : "") + '" data-i="' + i + '" role="option" aria-selected="' + (i === sel) + '">'
-        + esc(it.title) + (it.hint ? "<small>" + esc(it.hint) + "</small>" : "") + "</button>";
+        + '<span dir="auto">' + esc(it.title) + "</span>" + (it.hint ? "<small>" + esc(it.hint) + "</small>" : "") + "</button>";
     });
     list.innerHTML = html;
     var active = list.querySelector(".pal-item.sel");

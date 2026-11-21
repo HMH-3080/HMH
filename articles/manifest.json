@@ -1,56 +1,8 @@
 [
   {
-    "file": "building-reliable-backends.md",
-    "slug": "reliable-backends",
-    "date": "2026-06-15",
-    "tags": ["backend", "architecture"]
-  },
-  {
-    "file": "kotlin-multiplatform-production.md",
-    "slug": "kmp-in-production",
-    "date": "2026-06-28",
-    "tags": ["kotlin", "kmp", "mobile"]
-  },
-  {
-    "file": "sqlite-concurrent-writes-mvcc-turso.md",
-    "slug": "sqlite-mvcc-turso",
-    "date": "2026-07-02",
-    "tags": ["sqlite", "mvcc", "turso", "databases", "backend"]
-  },
-  {
-    "file": "elixir-processes-are-not-threads.md",
-    "slug": "elixir-processes-vs-threads",
-    "date": "2026-08-29",
-    "tags": ["elixir", "concurrency", "beam", "backend"]
-  },
-  {
-    "file": "websockets-are-not-faster-http.md",
-    "slug": "websockets-vs-http",
-    "date": "2026-08-30",
-    "tags": ["websockets", "realtime", "elixir", "phoenix", "architecture"]
-  },
-  {
-    "file": "why-the-beam-vm-is-special.md",
-    "slug": "why-beam-is-special",
-    "date": "2026-08-31",
-    "tags": ["elixir", "erlang", "beam", "actor-model", "concurrency", "fault-tolerance"]
-  },
-  {
-    "file": "beam-distributed-systems.md",
-    "slug": "beam-distributed",
-    "date": "2026-09-01",
-    "tags": ["elixir", "erlang", "beam", "distributed-systems", "otp", "fault-tolerance"]
-  },
-  {
-    "file": "beam-memory-model-isolation.md",
-    "slug": "beam-memory-model",
-    "date": "2026-09-02",
-    "tags": ["elixir", "erlang", "beam", "memory", "ets", "concurrency"]
-  },
-  {
-    "file": "backpressure-fast-producer-slow-consumer.md",
-    "slug": "backpressure",
-    "date": "2026-09-03",
-    "tags": ["backpressure", "elixir", "broadway", "genstage", "streaming", "resilience"]
+    "file": "env-secrets-in-production.md",
+    "slug": "env-secrets-in-production",
+    "date": "2026-11-21",
+    "tags": ["security", "secrets", "docker", "production", "devops"]
   }
 ]
