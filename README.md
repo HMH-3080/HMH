@@ -22,15 +22,28 @@ Shared assets: `style.css` (single design system, dark-only), `motion.js`
 
 ## Articles
 
-Add the `.md` file under `articles/`, then register it in `articles/manifest.json`:
+Add the `.md` file under `articles/`, then register it in `articles/manifest.json`
+with a short, URL-safe `slug` (lowercase words separated by dashes):
 
 ```json
-{ "file": "my-new-post.md", "date": "2026-09-10", "tags": ["elixir", "backend"] }
+{ "file": "my-new-post.md", "slug": "my-new-post", "date": "2026-09-10", "tags": ["elixir", "backend"] }
 ```
 
-Then add one row to the changelog in `about.html` and one entry to `HMH_INDEX`
-in `about.html` + `articles.html` (deep link format: `articles.html?f=my-new-post.md`).
-Titles are taken from the first `#` heading; reading time is computed automatically.
+Then regenerate the committed data file:
+
+```bash
+python3 build-articles.py          # writes articles-data.js
+python3 build-articles.py --check  # CI: fails if the committed file is stale
+```
+
+The build validates slugs (non-empty, unique, URL-safe) and bakes titles, reading
+times and markdown into `articles-data.js`, so the reader renders instantly with
+no `fetch`. Then add one row to the changelog in `about.html` and one entry to
+`HMH_INDEX` in `about.html` + `articles.html`.
+
+Shareable permalink: `articles.html?s=my-new-post` (legacy `?f=file.md` and `?a=N`
+links still work). Titles come from the first `#` heading; reading time is
+computed at build time.
 
 ## Design system
 
@@ -40,7 +53,9 @@ Inter + JetBrains Mono, hairline structure, no gradients, dark-only.
 
 ## Local preview
 
-Articles load via `fetch`, so open through a server, not `file://`:
+Articles are baked into `articles-data.js`, so no server is needed — open
+`about.html` or `articles.html` directly, even from `file://`. A server works
+too if you prefer:
 
 ```bash
 python3 -m http.server 8000

@@ -226,6 +226,8 @@ kbd { font-family: 'JetBrains Mono', monospace; font-size: .62rem; color: var(--
 .article-view.active { display: block; }
 .article-view .back { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--stroke); color: var(--txt); background: rgba(11,10,9,.5); border-radius: 10px; padding: 12px 20px; min-height: 48px; font-weight: 600; font-size: .95rem; text-decoration: none; cursor: pointer; margin: 34px 0; transition: border-color .15s, transform .15s; }
 .article-view .back:hover { border-color: var(--dim); transform: translateY(-2px); }
+.article-view .copy-link { margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: .64rem; letter-spacing: .1em; color: var(--dim); background: rgba(242,239,233,.06); border: 1px solid var(--stroke); border-radius: 8px; padding: 6px 10px; min-height: 32px; cursor: pointer; transition: color .15s, border-color .15s; }
+.article-view .copy-link:hover { color: var(--txt); border-color: var(--dim); }
 .article-header { max-width: 72ch; margin-bottom: 30px; padding-bottom: 22px; border-bottom: 1px solid var(--stroke-soft); }
 .article-header h1 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; letter-spacing: -.02em; font-size: clamp(1.9rem, 4.5vw, 2.6rem); line-height: 1.1; margin-bottom: 14px; }
 .article-meta { display: flex; gap: 16px; flex-wrap: wrap; font-family: 'JetBrains Mono', monospace; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); }

@@ -40,9 +40,7 @@
     <p class="bio reveal" style="--d:.55s">Backends, <b>Kotlin Multiplatform</b>, and <b>SQLite</b> — written the way they run: <b>short on theory, heavy on what actually happened</b>.</p>
   </header>
 
-  <div class="articles-table" id="articles-grid">
-    <div class="loading-msg">Loading articles…</div>
-  </div>
+  <div class="articles-table" id="articles-grid"></div>
   <div class="pagination" id="pagination"></div>
   <div class="article-view" id="article-view">
     <span class="back" id="back-btn">← Back to articles</span>
@@ -70,6 +68,7 @@
   </div>
 </footer>
 
+<script src="articles-data.js"></script>
 <script>
     (function() {
         var grid = document.getElementById("articles-grid");
@@ -86,14 +85,6 @@
 
         function esc(s) {
             return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
-        }
-        function extractTitle(md) {
-            var match = md.match(/^#\s+(.+)/m);
-            return match ? match[1].trim() : "Untitled";
-        }
-        function readMins(md) {
-            var words = md.trim().split(/\s+/).length;
-            return Math.max(1, Math.round(words / 200));
         }
         function getExcerpt(md) {
             var lines = md.split("\n");
@@ -174,14 +165,18 @@
                 });
             }
         }
+        function shareUrl(a) {
+            return location.href.split("?")[0].split("#")[0] + "?s=" + encodeURIComponent(a.slug);
+        }
         function openArticle(i) {
             var a = articles[i];
-            headerEl.innerHTML = '<h1>' + esc(a.title) + '</h1><div class="article-meta"><span>' + esc(a.tags.join(" / ")) + '</span><span>' + a.mins + ' min read</span></div>';
+            headerEl.innerHTML = '<h1>' + esc(a.title) + '</h1><div class="article-meta"><span>' + esc(a.tags.join(" / ")) + '</span><span>' + a.mins + ' min read</span><button class="copy-link" type="button" data-copy="' + esc(shareUrl(a)) + '">COPY LINK ↗</button></div>';
             contentEl.innerHTML = marked.parse(a.content);
             highlightCodeblocks(contentEl);
             grid.style.display = "none";
             paginationEl.style.display = "none";
             view.classList.add("active");
+            try { history.replaceState(null, "", "?s=" + encodeURIComponent(a.slug)); } catch (e) {}
             if (window.HMH_MOTION) window.HMH_MOTION.refresh();
             window.scrollTo({ top: 0, behavior: "smooth" });
         }
@@ -189,43 +184,26 @@
             view.classList.remove("active");
             grid.style.display = "";
             paginationEl.style.display = "";
+            try { history.replaceState(null, "", location.pathname); } catch (e) {}
         }
         backBtn.addEventListener("click", showGrid);
-        async function loadArticles() {
-            try {
-                var res = await fetch("articles/manifest.json");
-                var manifest = await res.json();
-                var loaded = [];
-                for (var i = 0; i < manifest.length; i++) {
-                    var item = manifest[i];
-                    try {
-                        var mdRes = await fetch("articles/" + item.file);
-                        var md = await mdRes.text();
-                        loaded.push({ title: extractTitle(md), date: item.date, tags: item.tags || [], content: md, mins: readMins(md), file: item.file });
-                    } catch (e) { console.warn("Failed to load:", item.file); }
-                }
-                articles = loaded.sort(function(a, b) { return new Date(b.date) - new Date(a.date); });
-                totalPages = Math.ceil(articles.length / PER_PAGE);
-                renderGrid();
-                try {
-                    var params = new URLSearchParams(window.location.search);
-                    var deepFile = params.get("f");
-                    var deepIdx = -1;
-                    if (deepFile) {
-                        for (var k = 0; k < articles.length; k++) {
-                            if (articles[k].file === deepFile) { deepIdx = k; break; }
-                        }
-                    } else {
-                        var deep = parseInt(params.get("a"), 10);
-                        if (!isNaN(deep) && deep >= 0 && deep < articles.length) deepIdx = deep;
-                    }
-                    if (deepIdx >= 0) openArticle(deepIdx);
-                } catch (e) {}
-            } catch (e) {
-                grid.innerHTML = '<div class="loading-msg">Failed to load articles. Use a local server or deploy to GitHub Pages.</div>';
+        function init() {
+            articles = (window.HMH_ARTICLES || []).slice().sort(function(a, b) { return new Date(b.date) - new Date(a.date); });
+            totalPages = Math.ceil(articles.length / PER_PAGE);
+            renderGrid();
+            var params = new URLSearchParams(window.location.search);
+            var bySlug = params.get("s");
+            var byFile = params.get("f");
+            var byIndex = parseInt(params.get("a"), 10);
+            var idx = -1;
+            for (var k = 0; k < articles.length; k++) {
+                if (bySlug && articles[k].slug === bySlug) { idx = k; break; }
+                if (!bySlug && byFile && articles[k].file === byFile) { idx = k; break; }
             }
+            if (idx < 0 && !bySlug && !byFile && !isNaN(byIndex) && byIndex >= 0 && byIndex < articles.length) idx = byIndex;
+            if (idx >= 0) openArticle(idx);
         }
-        loadArticles();
+        init();
     })();
 </script>
 
@@ -238,15 +216,15 @@
 </div>
 <script>
 window.HMH_INDEX = [
-    { group: "Writing", title: "Backpressure: when the chef outruns the waiter", run: function() { window.location.href = "articles.html?f=backpressure-fast-producer-slow-consumer.md"; } },
-    { group: "Writing", title: "The BEAM memory model: isolation instead of sharing", run: function() { window.location.href = "articles.html?f=beam-memory-model-isolation.md"; } },
-    { group: "Writing", title: "Why the BEAM is different for distributed systems", run: function() { window.location.href = "articles.html?f=beam-distributed-systems.md"; } },
-    { group: "Writing", title: "Why the BEAM VM is special", run: function() { window.location.href = "articles.html?f=why-the-beam-vm-is-special.md"; } },
-    { group: "Writing", title: "WebSockets are not just faster HTTP", run: function() { window.location.href = "articles.html?f=websockets-are-not-faster-http.md"; } },
-    { group: "Writing", title: "Elixir processes are not threads", run: function() { window.location.href = "articles.html?f=elixir-processes-are-not-threads.md"; } },
-    { group: "Writing", title: "SQLite concurrent writes & MVCC with Turso", run: function() { window.location.href = "articles.html?f=sqlite-concurrent-writes-mvcc-turso.md"; } },
-    { group: "Writing", title: "Kotlin Multiplatform in production", run: function() { window.location.href = "articles.html?f=kotlin-multiplatform-production.md"; } },
-    { group: "Writing", title: "Building reliable backend systems", run: function() { window.location.href = "articles.html?f=building-reliable-backends.md"; } }
+    { group: "Writing", title: "Backpressure: when the chef outruns the waiter", hint: "s=backpressure", run: function() { window.location.href = "articles.html?s=backpressure"; } },
+    { group: "Writing", title: "The BEAM memory model: isolation instead of sharing", hint: "s=beam-memory-model", run: function() { window.location.href = "articles.html?s=beam-memory-model"; } },
+    { group: "Writing", title: "Why the BEAM is different for distributed systems", hint: "s=beam-distributed", run: function() { window.location.href = "articles.html?s=beam-distributed"; } },
+    { group: "Writing", title: "Why the BEAM VM is special", hint: "s=why-beam-is-special", run: function() { window.location.href = "articles.html?s=why-beam-is-special"; } },
+    { group: "Writing", title: "WebSockets are not just faster HTTP", hint: "s=websockets-vs-http", run: function() { window.location.href = "articles.html?s=websockets-vs-http"; } },
+    { group: "Writing", title: "Elixir processes are not threads", hint: "s=elixir-processes-vs-threads", run: function() { window.location.href = "articles.html?s=elixir-processes-vs-threads"; } },
+    { group: "Writing", title: "SQLite concurrent writes & MVCC with Turso", hint: "s=sqlite-mvcc-turso", run: function() { window.location.href = "articles.html?s=sqlite-mvcc-turso"; } },
+    { group: "Writing", title: "Kotlin Multiplatform in production", hint: "s=kmp-in-production", run: function() { window.location.href = "articles.html?s=kmp-in-production"; } },
+    { group: "Writing", title: "Building reliable backend systems", hint: "s=reliable-backends", run: function() { window.location.href = "articles.html?s=reliable-backends"; } }
 ];
 </script>
 <script src="palette.js"></script>

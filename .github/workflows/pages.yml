@@ -23,6 +23,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
+      - name: Verify committed article data is current
+        run: python3 build-articles.py --check
       - uses: actions/upload-pages-artifact@v3
         with:
           path: .
