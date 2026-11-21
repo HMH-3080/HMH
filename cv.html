@@ -217,7 +217,7 @@
       <ul>
         <li>Built a <b>pthread-free AtomVM runtime</b> that runs Elixir and Erlang in the browser — no <code>SharedArrayBuffer</code> and no COOP/COEP headers, so it works in ordinary pages and cross-origin iframes.</li>
         <li>Patched FissionVM for a single-threaded loop and direct dispatch, added the missing <code>erlang:md5/1</code> NIF, and shipped checksum-verified artifacts published as <code>@hmh-3080/atomvm-wasm</code>.</li>
-        <li>Adopted by <b>LiveCodes</b> as its Elixir/Erlang <code>beam-wasm</code> worker — the foundation of two merged upstream PRs.</li>
+        <li>Adopted by <b>LiveCodes</b> as its Elixir/Erlang <code>beam-wasm</code> worker — the foundation of three merged upstream PRs.</li>
       </ul>
     </div>
 
@@ -254,12 +254,13 @@
     </div>
 
     <div class="job">
-      <div class="job-head"><span class="job-title">Upstream fixes merged</span><span class="job-date">9 pull requests</span></div>
+      <div class="job-head"><span class="job-title">Upstream fixes merged</span><span class="job-date">10 pull requests</span></div>
       <ul>
         <li><code>elixir-lang/elixir #15770</code> — fixed a type-checker crash on non-returning <code>for … into:</code> clauses.</li>
         <li><code>ktorio/ktor #5633</code> — corrected CORS default-methods filtering.</li>
         <li><code>LiveCodes/browser-elixir #1</code> — delivered the build toolchain for single-threaded AtomVM targets.</li>
         <li><code>LiveCodes/browser-elixir #2</code> — built the runtime and eval bundle from source with pinned dependencies and SHA-256 checksums.</li>
+        <li><code>live-codes/livecodes #1076</code> — added Elixir and Erlang (Wasm) support with a pthread-free AtomVM runtime: no <code>SharedArrayBuffer</code> or COOP/COEP requirement.</li>
         <li><code>loco-rs/loco #1785</code> — contributed an Arabic translation of the project README.</li>
         <li><code>Racore #2</code> — fixed an LRU-eviction memory leak in <code>inMemoryIndexes</code>.</li>
         <li><code>404-coffee-backend #1</code> — added core and user-management test coverage.</li>
@@ -269,7 +270,7 @@
 
   <section class="sec">
     <h2>Technical writing</h2>
-    <p><b>Nine published engineering articles</b>: BEAM/Elixir internals and the memory model, distributed-systems design, Kotlin Multiplatform in production, and SQLite MVCC concurrent writes.</p>
+    <p><b>One published engineering article</b> (Arabic): <b>.env in Production — Are We Handling Secrets Correctly?</b> — file permissions, Docker build/runtime secrets, environment variables, secret managers, rotation and least privilege.</p>
   </section>
 
   <section class="sec">

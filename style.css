@@ -239,6 +239,7 @@ body.reading .article-view .back { margin-top: 10px; }
 .article-body h2 { font-family: 'Space Grotesk', sans-serif; font-size: 1.35rem; font-weight: 600; letter-spacing: -.01em; margin: 34px 0 12px; padding-bottom: 10px; border-bottom: 1px solid var(--stroke-soft); }
 .article-body h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.08rem; font-weight: 600; margin: 26px 0 10px; }
 .article-body p { margin-bottom: 18px; }
+.article-body img { display: block; max-width: 100%; height: auto; margin: 24px auto 30px; border: 1px solid var(--stroke); border-radius: 14px; background: #fff; }
 .article-body code { font-family: 'JetBrains Mono', monospace; font-size: .82em; color: var(--txt); background: rgba(242,239,233,.06); border: 1px solid var(--stroke-soft); border-radius: 6px; padding: 2px 7px; }
 .article-body pre { background: var(--panel); border: 1px solid var(--stroke-soft); border-radius: 14px; overflow: hidden; margin: 22px 0; }
 .article-body pre .code-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 16px; border-bottom: 1px solid var(--stroke-soft); font-family: 'JetBrains Mono', monospace; font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); }

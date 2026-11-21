@@ -1,5 +1,7 @@
 # .env in Production — Are We Handling Secrets Correctly?
 
+![.env in Production — Are you really securing your secrets?](articles/env-secrets-in-production.png)
+
 استخدام ملفات `.env` في التطوير شائع ومناسب جداً لكن نفس أسلوب إدارة الإعدادات والأسرار في بيئة الإنتاج محتاج حسابات تانية
 
 المشكلة مش في ملف `.env` نفسه لكن في الافتراض إن وجوده داخل السيرفر مع شوية صلاحيات و `.gitignore` كافي لتأمين الداتا الحساسة
